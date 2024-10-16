@@ -5,6 +5,7 @@
 package isi.deso.tp4.logicaNegocios;
 
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
+import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 
 public class Pedido {
     private Cliente miCliente;
