@@ -128,4 +128,13 @@ public ItemMenu buscarProducto(String nombre) throws ItemNoEncontradoException {
         ItemMenu item = itemsComunes.get(0);
         return item; 
     };
+
+     public List<Pedido> obtenerPedidosPorEstado(String estado){
+         List<Pedido> pedidos = new ArrayList<>();
+         
+
+
+
+         return pedidos;
+     };
 }
