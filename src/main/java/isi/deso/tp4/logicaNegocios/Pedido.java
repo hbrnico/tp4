@@ -7,21 +7,21 @@ package isi.deso.tp4.logicaNegocios;
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
 import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 
-public class Pedido {
+public class Pedido{
     private Cliente miCliente;
     private ItemsPedidoMemory miItemsPedidoMemory;
     private double precio;
-    private String estado;
+    private ESTADO estado;
     
     public Pedido(Cliente miCliente){
         this.miCliente = miCliente;
         this.miItemsPedidoMemory = new ItemsPedidoMemory();
         this.precio = 0;
-        this.estado = "ESPERA";
+        this.estado = ESTADO.EN_ESPERA;
     }
     
 
-    public void setEstado(String estadoCambio){
+    public void setEstado(ESTADO estadoCambio){
         this.estado=estadoCambio;
     }
 

@@ -7,7 +7,7 @@ public interface Observable {
 
     void removeObserver(Observer o);
 
-    void notifyObservers();
+    void notifyObservers(Observer o);
 
     void setChanged();
 }
