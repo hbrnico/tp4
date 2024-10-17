@@ -21,6 +21,7 @@ public class Pedido implements Observable{
         this.estado = ESTADO.EN_ESPERA;
     }
 
+    public void setVendedor(Vendedor v){ this.miVendedor = v; }
     public Vendedor getMiVendedor() {
         return miVendedor;
     }
@@ -36,6 +37,8 @@ public class Pedido implements Observable{
     public double getPrecio(){
         return this.precio;
     }
+
+    public ESTADO getEstado(){ return this.estado; }
 
     public void agregarProducto(Vendedor v, String plato) {
         try{

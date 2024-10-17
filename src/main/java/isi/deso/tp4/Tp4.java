@@ -5,6 +5,7 @@
 package isi.deso.tp4;
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
 import isi.deso.tp4.logicaNegocios.*;
+import isi.deso.tp4.persistencia.PedidoMemory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,9 +25,9 @@ public class Tp4{
         
         //test3();
         
-        test4();
+        //test4();
 
-        //test5();
+        test5();
 
     }
     
@@ -241,7 +242,7 @@ public class Tp4{
         Vendedor v1 = new Vendedor(1, "Pedro's", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
         Vendedor v2 = new Vendedor(2, "Lucas'", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
         Vendedor v3 = new Vendedor(3, "Mariano's", "Cordoba 700", new Coordenada(-31.720648806383995, -60.52989301773252));
-        
+
         List<Vendedor> vendedores = new ArrayList<>(Arrays.asList(v1,v2,v3));
 
         Categoria cat1 = new Categoria(1, "Categoria de prueba", "x");
@@ -257,10 +258,10 @@ public class Tp4{
         Bebida m9 = new Bebida(9, "Licuado de frutilla", "Frutilla licuada con leche", 400.0, cat1, 0.0f, 300, v3);
         Plato p11 = new Plato(11, "Suprema", "Pechuga de pollo rebosada", 5000.00, cat1, 600, false, false, 300.00f, v1);
         Plato p12 = new Plato(12, "Suprema", "Pechuga de pollo rebosada", 5500.00, cat1, 650, false, false, 320.00f, v2);
-        Plato p13 = new Plato(13, "Milanesa", "Bife de nalga rebosado", 6500.00, cat1, 800, false, false, 310.00f,v1); 
-        Plato p14 = new Plato(14, "Milanesa", "Bife de lomo rebosado", 7200.00, cat1, 785, false, false, 350.00f,v3); 
-        Plato p15 = new Plato(15, "Papas fritas", "Porción de papas fritas para dos personas", 8000.00, cat1, 1000, true, true, 500.00f,v1); 
-        Plato p16 = new Plato(16, "Papas fritas", "Porción de papas fritas para dos personas", 8200.00, cat1, 900, true, true, 450.00f,v2); 
+        Plato p13 = new Plato(13, "Milanesa", "Bife de nalga rebosado", 6500.00, cat1, 800, false, false, 310.00f,v1);
+        Plato p14 = new Plato(14, "Milanesa", "Bife de lomo rebosado", 7200.00, cat1, 785, false, false, 350.00f,v3);
+        Plato p15 = new Plato(15, "Papas fritas", "Porción de papas fritas para dos personas", 8000.00, cat1, 1000, true, true, 500.00f,v1);
+        Plato p16 = new Plato(16, "Papas fritas", "Porción de papas fritas para dos personas", 8200.00, cat1, 900, true, true, 450.00f,v2);
         Plato p17 = new Plato(17, "Empanadas de carne", "Media docena de empanadas de carne", 4500.00, cat1, 1020, false, false, 700.00f,v1);
         Plato p18 = new Plato(18, "Empanadas de carne", "Media docena de empanadas de carne", 4700.00, cat1, 1200, false, false, 750.00f,v3);
         Plato p19 = new Plato(19, "Empanadas de verdura", "Media docena de empanadas de verdura", 4000.00, cat1, 920, false, true, 700.00f,v2);
@@ -287,13 +288,74 @@ public class Tp4{
         v3.agregarItem(m7);
         v3.agregarItem(m8);
         v3.agregarItem(m9);
-               
+
         Pedido p = C.comprar(vendedores);
 
     }
     
     public static void test5(){
+        Cliente C = new Cliente(1, "20-34567892-4", "pedrosanches@gmail.com", "Las Heras 6664", new Coordenada(-31.607585631151917, -60.688909841851526));
+        Vendedor v1 = new Vendedor(1, "Pedro's", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
+        Vendedor v2 = new Vendedor(2, "Lucas'", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
+        Vendedor v3 = new Vendedor(3, "Mariano's", "Cordoba 700", new Coordenada(-31.720648806383995, -60.52989301773252));
 
+        List<Vendedor> vendedores = new ArrayList<>(Arrays.asList(v1,v2,v3));
+
+        Categoria cat1 = new Categoria(1, "Categoria de prueba", "x");
+
+        Bebida m1 = new Bebida(1, "Coca-Cola", "Gaseosa de cola", 1000.0, cat1, 0.0f, 500, v1);
+        Bebida m2 = new Bebida(2, "Fanta", "Gaseosa de Naranja", 2000.0, cat1, 0.0f, 600, v1);
+        Bebida m3 = new Bebida(3, "Cepita de Naranja", "Jugo", 3000.0, cat1, 0.0f, 700, v1);
+        Bebida m4 = new Bebida(4, "Jugo de Tomate", "Jugo", 4000.0, cat1, 0.0f, 1000, v2);
+        Bebida m5 = new Bebida(5, "Vino", "Extracto de uvas", 10000.0, cat1, 14.6f, 1000, v2);
+        Bebida m6 = new Bebida(6, "Jugo de limon", "Jugo", 150.0, cat1, 0.0f, 300, v2);
+        Bebida m7 = new Bebida(7, "Pepsi", "Gaseosa de cola", 1000.0, cat1, 0.0f, 500, v1);
+        Bebida m8 = new Bebida(8, "Licuado de banana", "Banana licuada con leche", 400.0, cat1, 0.0f, 300, v3);
+        Bebida m9 = new Bebida(9, "Licuado de frutilla", "Frutilla licuada con leche", 400.0, cat1, 0.0f, 300, v3);
+        Plato p11 = new Plato(11, "Suprema", "Pechuga de pollo rebosada", 5000.00, cat1, 600, false, false, 300.00f, v1);
+        Plato p12 = new Plato(12, "Suprema", "Pechuga de pollo rebosada", 5500.00, cat1, 650, false, false, 320.00f, v2);
+        Plato p13 = new Plato(13, "Milanesa", "Bife de nalga rebosado", 6500.00, cat1, 800, false, false, 310.00f,v1);
+        Plato p14 = new Plato(14, "Milanesa", "Bife de lomo rebosado", 7200.00, cat1, 785, false, false, 350.00f,v3);
+        Plato p15 = new Plato(15, "Papas fritas", "Porción de papas fritas para dos personas", 8000.00, cat1, 1000, true, true, 500.00f,v1);
+        Plato p16 = new Plato(16, "Papas fritas", "Porción de papas fritas para dos personas", 8200.00, cat1, 900, true, true, 450.00f,v2);
+        Plato p17 = new Plato(17, "Empanadas de carne", "Media docena de empanadas de carne", 4500.00, cat1, 1020, false, false, 700.00f,v1);
+        Plato p18 = new Plato(18, "Empanadas de carne", "Media docena de empanadas de carne", 4700.00, cat1, 1200, false, false, 750.00f,v3);
+        Plato p19 = new Plato(19, "Empanadas de verdura", "Media docena de empanadas de verdura", 4000.00, cat1, 920, false, true, 700.00f,v2);
+        Plato p20 = new Plato(20, "Empanadas de verdura", "Media docena de empanadas de verdura", 4500.00, cat1, 880, false, true, 750.00f,v3);
+
+        v1.agregarItem(p20);
+        v1.agregarItem(p18);
+        v1.agregarItem(p16);
+        v1.agregarItem(m1);
+        v1.agregarItem(m2);
+        v1.agregarItem(m3);
+
+        v2.agregarItem(p14);
+        v2.agregarItem(p12);
+        v2.agregarItem(m4);
+        v2.agregarItem(m5);
+        v2.agregarItem(m6);
+
+        v3.agregarItem(p11);
+        v3.agregarItem(p13);
+        v3.agregarItem(p15);
+        v3.agregarItem(p17);
+        v3.agregarItem(p19);
+        v3.agregarItem(m7);
+        v3.agregarItem(m8);
+        v3.agregarItem(m9);
+
+        PedidoMemory pedMem = new PedidoMemory();
+
+        Pedido p1 = C.comprar(vendedores);
+
+        pedMem.addPedido(p1);
+
+        System.out.println(p1.getEstado());
+
+        List<Pedido> pedidosPagadosv1 = v1.obtenerPedidosPorEstado(ESTADO.PAGADO, pedMem.buscarPorRestaurante(v1.getID()));
+
+        System.out.println(pedidosPagadosv1.toString());
     }
 
 
@@ -345,7 +407,7 @@ public class Tp4{
         if(encontrado == false){
             System.out.println("No se ha encontrado un vendedor con ese ID.");
         }
-    } 
+    }
     
     public static void mostrarVendedores(ArrayList<Vendedor> vendedores){
         for(Vendedor v: vendedores){

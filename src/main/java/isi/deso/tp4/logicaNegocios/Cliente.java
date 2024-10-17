@@ -56,12 +56,14 @@ public class Cliente {
         String vendedorNombre = scanner.nextLine();
         int vendedorSeleccionado=-1;
         Vendedor vendInstance=null;
-        for(Vendedor vend : vendedores){
-            if(vend.getNombre().equals(vendedorNombre)) {
-                vendInstance=vend;
+        for(Vendedor vend : vendedores) {
+            if (vend.getNombre().equals(vendedorNombre)) {
+                vendInstance = vend;
                 break;
             }
         }
+
+        p.setVendedor(vendInstance);
 
         System.out.println("Productos del restaurante "+vendInstance.getNombre());
         List<ItemMenu> aux = vendInstance.getItems();
@@ -84,7 +86,6 @@ public class Cliente {
             System.out.println("¿Desea agregar otro producto al pedido? true/false");   
             agregarAlgo = scannerAlgo.nextBoolean();   
         }
-
 
         //pedido ya con todos los items
         //cuanto duele la jodita?
@@ -112,7 +113,7 @@ public class Cliente {
         if(estrategiaDePago.pagar()){
             System.out.println("Pago realizado con exito");
             //cambiar estado del pedido
-            p.setEstado("PAGADO");
+            p.setEstado(ESTADO.PAGADO);
         }else{
             System.out.println("Pago fallido");
         }
@@ -138,7 +139,6 @@ public class Cliente {
         return estrategiaDePago.pagar();
     }
 
-    @Override
     public void update(ESTADO e) {
         
     }
