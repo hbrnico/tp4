@@ -129,11 +129,11 @@ public ItemMenu buscarProducto(String nombre) throws ItemNoEncontradoException {
         return item; 
     };
 
-     public List<Pedido> obtenerPedidosPorEstado(String estado){
+
+public List<Pedido> obtenerPedidosPorEstado(String estado){
+
          List<Pedido> pedidos = new ArrayList<>();
          
-
-
 
          return pedidos;
      };

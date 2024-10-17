@@ -4,6 +4,7 @@
  */
 package isi.deso.tp4.logicaNegocios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -119,6 +120,7 @@ public class Cliente {
 
         return p;
     }
+
     public void pagarPorMercadoPago(Pedido carrito) {
         estrategiaDePago = new PagarPorMercadoPago(carrito);
     }
@@ -134,5 +136,10 @@ public class Cliente {
         }
         
         return estrategiaDePago.pagar();
+    }
+
+    @Override
+    public void update(ESTADO e) {
+        
     }
 }

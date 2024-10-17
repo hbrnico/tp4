@@ -24,7 +24,9 @@ public class Tp4{
         
         //test3();
         
-        //test4();
+        test4();
+
+        //test5();
 
     }
     
@@ -290,7 +292,9 @@ public class Tp4{
 
     }
     
+    public static void test5(){
 
+    }
 
 
     public static void buscarVendedoresPorId(ArrayList<Vendedor> vendedores, int ID){

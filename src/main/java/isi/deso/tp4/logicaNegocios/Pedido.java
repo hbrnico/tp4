@@ -7,8 +7,9 @@ package isi.deso.tp4.logicaNegocios;
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
 import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 
-public class Pedido{
+public class Pedido implements Observable{
     private Cliente miCliente;
+    private Vendedor miVendedor;
     private ItemsPedidoMemory miItemsPedidoMemory;
     private double precio;
     private ESTADO estado;
@@ -19,7 +20,10 @@ public class Pedido{
         this.precio = 0;
         this.estado = ESTADO.EN_ESPERA;
     }
-    
+
+    public Vendedor getMiVendedor() {
+        return miVendedor;
+    }
 
     public void setEstado(ESTADO estadoCambio){
         this.estado=estadoCambio;
