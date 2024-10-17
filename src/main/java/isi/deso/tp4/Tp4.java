@@ -353,11 +353,27 @@ public class Tp4{
 
         System.out.println(p1.getEstado());
 
-        List<Pedido> pedidosPagadosv1 = v1.obtenerPedidosPorEstado(ESTADO.PAGADO, pedMem.buscarPorRestaurante(v1.getID()));
+        List<Pedido> pedidosPagadosv1 = v1.obtenerPedidosPorEstado(ESTADO.RECIBIDO);
+
+        //Pedido pedidoActualizado.seleccionarPedido(pedidosPagadosv1);
 
         System.out.println(pedidosPagadosv1.toString());
     }
 
+    //public static Pedido seleccionarPedido(List<Pedido> pedidosLista){
+        //Mostrar los pedidos
+        //System.out.println("Seleccione un Pedido: ");
+
+//        for (Pedido pedido : pedidosLista) {
+  //          System.out.println();
+      //      System.out.println(pedido.getFechaHoraPedido());
+    //        System.out.println(pedido.getEstado());
+            //System.out.println(pedido.getItemsPedidoMemory());
+        //}
+
+
+
+    //}
 
     public static void buscarVendedoresPorId(ArrayList<Vendedor> vendedores, int ID){
         boolean encontrado = false;

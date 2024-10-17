@@ -22,6 +22,7 @@ public class Pedido implements Observable{
     }
 
     public void setVendedor(Vendedor v){ this.miVendedor = v; }
+
     public Vendedor getMiVendedor() {
         return miVendedor;
     }

@@ -6,6 +6,7 @@ package isi.deso.tp4.logicaNegocios;
 
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
 import isi.deso.tp4.excepciones.PedidoNoEncontradoException;
+import isi.deso.tp4.persistencia.PedidoMemory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +132,9 @@ public class Vendedor {
         return item; 
     };
 
-    public List<Pedido> obtenerPedidosPorEstado(ESTADO estado, List<Pedido> misPedidos){
+    public List<Pedido> obtenerPedidosPorEstado(ESTADO estado){
+        PedidoMemory misPedidosMemory = new PedidoMemory();
+        List<Pedido> misPedidos = misPedidosMemory.buscarPorRestaurante(this.getID());
         misPedidos.removeIf(p -> !p.getEstado().equals(estado));
         return misPedidos;
     };

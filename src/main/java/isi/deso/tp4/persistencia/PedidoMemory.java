@@ -11,11 +11,13 @@ import java.util.stream.Collectors;
 public class PedidoMemory implements PedidoDao{
     private List<Pedido> pedidos;
 
-    public PedidoMemory() {this.pedidos = new ArrayList<Pedido>();}
-    public PedidoMemory(List<Pedido> pedidos) {this.pedidos = pedidos;}
-    public List<Pedido> getPedidos() {return this.pedidos;}
-    public void setPedidos(List<Pedido> pedidos) {this.pedidos = pedidos;}
-    public void addPedido(Pedido pedido) {this.pedidos.add(pedido);}
+    public PedidoMemory() {}
+
+    public List<Pedido> getPedidos() {return pedidos;}
+
+    public void setPedidos(List<Pedido> pedidoss) {pedidos = pedidoss;}
+
+    public void addPedido(Pedido pedido) {pedidos.add(pedido);}
 
     public List<Pedido> buscarPorRestaurante(int idRest) throws PedidoNoEncontradoException {
         List<Pedido> pedidosPorRestaurante = this.pedidos.stream()
