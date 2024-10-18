@@ -19,17 +19,11 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
     public ItemsPedidoMemory() {
             this.itemsPedidos = new ArrayList<>();
     }
-    
-    //constructor solo para las pruebas
-    public ItemsPedidoMemory(List<ItemPedido> items) {
-            this.itemsPedidos = items;
+
+    public List<ItemPedido> getItemsPedidos() {
+        return itemsPedidos;
     }
 
-    public void setItemsPedidos(List<ItemPedido> items){
-        this.itemsPedidos = items;
-    }
-
-    @Override
     public List<ItemPedido> buscarPorRestaurante(int idRest) throws ItemNoEncontradoException {
         
         List<ItemPedido> itemsComunes = this.itemsPedidos.stream()
@@ -41,10 +35,9 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
         return itemsComunes;
     };
 
-    
-    @Override
+
     public List<ItemPedido> buscarPorRangoPrecio(double min, double max) throws ItemNoEncontradoException{
-        List<ItemPedido> res = itemsPedidos.stream()
+        List<ItemPedido> res = this.itemsPedidos.stream()
                 .filter(itemPedido -> itemPedido.getItemMenu().getPrecio() >= min && itemPedido.getItemMenu().getPrecio() <= max)
                 .collect(Collectors.toList());
         
@@ -52,12 +45,11 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
         
         return res;
     };
-    
-    @Override
+
     public List<ItemPedido> filtrado(Function<ItemPedido, Boolean> funcion) throws ItemNoEncontradoException{
         List<ItemPedido> res = new ArrayList<>();
         this.itemsPedidos.forEach(n -> {
-            if (funcion.apply(n) == true) res.add(n);
+            if (funcion.apply(n)) res.add(n);
         });
         
         if(res.isEmpty()) throw new ItemNoEncontradoException("No se encontraron items pedidos segun el filtrado especificado");
@@ -65,7 +57,6 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
         return res;
     };
 
-    @Override
     public List<ItemPedido> ordenarPor(Comparator<ItemPedido> comp) throws ItemNoEncontradoException{
         
         List<ItemPedido> res = itemsPedidos;
@@ -74,8 +65,8 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
         return res;
     };
 
-    public void agrearAItemsPedidos(ItemPedido IPAAgregar){
-        this.itemsPedidos.add(IPAAgregar);
+    public void agrearAItemsPedidos(ItemPedido IPAgregar){
+        BaseDeDatos.addItemPedido(IPAgregar);
     };
 
 }

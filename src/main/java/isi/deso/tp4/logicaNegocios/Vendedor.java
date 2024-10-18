@@ -5,6 +5,8 @@
 package isi.deso.tp4.logicaNegocios;
 
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
+import isi.deso.tp4.excepciones.PedidoNoEncontradoException;
+import isi.deso.tp4.persistencia.PedidoMemory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class Vendedor {
     private Coordenada coordenadas;
     private List<ItemMenu> listaItems;
     
-     public Vendedor(int id, String nombre, String direccion, Coordenada coordenadas){
+    public Vendedor(int id, String nombre, String direccion, Coordenada coordenadas){
         this.id = id;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -118,7 +120,8 @@ public class Vendedor {
 
     return ret;
     }
-public ItemMenu buscarProducto(String nombre) throws ItemNoEncontradoException {
+
+    public ItemMenu buscarProducto(String nombre) throws ItemNoEncontradoException {
         
         List<ItemMenu> itemsComunes = this.listaItems.stream()
             .filter(ItemMenu -> ItemMenu.getNombre().equals(nombre))  
@@ -129,12 +132,10 @@ public ItemMenu buscarProducto(String nombre) throws ItemNoEncontradoException {
         return item; 
     };
 
-
-public List<Pedido> obtenerPedidosPorEstado(String estado){
-
-         List<Pedido> pedidos = new ArrayList<>();
-         
-
-         return pedidos;
-     };
+    public List<Pedido> obtenerPedidosPorEstado(ESTADO estado){
+        PedidoMemory misPedidosMemory = new PedidoMemory();
+        List<Pedido> misPedidos = misPedidosMemory.buscarPorRestaurante(this.getID());
+        misPedidos.removeIf(p -> !p.getEstado().equals(estado));
+        return misPedidos;
+    };
 }
