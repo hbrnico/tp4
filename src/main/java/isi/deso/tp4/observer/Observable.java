@@ -21,8 +21,8 @@ abstract class Observable {
         }
     }
 
-    //este que hace?
+    //este que hace? guarda en la base de datos?
     public void setChanged(){
-        
+
     };
 }

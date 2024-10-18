@@ -141,6 +141,7 @@ public class Vendedor {
 
 
     //Actualiza el estado de un pedido de un cliente en particular (no tenemos id de pedido, problema con varios pedidios de un mismo client con el mismo estado)
+
     public void cambiarEstadoPedido(int idCliente, ESTADO estadoBusqueda, ESTADO estadoNuevo) throws PedidoNoEncontradoException{
         List<Pedido> pedidos = obtenerPedidosPorEstado(estadoBusqueda);
         Pedido pedido = pedidos.stream()
