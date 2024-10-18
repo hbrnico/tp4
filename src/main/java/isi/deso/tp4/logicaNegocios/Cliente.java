@@ -20,7 +20,7 @@ import java.lang.annotation.ElementType;
 import java.util.List;
 import java.util.Scanner;
 
-public class Cliente {
+public class Cliente implements Observer {
     private int id;
     private String cuit;
     private String email;
@@ -99,7 +99,7 @@ public class Cliente {
         }
 
         if(p.getItemsDelPedido().isEmpty()){
-            return;
+            return 0;
         }
 
         PedidoMemory ped = new PedidoMemory();
@@ -123,7 +123,9 @@ public class Cliente {
         return estrategiaDePago.pagar();
     }
 
-    public void update(ESTADO e) {
-        
+    public void update(ESTADO estado) {
+        if(estado == ESTADO.EN_ENVIO){
+            //LOGICA QUE GENERA PAGO
+        }
     }
 }

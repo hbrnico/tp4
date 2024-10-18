@@ -1,11 +1,28 @@
 package isi.deso.tp4.observer;
 
-public interface Observable {
-    //void addObserver(Observador o);
+import java.util.ArrayList;
+import java.util.List;
 
-    //void removeObserver(Observer o);
+abstract class Observable {
 
-    //void notifyObservers(Observer o);
+    private List<Observer> suscriptores = new ArrayList<Observer>();
 
-    //void setChanged();
+    public void addObserver(Observer o){
+        this.suscriptores.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        this.suscriptores.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (int i = 0; i < this.suscriptores.size(); i++){
+            this.suscriptores.get(i).update(this);
+        }
+    }
+
+    //este que hace?
+    public void setChanged(){
+        
+    };
 }

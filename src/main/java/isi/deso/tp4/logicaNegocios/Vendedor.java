@@ -138,4 +138,17 @@ public class Vendedor {
         misPedidos.removeIf(p -> !p.getEstado().equals(estado));
         return misPedidos;
     };
+
+
+    //Actualiza el estado de un pedido de un cliente en particular (no tenemos id de pedido, problema con varios pedidios de un mismo client con el mismo estado)
+    public void cambiarEstadoPedido(int idCliente, ESTADO estadoBusqueda, ESTADO estadoNuevo) throws PedidoNoEncontradoException{
+        List<Pedido> pedidos = obtenerPedidosPorEstado(estadoBusqueda);
+        Pedido pedido = pedidos.stream()
+            .filter(p -> p.getMiCliente().getID() == idCliente)
+            .findFirst()
+            .orElseThrow(() -> new PedidoNoEncontradoException("No se encontró el pedido del cliente: " + idCliente + ", en estado: " + estadoBusqueda));
+        pedido.setEstado(estadoNuevo);
+    }
+
+
 }
