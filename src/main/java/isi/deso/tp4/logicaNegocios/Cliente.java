@@ -20,7 +20,7 @@ import java.lang.annotation.ElementType;
 import java.util.List;
 import java.util.Scanner;
 
-public class Cliente {
+public class Cliente implements Observer {
     private int id;
     private String cuit;
     private String email;
@@ -56,25 +56,30 @@ public class Cliente {
     public Coordenada getCoordenadas() {
         return this.coordenadas;
     }
-    
-    public Pedido comprar(List<Vendedor> vendedores){
+
+    public void comprar(List<Vendedor> vendedores) throws IOException {
         Pedido p = new Pedido(this);
         //mostra todos los vendedores
         System.out.println("Elija el restaurante en el que desea ordenar");
         vendedores.forEach(n -> System.out.println(n.getNombre()));
 
         // seleccionar un vendedor
-        Scanner scanner = new Scanner(System.in);
-        String vendedorNombre = scanner.nextLine();
-        int vendedorSeleccionado=-1;
+        FileReader f = new FileReader("src/main/java/isi/deso/tp4/archivoPrueba");
+        BufferedReader b = new BufferedReader(f);
         Vendedor vendInstance=null;
-        for(Vendedor vend : vendedores) {
-            if (vend.getNombre().equals(vendedorNombre)) {
-                vendInstance = vend;
-                break;
+        int vendedorSeleccionado=-1;
+        while(vendInstance == null) {
+            String vendedorNombre = b.readLine();
+            for (Vendedor vend : vendedores) {
+                if (vend.getNombre().equals(vendedorNombre)) {
+                    vendInstance = vend;
+                    break;
+                }
+            }
+            if (vendInstance == null) {
+                System.out.println("El vendedor ingresado no existe. Ingrese los datos nuevamente.");
             }
         }
-
         p.setVendedor(vendInstance);
 
         System.out.println("Productos del restaurante "+vendInstance.getNombre());
@@ -90,7 +95,7 @@ public class Cliente {
 
         while(agregarAlgo){
             System.out.println("Ingrese el nombre del producto a agregar ");
-            producto = scanner.nextLine();
+            producto = b.readLine();
             //selecciono producto (cin del producto)
             p.agregarProducto(producto);
             //while(agregarAlgo != true && agregarAlgo != false){
@@ -124,7 +129,58 @@ public class Cliente {
         return estrategiaDePago.pagar();
     }
 
-    public void update(ESTADO e) {
-        
+    public void update(Observable obs) {
+        Pedido p = (Pedido) obs;
+
+        switch(p.getEstado()){
+            case ESTADO.EN_ESPERA:
+
+            //ingrese metodo de pago
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Ingrese metodo de pago: MP / TF ");
+            while (estrategiaDePago==null) {
+                String metodo=scanner.nextLine();
+                switch (metodo){
+                    case "MP":
+                        pagarPorMercadoPago(p);
+                        break;
+                    case "TF":
+                        pagarPorTransferencia(p);
+                        break;
+                    default:
+                        System.out.println("Metodo de pago desconocido, vuelva a ingresar");
+                        System.out.println("Ingrese metodo de pago: MP / TF ");
+                        break;
+                }
+            }
+            if(estrategiaDePago.pagar()){
+                System.out.println("Pago realizado con exito");
+                //cambiar estado del pedido
+                p.setEstado(ESTADO.RECIBIDO);
+            }
+            else System.out.println("Pago fallido");
+
+            estrategiaDePago=null;
+                break;
+
+            case ESTADO.RECHAZADO:
+                System.out.println("Pedido rechazado.");
+                break;
+
+            case ESTADO.EN_ENVIO:
+                System.out.println("Su pedido se encuentra en camino");
+                break;
+
+            case ESTADO.ENTREGADO:
+                System.out.println("Su pedido fue entregado con exito. Esperamos que lo distrufe.");
+                break;
+
+            case ESTADO.RECIBIDO:
+                System.out.println("Su pedido fue recibido con exito por el restaurante. Se le notificara cuando se acepte o rechace el mismo.");
+                break;
+
+
+        }
+
     }
 }

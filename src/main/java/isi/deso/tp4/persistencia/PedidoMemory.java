@@ -15,11 +15,11 @@ public class PedidoMemory implements PedidoDao{
         this.pedidos = BaseDeDatos.getPedidoList();
     }
 
-    public List<Pedido> getPedidos() {return pedidos;}
+    public List<Pedido> getPedidos() {return this.pedidos;}
 
-    public void setPedidos(List<Pedido> pedidoss) {pedidos = pedidoss;}
-
-    public void addPedido(Pedido pedido) {pedidos.add(pedido);}
+    public void addPedido(Pedido pedido) {
+        BaseDeDatos.addPedido(pedido);
+    }
 
     public List<Pedido> buscarPorRestaurante(int idRest) throws PedidoNoEncontradoException {
         List<Pedido> pedidosPorRestaurante = this.pedidos.stream()

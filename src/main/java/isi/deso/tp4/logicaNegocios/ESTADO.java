@@ -5,5 +5,5 @@ public enum ESTADO {
     RECIBIDO,
     EN_ENVIO,
     ENTREGADO,
-    PAGADO
+    RECHAZADO
 }

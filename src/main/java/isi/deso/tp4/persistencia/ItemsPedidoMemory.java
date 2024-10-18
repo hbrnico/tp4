@@ -17,7 +17,7 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
     private List<ItemPedido> itemsPedidos;
 
     public ItemsPedidoMemory() {
-            this.itemsPedidos = new ArrayList<>();
+            this.itemsPedidos = BaseDeDatos.getItemPedidoList();
     }
 
     public List<ItemPedido> getItemsPedidos() {

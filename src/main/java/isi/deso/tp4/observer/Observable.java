@@ -1,11 +1,10 @@
 package isi.deso.tp4.observer;
 
-public interface Observable {
-    //void addObserver(Observador o);
+import isi.deso.tp4.logicaNegocios.ESTADO;
 
-    //void removeObserver(Observer o);
-
-    //void notifyObservers(Observer o);
-
-    //void setChanged();
+public interface Observable{
+    void addObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers();
+    void setEstado(ESTADO estadoCambio);
 }

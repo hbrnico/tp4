@@ -15,11 +15,7 @@ public class VendedorMemory implements VendedorDao {
     private List<Vendedor> vendedores;
     
     public VendedorMemory() {
-        this.vendedores = new ArrayList<>();
-    }
-
-    public VendedorMemory(List<Vendedor> vendedores) {
-        this.vendedores = vendedores;
+        this.vendedores = BaseDeDatos.getVendedorList();
     }
     
 

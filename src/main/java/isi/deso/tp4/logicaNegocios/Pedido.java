@@ -9,18 +9,28 @@ import isi.deso.tp4.observer.Observable;
 import isi.deso.tp4.observer.Observer;
 import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 
-public class Pedido implements Observable{
+import java.util.ArrayList;
+import java.util.List;
+import java.time.LocalDateTime;
+import java.util.stream.Collectors;
+
+public class Pedido implements Observable {
     private Cliente miCliente;
     private Vendedor miVendedor;
-    private ItemsPedidoMemory miItemsPedidoMemory;
+    private LocalDateTime fechaHoraPedido;
     private double precio;
     private ESTADO estado;
+    private List<Observer> suscriptores;
+    private int ID;
+    static int contador = 0;
     
     public Pedido(Cliente miCliente){
         this.miCliente = miCliente;
-        this.miItemsPedidoMemory = new ItemsPedidoMemory();
+        this.fechaHoraPedido = LocalDateTime.now();
         this.precio = 0;
         this.estado = ESTADO.EN_ESPERA;
+        this.suscriptores = new ArrayList<>();
+        this.ID=contador++;
     }
 
     public void setVendedor(Vendedor v){ this.miVendedor = v; }
@@ -35,11 +45,13 @@ public class Pedido implements Observable{
 
     public ESTADO getEstado(){ return this.estado; }
 
+    public int getID(){ return this.ID; }
+
     public LocalDateTime getFechaHoraPedido(){ return this.fechaHoraPedido; }
 
     public void agregarProducto(String plato) {
         try{
-            ItemMenu p = v.buscarProducto(plato);
+            ItemMenu p = this.miVendedor.buscarProducto(plato);
             ItemPedido recup = new ItemPedido(p,this);
             ItemsPedidoMemory miItemsPedidoMemory = new ItemsPedidoMemory();
             miItemsPedidoMemory.agrearAItemsPedidos(recup);
