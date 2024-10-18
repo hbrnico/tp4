@@ -12,5 +12,3 @@ public interface PedidoDao {
     public List<Pedido> buscarPorRestaurante(int idRest) throws PedidoNoEncontradoException;
 }
 
-// Es mejor usar buscarPorRestaurante cada vez que queremos obtener los pedidos de un vendedor o
-// guardar una lista con sus pedidos cómo atributo del vendedor?

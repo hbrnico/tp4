@@ -4,7 +4,19 @@
  */
 package isi.deso.tp4.logicaNegocios;
 
-import java.util.ArrayList;
+import isi.deso.tp4.observer.Observable;
+import isi.deso.tp4.observer.Observer;
+import isi.deso.tp4.persistencia.PedidoMemory;
+import isi.deso.tp4.strategy.EstrategiaPago;
+import isi.deso.tp4.strategy.PagarPorMercadoPago;
+import isi.deso.tp4.strategy.PagarPorTransferencia;
+import isi.deso.tp4.logicaNegocios.ESTADO;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.annotation.ElementType;
 import java.util.List;
 import java.util.Scanner;
 
@@ -50,7 +62,7 @@ public class Cliente {
         //mostra todos los vendedores
         System.out.println("Elija el restaurante en el que desea ordenar");
         vendedores.forEach(n -> System.out.println(n.getNombre()));
-        
+
         // seleccionar un vendedor
         Scanner scanner = new Scanner(System.in);
         String vendedorNombre = scanner.nextLine();
@@ -68,58 +80,31 @@ public class Cliente {
         System.out.println("Productos del restaurante "+vendInstance.getNombre());
         List<ItemMenu> aux = vendInstance.getItems();
         aux.forEach(n -> System.out.println(n.getNombre()));
-        Boolean agregarAlgo;//cin algo;
+        Boolean agregarAlgo = null;
         String producto;
-        System.out.println("¿Desea agregar un producto al pedido? true/false");
-        Scanner scannerAlgo = new Scanner(System.in);
-        agregarAlgo = scannerAlgo.nextBoolean();
+        //Scanner scannerAlgo = new Scanner(System.in);
+       // while(agregarAlgo){
+            System.out.println("¿Desea agregar un producto al pedido? true/false");
+            agregarAlgo = Boolean.valueOf(b.readLine());
+       // }
 
-        if(!agregarAlgo){
-            return p;
-        }
-
-        while(agregarAlgo == true){
+        while(agregarAlgo){
             System.out.println("Ingrese el nombre del producto a agregar ");
             producto = scanner.nextLine();
             //selecciono producto (cin del producto)
-            p.agregarProducto(vendInstance, producto);
-            System.out.println("¿Desea agregar otro producto al pedido? true/false");   
-            agregarAlgo = scannerAlgo.nextBoolean();   
+            p.agregarProducto(producto);
+            //while(agregarAlgo != true && agregarAlgo != false){
+                System.out.println("¿Desea agregar un producto al pedido? true/false");
+                agregarAlgo = Boolean.valueOf(b.readLine());
+            //}
         }
 
-        //pedido ya con todos los items
-        //cuanto duele la jodita?
-        //¿cerramos numeros maestro?
-        //*gesto de escribir con la mano* (marca patentada de mi viejo)
-        
-        //ingrese metodo de pago
-        System.out.println("Ingrese metodo de pago: MP / TF ");
-        while (estrategiaDePago==null) {  
-        String metodo=scanner.nextLine();
-        switch (metodo) {
-            case "MP":
-                pagarPorMercadoPago(p);
-                break;
-            case "TF":
-                pagarPorTransferencia(p);
-                break;
-            default:
-                System.out.println("Metodo de pago desconocido, vuelva a ingresar");
-                System.out.println("Ingrese metodo de pago: MP / TF ");
-                break;
-            
+        if(p.getItemsDelPedido().isEmpty()){
+            return;
         }
-        }
-        if(estrategiaDePago.pagar()){
-            System.out.println("Pago realizado con exito");
-            //cambiar estado del pedido
-            p.setEstado(ESTADO.PAGADO);
-        }else{
-            System.out.println("Pago fallido");
-        }
-        estrategiaDePago=null;
 
-        return p;
+        PedidoMemory ped = new PedidoMemory();
+        ped.addPedido(p);
     }
 
     public void pagarPorMercadoPago(Pedido carrito) {

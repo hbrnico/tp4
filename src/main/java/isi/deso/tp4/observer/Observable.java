@@ -1,6 +1,4 @@
-package isi.deso.tp4.logicaNegocios;
-
-import java.util.Observer;
+package isi.deso.tp4.observer;
 
 public interface Observable {
     //void addObserver(Observador o);

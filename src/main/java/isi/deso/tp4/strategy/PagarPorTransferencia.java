@@ -1,4 +1,6 @@
-package isi.deso.tp4.logicaNegocios;
+package isi.deso.tp4.strategy;
+
+import isi.deso.tp4.logicaNegocios.Pedido;
 
 import java.util.Scanner;
 

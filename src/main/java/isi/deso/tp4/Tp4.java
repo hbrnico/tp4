@@ -5,6 +5,8 @@
 package isi.deso.tp4;
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
 import isi.deso.tp4.logicaNegocios.*;
+import isi.deso.tp4.persistencia.BaseDeDatos;
+import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 import isi.deso.tp4.persistencia.PedidoMemory;
 
 import java.util.ArrayList;
@@ -48,7 +50,7 @@ public class Tp4{
         System.out.println("Ingrese el nombre del vendedor que desea buscar: ");
         
         String nombre = ingresoTeclado.next();
-        
+
         buscarVendedoresPorNombre(vendedores, nombre);
         
         System.out.println("Ingrese el ID del vendedor que desea borrar: ");
@@ -345,35 +347,70 @@ public class Tp4{
         v3.agregarItem(m8);
         v3.agregarItem(m9);
 
-        PedidoMemory pedMem = new PedidoMemory();
+        try{
+            C.comprar(vendedores);
+        }
+        catch(IOException x1){
+            System.out.println(x1);
+        }
+        try{
+            C.comprar(vendedores);
+        }
+        catch(IOException x1){
+            System.out.println(x1);
+        }
+        try{
+            C.comprar(vendedores);
+        }
+        catch(IOException x1) {
+            System.out.println(x1);
+        }
 
-        Pedido p1 = C.comprar(vendedores);
+        List<Pedido> pedidosEnEspera = v1.obtenerPedidosPorEstado(ESTADO.EN_ESPERA);
 
-        pedMem.addPedido(p1);
+        seleccionarPedido(pedidosEnEspera);
 
-        System.out.println(p1.getEstado());
-
-        List<Pedido> pedidosPagadosv1 = v1.obtenerPedidosPorEstado(ESTADO.RECIBIDO);
-
-        //Pedido pedidoActualizado.seleccionarPedido(pedidosPagadosv1);
-
-        System.out.println(pedidosPagadosv1.toString());
+        //System.out.println(pedidosPagadosv1.toString());
     }
 
-    //public static Pedido seleccionarPedido(List<Pedido> pedidosLista){
+    public static void seleccionarPedido(List<Pedido> pedidosLista){
         //Mostrar los pedidos
-        //System.out.println("Seleccione un Pedido: ");
+       // Scanner ingresoTeclado = new Scanner(System.in);
+        System.out.println("Cantidad de pedidos: " + pedidosLista.size());
+        System.out.println("Seleccione un pedido: ");
 
-//        for (Pedido pedido : pedidosLista) {
-  //          System.out.println();
-      //      System.out.println(pedido.getFechaHoraPedido());
-    //        System.out.println(pedido.getEstado());
-            //System.out.println(pedido.getItemsPedidoMemory());
-        //}
+     for (Pedido pedido : pedidosLista) {
+            System.out.println("ID: "+ pedido.getID() +
+                    " ||  Fecha: " + pedido.getFechaHoraPedido() +
+                    " || Estado: " + pedido.getEstado() +
+                    " || Items: ");
+                for(ItemMenu item: pedido.getItemsDelPedido()){
+                    System.out.print(item.getNombre() + " ");
+                }
+            System.out.println();
+        }
+/*
+ Pedro's
+ true
+ Fanta
+ false
+ Pedro's
+ true
+ Papas fritas
+ false
+ Mariano's
+ true
+ Pepsi
+false
 
+ */
 
+     //String nombre = ingresoTeclado.next();
+        // int idABuscar = ingresoTeclado.nextInt();
+     //.out.println("Ingrese el ID del pedido que quiera seleccionar: ");
+     //Scanner scaner = new Scanner(System.in);
 
-    //}
+    }
 
     public static void buscarVendedoresPorId(ArrayList<Vendedor> vendedores, int ID){
         boolean encontrado = false;

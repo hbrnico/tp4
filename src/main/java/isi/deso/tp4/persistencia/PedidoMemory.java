@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 public class PedidoMemory implements PedidoDao{
     private List<Pedido> pedidos;
 
-    public PedidoMemory() {}
+    public PedidoMemory() {
+        this.pedidos = BaseDeDatos.getPedidoList();
+    }
 
     public List<Pedido> getPedidos() {return pedidos;}
 

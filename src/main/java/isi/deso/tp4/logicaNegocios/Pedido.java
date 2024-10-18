@@ -5,6 +5,8 @@
 package isi.deso.tp4.logicaNegocios;
 
 import isi.deso.tp4.excepciones.ItemNoEncontradoException;
+import isi.deso.tp4.observer.Observable;
+import isi.deso.tp4.observer.Observer;
 import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 
 public class Pedido implements Observable{
@@ -27,29 +29,57 @@ public class Pedido implements Observable{
         return miVendedor;
     }
 
-    public void setEstado(ESTADO estadoCambio){
-        this.estado=estadoCambio;
-    }
-
-    public ItemsPedidoMemory getItemsPedidoMemory(){
-        return this.miItemsPedidoMemory;
-    }
-
     public double getPrecio(){
         return this.precio;
     }
 
     public ESTADO getEstado(){ return this.estado; }
 
-    public void agregarProducto(Vendedor v, String plato) {
+    public LocalDateTime getFechaHoraPedido(){ return this.fechaHoraPedido; }
+
+    public void agregarProducto(String plato) {
         try{
             ItemMenu p = v.buscarProducto(plato);
             ItemPedido recup = new ItemPedido(p,this);
-            this.miItemsPedidoMemory.agrearAItemsPedidos(recup);   
+            ItemsPedidoMemory miItemsPedidoMemory = new ItemsPedidoMemory();
+            miItemsPedidoMemory.agrearAItemsPedidos(recup);
             this.precio = this.precio + p.getPrecio();
         }
         catch(ItemNoEncontradoException x1){
             System.out.println(x1);
         }
-    };
+    }
+
+    public void setEstado(ESTADO estadoCambio){
+        this.estado=estadoCambio;
+        notifyObservers();
+    }
+
+    public void addObserver(Observer o){
+        this.suscriptores.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        this.suscriptores.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (int i = 0; i < this.suscriptores.size(); i++){
+            this.suscriptores.get(i).update(this);
+        }
+    }
+
+    public List<ItemMenu> getItemsDelPedido(){
+        ItemsPedidoMemory miItemsPedidoMemory = new ItemsPedidoMemory();
+        List<ItemPedido> aux = miItemsPedidoMemory.getItemsPedidos().stream()
+                .filter(itemPedido -> itemPedido.getPedido().getID() == this.getID())
+                .collect(Collectors.toList());
+
+        List<ItemMenu> ret = new ArrayList<>();
+        for (ItemPedido itemPedido : aux){
+            ret.add(itemPedido.getItemMenu());
+        }
+
+        return ret;
+    }
 }
