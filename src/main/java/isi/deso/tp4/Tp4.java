@@ -9,6 +9,7 @@ import isi.deso.tp4.persistencia.BaseDeDatos;
 import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 import isi.deso.tp4.persistencia.PedidoMemory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -193,15 +194,14 @@ public class Tp4{
         ItemPedido ip20 = new ItemPedido(p20,ped1);
 
         ArrayList<ItemPedido> listaItemsPedido = new ArrayList<>(Arrays.asList(ip1,ip2,ip3,ip4,ip5,ip6,ip7,ip8,ip9,ip10,ip11,ip12,ip13,ip14,ip15,ip16,ip17,ip18,ip19,ip20));
-
-        
-        ped1.getItemsPedidoMemory().setItemsPedidos(listaItemsPedido);
+        BaseDeDatos.setItemPedidoList(listaItemsPedido);
+        ItemsPedidoMemory itemsAMostrar = new ItemsPedidoMemory();
 
         //Recomendamos comentar los metodos para probarlos de a 1 y ver mejor los resultados
         
         //Probamos buscarPorRestaurante
         try{
-            List<ItemPedido> aux = ped1.getItemsPedidoMemory().buscarPorRestaurante(1);
+            List<ItemPedido> aux = itemsAMostrar.buscarPorRestaurante(1);
             aux.forEach(n -> System.out.println(n.getItemMenu().getNombre()));
         } catch(ItemNoEncontradoException x1){
             System.out.println(x1);
@@ -209,7 +209,7 @@ public class Tp4{
         
         //Probamos buscarPorRantoPrecio
         try{
-            List<ItemPedido> aux = ped1.getItemsPedidoMemory().buscarPorRangoPrecio(500.0f, 7000.0f);
+            List<ItemPedido> aux = itemsAMostrar.buscarPorRangoPrecio(500.0f, 7000.0f);
             aux.forEach(n -> System.out.println(n.getItemMenu().getNombre()));
         } catch(ItemNoEncontradoException x1){
             System.out.println(x1);
@@ -220,7 +220,7 @@ public class Tp4{
         //el filtro que se desee en el momento. En este caso filtramos aquellos itemPedido
         //asociados al vendedor 1
         try{
-            List<ItemPedido> aux = ped1.getItemsPedidoMemory().filtrado(n -> n.getItemMenu().getVendedor().getID() == 1);
+            List<ItemPedido> aux = itemsAMostrar.filtrado(n -> n.getItemMenu().getVendedor().getID() == 1);
             aux.forEach(n -> System.out.println(n.getItemMenu().getNombre()));
         } catch(ItemNoEncontradoException x1){
             System.out.println(x1);
@@ -231,7 +231,7 @@ public class Tp4{
         //el comparator 'comp'. En este caso ordenamos alfabeticamente por el nombre de los itemMenu
         try{
             Comparator<ItemPedido> comp = (a, b) -> a.getItemMenu().getNombre().compareTo(b.getItemMenu().getNombre());
-            List<ItemPedido> aux = ped1.getItemsPedidoMemory().ordenarPor(comp);
+            List<ItemPedido> aux = itemsAMostrar.ordenarPor(comp);
             aux.forEach(n -> System.out.println(n.getItemMenu().getNombre()));
         } catch(ItemNoEncontradoException x1){
             System.out.println(x1);
@@ -288,8 +288,18 @@ public class Tp4{
         v3.agregarItem(m7);
         v3.agregarItem(m8);
         v3.agregarItem(m9);
+<<<<<<< HEAD
         Pedido p = C.comprar(vendedores);
 
+=======
+
+        try{
+            C.comprar(vendedores);
+        }
+        catch(IOException x1){
+            System.out.println(x1);
+        }
+>>>>>>> 2e284ce03e0702afcd0b4490c5aabc5883ccbe88
     }
     
     public static void test5(){

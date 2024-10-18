@@ -19,7 +19,7 @@ public class Vendedor {
     private String direccion;
     private Coordenada coordenadas;
     private List<ItemMenu> listaItems;
-    
+
     public Vendedor(int id, String nombre, String direccion, Coordenada coordenadas){
         this.id = id;
         this.nombre = nombre;
@@ -134,6 +134,7 @@ public class Vendedor {
 
     public List<Pedido> obtenerPedidosPorEstado(ESTADO estado){
         PedidoMemory misPedidosMemory = new PedidoMemory();
+        //System.out.println("Cantidad de pedidos en bdd: " + misPedidosMemory.getPedidos().size());
         List<Pedido> misPedidos = misPedidosMemory.buscarPorRestaurante(this.getID());
         misPedidos.removeIf(p -> !p.getEstado().equals(estado));
         return misPedidos;

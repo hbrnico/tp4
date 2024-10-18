@@ -1,28 +1,10 @@
 package isi.deso.tp4.observer;
 
-import java.util.ArrayList;
-import java.util.List;
+import isi.deso.tp4.logicaNegocios.ESTADO;
 
-abstract class Observable {
-
-    private List<Observer> suscriptores = new ArrayList<Observer>();
-
-    public void addObserver(Observer o){
-        this.suscriptores.add(o);
-    }
-
-    public void removeObserver(Observer o) {
-        this.suscriptores.remove(o);
-    }
-
-    public void notifyObservers() {
-        for (int i = 0; i < this.suscriptores.size(); i++){
-            this.suscriptores.get(i).update(this);
-        }
-    }
-
-    //este que hace? guarda en la base de datos?
-    public void setChanged(){
-
-    };
+public interface Observable{
+    void addObserver(Observer o);
+    void removeObserver(Observer o);
+    void notifyObservers();
+    void setEstado(ESTADO estadoCambio);
 }
