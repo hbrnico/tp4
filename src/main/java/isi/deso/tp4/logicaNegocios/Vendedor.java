@@ -10,6 +10,7 @@ import isi.deso.tp4.persistencia.PedidoMemory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Vendedor {
@@ -141,16 +142,40 @@ public class Vendedor {
     };
 
 
-    //Actualiza el estado de un pedido de un cliente en particular (no tenemos id de pedido, problema con varios pedidios de un mismo client con el mismo estado)
+    public void cambiarEstadoPedido(List<Pedido> pedidos) throws PedidoNoEncontradoException{
 
-    public void cambiarEstadoPedido(int idCliente, ESTADO estadoBusqueda, ESTADO estadoNuevo) throws PedidoNoEncontradoException{
-        List<Pedido> pedidos = obtenerPedidosPorEstado(estadoBusqueda);
-        Pedido pedido = pedidos.stream()
-            .filter(p -> p.getMiCliente().getID() == idCliente)
-            .findFirst()
-            .orElseThrow(() -> new PedidoNoEncontradoException("No se encontró el pedido del cliente: " + idCliente + ", en estado: " + estadoBusqueda));
+        Pedido pedido=seleccionarPedido(pedidos);
+        System.out.println("Ingrese el nuevo estado: EN_ESPERA/RECIBIDO/EN_ENVIO/ENTREGADO/RECHAZADO");
+        Scanner ingresoTeclado = new Scanner(System.in);
+        ESTADO estadoNuevo = ESTADO.valueOf(ingresoTeclado.next());
         pedido.setEstado(estadoNuevo);
     }
 
+    public static Pedido seleccionarPedido(List<Pedido> pedidosLista){
+        //Mostrar los pedidos
+        Scanner ingresoTeclado = new Scanner(System.in);
+        System.out.println("Cantidad de pedidos: " + pedidosLista.size());
+        System.out.println("Seleccione un pedido: ");
 
+        for (Pedido pedido : pedidosLista) {
+            System.out.println("ID: "+ pedido.getID() +
+                    " ||  Fecha: " + pedido.getFechaHoraPedido() +
+                    " || Estado: " + pedido.getEstado() +
+                    " || Items: ");
+            for(ItemMenu item: pedido.getItemsDelPedido()){
+                System.out.print(item.getNombre() + " ");
+            }
+            System.out.println();
+        }
+
+        System.out.println("Ingrese el ID del pedido que quiera seleccionar: ");
+        int idABuscar = ingresoTeclado.nextInt();
+
+        Pedido pedido = pedidosLista.stream()
+                .filter(p -> p.getID() == idABuscar)
+                .findFirst()
+                .orElseThrow(() -> new PedidoNoEncontradoException("No se encontró el pedido con id: "+idABuscar));
+
+        return pedido;
+    }
 }

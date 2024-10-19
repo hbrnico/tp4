@@ -10,13 +10,9 @@ import isi.deso.tp4.persistencia.PedidoMemory;
 import isi.deso.tp4.strategy.EstrategiaPago;
 import isi.deso.tp4.strategy.PagarPorMercadoPago;
 import isi.deso.tp4.strategy.PagarPorTransferencia;
-import isi.deso.tp4.logicaNegocios.ESTADO;
-
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.annotation.ElementType;
 import java.util.List;
 import java.util.Scanner;
 
@@ -59,16 +55,23 @@ public class Cliente implements Observer {
 
     public void comprar(List<Vendedor> vendedores) throws IOException {
         Pedido p = new Pedido(this);
-        //mostra todos los vendedores
+        p.addObserver(this);
         System.out.println("Elija el restaurante en el que desea ordenar");
         vendedores.forEach(n -> System.out.println(n.getNombre()));
+
+        //INPUTs
+        //FileReader f = new FileReader("src/main/java/isi/deso/tp4/archivoPrueba");// INGRESO POR TECLADO
+        //BufferedReader b = new BufferedReader(f);// INGRESO POR TECLADO
+        Scanner scanner = new Scanner(System.in);
+        Scanner scannerAlgo = new Scanner(System.in);
+
         // seleccionar un vendedor
-        FileReader f = new FileReader("src/main/java/isi/deso/tp4/archivoPrueba");
-        BufferedReader b = new BufferedReader(f);
         Vendedor vendInstance=null;
         int vendedorSeleccionado=-1;
         while(vendInstance == null) {
-            String vendedorNombre = b.readLine();
+            //String vendedorNombre = b.readLine(); // ARCHIVO
+            String vendedorNombre = scanner.nextLine(); // INGRESO POR TECLADO
+
             for (Vendedor vend : vendedores) {
                 if (vend.getNombre().equals(vendedorNombre)) {
                     vendInstance = vend;
@@ -84,23 +87,22 @@ public class Cliente implements Observer {
         System.out.println("Productos del restaurante "+vendInstance.getNombre());
         List<ItemMenu> aux = vendInstance.getItems();
         aux.forEach(n -> System.out.println(n.getNombre()));
-        Boolean agregarAlgo = null;
+        Boolean agregarAlgo;
         String producto;
-        //Scanner scannerAlgo = new Scanner(System.in);
-       // while(agregarAlgo){
-            System.out.println("¿Desea agregar un producto al pedido? true/false");
-            agregarAlgo = Boolean.valueOf(b.readLine());
-       // }
+        System.out.println("¿Desea agregar un producto al pedido? true/false");
+        // agregarAlgo = Boolean.valueOf(b.readLine()); // ARCHIVO
+        agregarAlgo = scannerAlgo.nextBoolean(); // INGRESO POR TECLADO
 
         while(agregarAlgo){
             System.out.println("Ingrese el nombre del producto a agregar ");
-            producto = b.readLine();
-            //selecciono producto (cin del producto)
+            // producto = b.readLine(); // ARCHIVO
+            producto = scanner.nextLine(); // INGRESO POR TECLADO
+            System.out.println(producto);
+
             p.agregarProducto(producto);
-            //while(agregarAlgo != true && agregarAlgo != false){
                 System.out.println("¿Desea agregar un producto al pedido? true/false");
-                agregarAlgo = Boolean.valueOf(b.readLine());
-            //}
+                // agregarAlgo = Boolean.valueOf(b.readLine()); // ARCHIVO
+                agregarAlgo = scannerAlgo.nextBoolean(); // INGRESO POR TECLADO
         }
 
         if(p.getItemsDelPedido().isEmpty()){
@@ -119,55 +121,44 @@ public class Cliente implements Observer {
         estrategiaDePago = new PagarPorTransferencia(carrito);
     }
 
-    public boolean pagar() {
-        if(estrategiaDePago == null){
-            System.out.println("Primero debe seleccionar una estrategia de pago valida.");
-            return false;
-        }
-        
-        return estrategiaDePago.pagar();
-    }
-
     public void update(Observable obs) {
         Pedido p = (Pedido) obs;
 
         switch(p.getEstado()){
-            case ESTADO.EN_ESPERA:
-
-            //ingrese metodo de pago
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Ingrese metodo de pago: MP / TF ");
-            while (estrategiaDePago==null) {
-                String metodo=scanner.nextLine();
-                switch (metodo){
-                    case "MP":
-                        pagarPorMercadoPago(p);
-                        break;
-                    case "TF":
-                        pagarPorTransferencia(p);
-                        break;
-                    default:
-                        System.out.println("Metodo de pago desconocido, vuelva a ingresar");
-                        System.out.println("Ingrese metodo de pago: MP / TF ");
-                        break;
+            case ESTADO.EN_ENVIO:
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Ingrese metodo de pago: MP / TF ");
+                while (estrategiaDePago==null) {
+                    String metodo=scanner.nextLine();
+                    switch (metodo){
+                        case "MP":
+                            pagarPorMercadoPago(p);
+                            break;
+                        case "TF":
+                            pagarPorTransferencia(p);
+                            break;
+                        default:
+                            System.out.println("Metodo de pago desconocido, vuelva a ingresar");
+                            System.out.println("Ingrese metodo de pago: MP / TF ");
+                            break;
+                    }
                 }
-            }
-            if(estrategiaDePago.pagar()){
-                System.out.println("Pago realizado con exito");
-                //cambiar estado del pedido
-                p.setEstado(ESTADO.RECIBIDO);
-            }
-            else System.out.println("Pago fallido");
+                if(estrategiaDePago.pagar()){
+                    System.out.println("Pago realizado con exito");
+                    //cambiar estado del pedido
+                    p.setEstado(ESTADO.RECIBIDO);
+                }
+                else System.out.println("Pago fallido");
 
-            estrategiaDePago=null;
+                estrategiaDePago=null;
                 break;
 
             case ESTADO.RECHAZADO:
                 System.out.println("Pedido rechazado.");
                 break;
 
-            case ESTADO.EN_ENVIO:
-                System.out.println("Su pedido se encuentra en camino");
+            case ESTADO.EN_ESPERA:
+                System.out.println("Su pedido llego al vendedor, ahora se encuentra en espera de confirmacion.");
                 break;
 
             case ESTADO.ENTREGADO:
@@ -177,8 +168,6 @@ public class Cliente implements Observer {
             case ESTADO.RECIBIDO:
                 System.out.println("Su pedido fue recibido con exito por el restaurante. Se le notificara cuando se acepte o rechace el mismo.");
                 break;
-
-
         }
 
     }

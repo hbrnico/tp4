@@ -288,10 +288,10 @@ public class Tp4{
         v3.agregarItem(m7);
         v3.agregarItem(m8);
         v3.agregarItem(m9);
-<<<<<<< HEAD
-        Pedido p = C.comprar(vendedores);
 
-=======
+       // Pedido p = C.comprar(vendedores);
+
+
 
         try{
             C.comprar(vendedores);
@@ -299,7 +299,7 @@ public class Tp4{
         catch(IOException x1){
             System.out.println(x1);
         }
->>>>>>> 2e284ce03e0702afcd0b4490c5aabc5883ccbe88
+
     }
     
     public static void test5(){
@@ -373,51 +373,14 @@ public class Tp4{
             System.out.println(x1);
         }
 
-        List<Pedido> pedidosEnEspera = v1.obtenerPedidosPorEstado(ESTADO.EN_ESPERA);
 
-        seleccionarPedido(pedidosEnEspera);
+        List<Pedido> pedidos = v1.obtenerPedidosPorEstado(ESTADO.EN_ESPERA);
 
-        //System.out.println(pedidosPagadosv1.toString());
-    }
+        v1.cambiarEstadoPedido(pedidos);
 
-    public static void seleccionarPedido(List<Pedido> pedidosLista){
-        //Mostrar los pedidos
-       // Scanner ingresoTeclado = new Scanner(System.in);
-        System.out.println("Cantidad de pedidos: " + pedidosLista.size());
-        System.out.println("Seleccione un pedido: ");
-
-     for (Pedido pedido : pedidosLista) {
-            System.out.println("ID: "+ pedido.getID() +
-                    " ||  Fecha: " + pedido.getFechaHoraPedido() +
-                    " || Estado: " + pedido.getEstado() +
-                    " || Items: ");
-                for(ItemMenu item: pedido.getItemsDelPedido()){
-                    System.out.print(item.getNombre() + " ");
-                }
-            System.out.println();
-        }
-/*
- Pedro's
- true
- Fanta
- false
- Pedro's
- true
- Papas fritas
- false
- Mariano's
- true
- Pepsi
-false
-
- */
-
-     //String nombre = ingresoTeclado.next();
-        // int idABuscar = ingresoTeclado.nextInt();
-     //.out.println("Ingrese el ID del pedido que quiera seleccionar: ");
-     //Scanner scaner = new Scanner(System.in);
 
     }
+
 
     public static void buscarVendedoresPorId(ArrayList<Vendedor> vendedores, int ID){
         boolean encontrado = false;

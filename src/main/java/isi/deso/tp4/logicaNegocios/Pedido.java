@@ -54,14 +54,13 @@ public class Pedido implements Observable {
     public LocalDateTime getFechaHoraPedido(){ return this.fechaHoraPedido; }
 
     public void agregarProducto(String plato) {
-        try{
+        try {
             ItemMenu p = this.miVendedor.buscarProducto(plato);
-            ItemPedido recup = new ItemPedido(p,this);
+            ItemPedido recup = new ItemPedido(p, this);
             ItemsPedidoMemory miItemsPedidoMemory = new ItemsPedidoMemory();
             miItemsPedidoMemory.agrearAItemsPedidos(recup);
             this.precio = this.precio + p.getPrecio();
-        }
-        catch(ItemNoEncontradoException x1){
+        } catch (ItemNoEncontradoException x1) {
             System.out.println(x1);
         }
     }
@@ -83,5 +82,19 @@ public class Pedido implements Observable {
         }
 
         return ret;
+    }
+
+    public void addObserver(Observer o){
+        this.suscriptores.add(o);
+    }
+
+    public void removeObserver(Observer o) {
+        this.suscriptores.remove(o);
+    }
+
+    public void notifyObservers() {
+        for (int i = 0; i < this.suscriptores.size(); i++){
+            this.suscriptores.get(i).update(this);
+        }
     }
 }
