@@ -8,6 +8,7 @@ import isi.deso.tp4.logicaNegocios.*;
 import isi.deso.tp4.persistencia.BaseDeDatos;
 import isi.deso.tp4.persistencia.ItemsPedidoMemory;
 import isi.deso.tp4.persistencia.PedidoMemory;
+import isi.deso.tp4.persistencia.VendedorMemory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -289,9 +290,7 @@ public class Tp4{
         v3.agregarItem(m8);
         v3.agregarItem(m9);
 
-       // Pedido p = C.comprar(vendedores);
-
-
+        // Pedido p = C.comprar(vendedores);
 
         try{
             C.comprar(vendedores);
@@ -354,6 +353,10 @@ public class Tp4{
         v3.agregarItem(m8);
         v3.agregarItem(m9);
 
+        System.out.println("Hola. Tener en cuenta que este caso de uso analiza los pedidos asociados con" +
+                " el restaurante \"Pedro\'s, por lo que seria correcto realizarle por lo menos un pedido.");
+        System.out.println();
+
         try{
             C.comprar(vendedores);
         }
@@ -373,12 +376,9 @@ public class Tp4{
             System.out.println(x1);
         }
 
-
         List<Pedido> pedidos = v1.obtenerPedidosPorEstado(ESTADO.EN_ESPERA);
 
         v1.cambiarEstadoPedido(pedidos);
-
-
     }
 
 

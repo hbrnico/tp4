@@ -87,22 +87,39 @@ public class Cliente implements Observer {
         System.out.println("Productos del restaurante "+vendInstance.getNombre());
         List<ItemMenu> aux = vendInstance.getItems();
         aux.forEach(n -> System.out.println(n.getNombre()));
-        Boolean agregarAlgo;
+        Boolean agregarAlgo = false, valorValido = false;
         String producto;
         System.out.println("¿Desea agregar un producto al pedido? true/false");
         // agregarAlgo = Boolean.valueOf(b.readLine()); // ARCHIVO
-        agregarAlgo = scannerAlgo.nextBoolean(); // INGRESO POR TECLADO
+
+        while(!valorValido) {
+            try {
+                agregarAlgo = scannerAlgo.nextBoolean(); // INGRESO POR TECLADO
+                valorValido = true;
+            } catch (Exception e) {
+                System.out.println("Error: Debes ingresar 'true' o 'false'. Por favor, reingresa el valor.");
+                scannerAlgo.next();
+            }
+        }
+
+        valorValido = false;
 
         while(agregarAlgo){
             System.out.println("Ingrese el nombre del producto a agregar ");
             // producto = b.readLine(); // ARCHIVO
             producto = scanner.nextLine(); // INGRESO POR TECLADO
-            System.out.println(producto);
-
             p.agregarProducto(producto);
                 System.out.println("¿Desea agregar un producto al pedido? true/false");
                 // agregarAlgo = Boolean.valueOf(b.readLine()); // ARCHIVO
-                agregarAlgo = scannerAlgo.nextBoolean(); // INGRESO POR TECLADO
+            while(!valorValido) {
+                try {
+                    agregarAlgo = scannerAlgo.nextBoolean(); // INGRESO POR TECLADO
+                    valorValido = true;
+                } catch (Exception e) {
+                    System.out.println("Error: Debes ingresar 'true' o 'false'. Por favor, reingresa el valor.");
+                    scannerAlgo.next();
+                }
+            }
         }
 
         if(p.getItemsDelPedido().isEmpty()){

@@ -10,6 +10,7 @@ import isi.deso.tp4.persistencia.PedidoMemory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -145,14 +146,31 @@ public class Vendedor {
     public void cambiarEstadoPedido(List<Pedido> pedidos) throws PedidoNoEncontradoException{
 
         Pedido pedido=seleccionarPedido(pedidos);
-        System.out.println("Ingrese el nuevo estado: EN_ESPERA/RECIBIDO/EN_ENVIO/ENTREGADO/RECHAZADO");
+        if(pedido == null) return;
+
         Scanner ingresoTeclado = new Scanner(System.in);
-        ESTADO estadoNuevo = ESTADO.valueOf(ingresoTeclado.next());
+        Boolean valorValido = false;
+        ESTADO estadoNuevo = null;
+
+        System.out.println("Ingrese el nuevo estado: EN_ESPERA/RECIBIDO/EN_ENVIO/ENTREGADO/RECHAZADO");
+        while(!valorValido)
+        try {
+            estadoNuevo = ESTADO.valueOf(ingresoTeclado.next());
+            valorValido = true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("El valor ingresado no es un estado válido. Reingrese los datos.");
+        }
         pedido.setEstado(estadoNuevo);
     }
 
     public static Pedido seleccionarPedido(List<Pedido> pedidosLista){
         //Mostrar los pedidos
+
+        if(pedidosLista.size() == 0){
+            System.out.println("No existen pedidos en el sistema. Lo lamento.");
+            return null;
+        }
+
         Scanner ingresoTeclado = new Scanner(System.in);
         System.out.println("Cantidad de pedidos: " + pedidosLista.size());
         System.out.println("Seleccione un pedido: ");
@@ -170,11 +188,22 @@ public class Vendedor {
 
         System.out.println("Ingrese el ID del pedido que quiera seleccionar: ");
         int idABuscar = ingresoTeclado.nextInt();
+        Boolean valorEncontrado = false;
+        Pedido pedido = null;
 
-        Pedido pedido = pedidosLista.stream()
-                .filter(p -> p.getID() == idABuscar)
-                .findFirst()
-                .orElseThrow(() -> new PedidoNoEncontradoException("No se encontró el pedido con id: "+idABuscar));
+        while(!valorEncontrado){
+            for(Pedido p : pedidosLista) {
+                if (p.getID() == idABuscar) {
+                    pedido = p;
+                    valorEncontrado = true;
+                }
+            }
+            if(!valorEncontrado){
+                System.out.println("No se encontró el pedido con id: "+idABuscar);
+                System.out.println("Ingrese nuevamente el ID del pedido a buscar: ");
+                idABuscar = ingresoTeclado.nextInt();
+            }
+        }
 
         return pedido;
     }

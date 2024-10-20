@@ -17,13 +17,18 @@ public class VendedorMemory implements VendedorDao {
     public VendedorMemory() {
         this.vendedores = BaseDeDatos.getVendedorList();
     }
-    
 
     public Vendedor getVendedorByID (int id) {
         Optional<Vendedor> vendedorEncontrado = this.vendedores.stream()
             .filter(v -> v.getID() == id)  
             .findFirst();
+        return vendedorEncontrado.orElse(null);
+    }
 
+    public Vendedor getVendedorByNombre(String nombre){
+        Optional<Vendedor> vendedorEncontrado = this.vendedores.stream()
+                .filter(v -> v.getNombre().equals(nombre))
+                .findFirst();
         return vendedorEncontrado.orElse(null);
     }
 }

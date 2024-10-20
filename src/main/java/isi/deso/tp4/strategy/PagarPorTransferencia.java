@@ -16,7 +16,8 @@ public class PagarPorTransferencia extends EstrategiaPago {
         Scanner ingresoDatos = new Scanner(System.in);
         boolean estaPago = false;
         boolean auxiliar =true;
-        boolean continuarPago;
+        boolean continuarPago = false;
+        boolean valorValido = false;
 
         while(auxiliar){
 
@@ -36,9 +37,16 @@ public class PagarPorTransferencia extends EstrategiaPago {
         //calcular precio +2%
         double precioAPagar = carrito.getPrecio() * 1.02;
 
-        //preguntar si desea pagar
-        System.out.println("El precio a pagar es: " + precioAPagar + ", ¿Desea terminar el pago? true/false");
-        continuarPago=ingresoDatos.nextBoolean();
+        while(!valorValido) {
+            try {
+                System.out.println("El precio a pagar es: " + precioAPagar + ", ¿Desea terminar el pago? true/false");
+                continuarPago = ingresoDatos.nextBoolean();
+                valorValido = true;
+            } catch (Exception e) {
+                System.out.println("Error: Debes ingresar 'true' o 'false'. Por favor, reingresa el valor.");
+                ingresoDatos.next();
+            }
+        }
 
         if(continuarPago){
             estaPago = true;

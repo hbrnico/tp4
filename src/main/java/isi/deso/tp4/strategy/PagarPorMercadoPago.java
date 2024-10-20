@@ -17,7 +17,8 @@ public class PagarPorMercadoPago extends EstrategiaPago {
         Scanner ingresoDatos = new Scanner(System.in);
         boolean estaPago = false;
         boolean auxiliar =true;
-        boolean continuarPago;
+        boolean continuarPago = false;
+        boolean valorValido = false;
 
         while(auxiliar){
            String regex = "^([a-zA-Z]+[a-zA-Z0-9]*|[a-zA-Z0-9]+(\\.[a-zA-Z0-9]+)*)$";
@@ -26,19 +27,26 @@ public class PagarPorMercadoPago extends EstrategiaPago {
             this.alias = ingresoDatos.next();
             if(alias.length() >= 6 && alias.length() <= 20 && (alias.matches(regex))){
                 auxiliar=false;
-            }else{
+            }
+            else{
                 System.out.println("Alias erroneo, vuelva a ingresar");
             }
         }
-        //calcular precio +4%
         double precioAPagar = carrito.getPrecio() * 1.04;
 
-        //preguntar si desea pagar
-        System.out.println("El precio a pagar es: " + precioAPagar + ", ¿Desea terminar el pago? true/false");
-        continuarPago=ingresoDatos.nextBoolean();
+        while(!valorValido) {
+            try {
+                System.out.println("El precio a pagar es: " + precioAPagar + ", ¿Desea terminar el pago? true/false");
+                continuarPago = ingresoDatos.nextBoolean();
+                valorValido = true;
+            } catch (Exception e) {
+                System.out.println("Error: Debes ingresar 'true' o 'false'. Por favor, reingresa el valor.");
+                ingresoDatos.next();
+            }
+        }
         
         if(continuarPago){
-        estaPago = true;
+            estaPago = true;
         }
         
         return estaPago;
