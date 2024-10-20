@@ -1,8 +1,8 @@
-package isi.deso.tp4.persistencia;
+package isi.deso.tp.persistencia;
 
-import isi.deso.tp4.logicaNegocios.ItemPedido;
-import isi.deso.tp4.logicaNegocios.Pedido;
-import isi.deso.tp4.logicaNegocios.Vendedor;
+import isi.deso.tp.logicaNegocios.ItemPedido;
+import isi.deso.tp.logicaNegocios.Pedido;
+import isi.deso.tp.logicaNegocios.Vendedor;
 
 import java.util.ArrayList;
 import java.util.List;

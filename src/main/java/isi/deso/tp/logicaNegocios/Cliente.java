@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package isi.deso.tp4.logicaNegocios;
+package isi.deso.tp.logicaNegocios;
 
-import isi.deso.tp4.observer.Observable;
-import isi.deso.tp4.observer.Observer;
-import isi.deso.tp4.persistencia.PedidoMemory;
-import isi.deso.tp4.strategy.EstrategiaPago;
-import isi.deso.tp4.strategy.PagarPorMercadoPago;
-import isi.deso.tp4.strategy.PagarPorTransferencia;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import isi.deso.tp.observer.Observable;
+import isi.deso.tp.observer.Observer;
+import isi.deso.tp.persistencia.PedidoMemory;
+import isi.deso.tp.strategy.EstrategiaPago;
+import isi.deso.tp.strategy.PagarPorMercadoPago;
+import isi.deso.tp.strategy.PagarPorTransferencia;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;

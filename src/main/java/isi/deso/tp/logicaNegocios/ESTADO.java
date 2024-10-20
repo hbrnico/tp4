@@ -1,4 +1,4 @@
-package isi.deso.tp4.logicaNegocios;
+package isi.deso.tp.logicaNegocios;
 
 public enum ESTADO {
     EN_ESPERA,

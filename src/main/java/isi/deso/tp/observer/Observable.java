@@ -1,6 +1,6 @@
-package isi.deso.tp4.observer;
+package isi.deso.tp.observer;
 
-import isi.deso.tp4.logicaNegocios.ESTADO;
+import isi.deso.tp.logicaNegocios.ESTADO;
 
 public interface Observable{
     void addObserver(Observer o);

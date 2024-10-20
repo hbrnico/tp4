@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package isi.deso.tp4.logicaNegocios;
+package isi.deso.tp.logicaNegocios;
 
-import isi.deso.tp4.excepciones.ItemNoEncontradoException;
-import isi.deso.tp4.observer.Observable;
-import isi.deso.tp4.observer.Observer;
-import isi.deso.tp4.persistencia.ItemsPedidoMemory;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.observer.Observable;
+import isi.deso.tp.observer.Observer;
+import isi.deso.tp.persistencia.ItemsPedidoMemory;
 
 import java.util.ArrayList;
 import java.util.List;

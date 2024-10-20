@@ -2,13 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package isi.deso.tp4;
-import isi.deso.tp4.excepciones.ItemNoEncontradoException;
-import isi.deso.tp4.logicaNegocios.*;
-import isi.deso.tp4.persistencia.BaseDeDatos;
-import isi.deso.tp4.persistencia.ItemsPedidoMemory;
-import isi.deso.tp4.persistencia.PedidoMemory;
-import isi.deso.tp4.persistencia.VendedorMemory;
+package isi.deso.tp;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.logicaNegocios.*;
+import isi.deso.tp.persistencia.BaseDeDatos;
+import isi.deso.tp.persistencia.ItemsPedidoMemory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +17,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 
-public class Tp4{
+public class Tp {
 
     public static void main(String[] args) {
 

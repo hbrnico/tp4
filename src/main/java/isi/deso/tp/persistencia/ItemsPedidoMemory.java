@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package isi.deso.tp4.persistencia;
+package isi.deso.tp.persistencia;
 
-import isi.deso.tp4.excepciones.ItemNoEncontradoException;
-import isi.deso.tp4.logicaNegocios.ItemPedido;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.logicaNegocios.ItemPedido;
 
 import java.util.ArrayList;
 import java.util.Comparator;

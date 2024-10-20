@@ -1,4 +1,4 @@
-package isi.deso.tp4.logicaNegocios;
+package isi.deso.tp.logicaNegocios;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
