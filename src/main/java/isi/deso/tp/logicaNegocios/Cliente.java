@@ -17,6 +17,7 @@ import java.util.Scanner;
 
 public class Cliente implements Observer {
     private int id;
+    private String nombre;
     private String cuit;
     private String email;
     private String direccion;
@@ -31,6 +32,18 @@ public class Cliente implements Observer {
         this.coordenadas = coordenadas;
         this.estrategiaDePago = null;
     }
+
+    public Cliente(int id, String cuit, String nombre, String email, String direccion, Coordenada coordenadas) {
+        this.id = id;
+        this.cuit = cuit;
+        this.nombre = nombre;
+        this.email = email;
+        this.direccion = direccion;
+        this.coordenadas = coordenadas;
+        this.estrategiaDePago = null;
+    }
+
+    public String getNombre() { return this.nombre; }
 
     public int getID() {
         return this.id;

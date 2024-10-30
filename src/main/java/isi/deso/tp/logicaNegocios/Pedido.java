@@ -33,6 +33,26 @@ public class Pedido implements Observable {
         this.ID=contador++;
     }
 
+    public Pedido(Cliente miCliente, Vendedor miVendedor){
+        this.miCliente = miCliente;
+        this.miVendedor = miVendedor;
+        this.fechaHoraPedido = LocalDateTime.now();
+        this.precio = 0;
+        this.estado = ESTADO.EN_ESPERA;
+        this.suscriptores = new ArrayList<>();
+        this.ID=contador++;
+    }
+
+    public Pedido(Cliente miCliente, Vendedor miVendedor, int id){
+        this.miCliente = miCliente;
+        this.miVendedor = miVendedor;
+        this.fechaHoraPedido = LocalDateTime.now();
+        this.precio = 0;
+        this.estado = ESTADO.EN_ESPERA;
+        this.suscriptores = new ArrayList<>();
+        this.ID=id;
+    }
+
     public void setVendedor(Vendedor v){ this.miVendedor = v; }
 
     public Vendedor getMiVendedor() {

@@ -7,10 +7,12 @@ package isi.deso.tp.logicaNegocios;
 public class ItemPedido {
     private ItemMenu itemMenu;
     private Pedido pedido;
+    private int cantidad;
 
     public ItemPedido(ItemMenu itemMenu, Pedido pedido){
         this.itemMenu = itemMenu;
         this.pedido = pedido;
+        this.cantidad=0;
     }
     
     public ItemMenu getItemMenu() {
