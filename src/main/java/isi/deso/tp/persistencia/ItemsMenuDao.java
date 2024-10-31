@@ -6,6 +6,6 @@ import isi.deso.tp.logicaNegocios.ItemMenu;
 import java.util.List;
 
 public interface ItemsMenuDao {
-    public ItemMenu getItemMenu(int id);
+    public ItemMenu getItemMenu(int id) throws ItemNoEncontradoException;
     public List<ItemMenu> itemsPorVendedor (int id) throws ItemNoEncontradoException;
 }

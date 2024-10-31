@@ -15,12 +15,12 @@ public class ItemsMenuMemory implements ItemsMenuDao {
         List<ItemMenu> itemsMenu = BaseDeDatos.getItemMenuList();
     }
 
-    public ItemMenu getItemMenu(int id) {
+    public ItemMenu getItemMenu(int id) throws ItemNoEncontradoException {
         List<ItemMenu> items = this.itemsMenu.stream()
                 .filter(itemMenu -> itemMenu.getId() == id)
                 .collect(Collectors.toList());
         
-        if(items.isEmpty()) return null;
+        if(items.isEmpty()) throw new ItemNoEncontradoException("No existe este item" + id);
         ItemMenu item = items.get(0);
         return item;
     }

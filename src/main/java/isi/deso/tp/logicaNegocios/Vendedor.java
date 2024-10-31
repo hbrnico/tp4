@@ -52,7 +52,9 @@ public class Vendedor {
     public Coordenada getCoordenadas(){
         return this.coordenadas;
     }
-    
+
+    public void setID(int id){this.id = id;}
+
     private double haversine(double lat1, double lng1, double lat2, double lng2){
         final double R = 6371;
 
@@ -72,7 +74,8 @@ public class Vendedor {
         Coordenada coorC = cliente.getCoordenadas();
         return haversine(coorV.getLat(), coorV.getLng(), coorC.getLat(), coorC.getLng());
     }
-    
+    //modificar ya que habria que habria que conseguir los items menu que tengan como FK a este vendedor
+    //este metodo deberia remplazarse dentro del controlador de item menu
     public void agregarItem(ItemMenu itemAAgregar){
         this.listaItems.add(itemAAgregar);
     }
@@ -83,6 +86,7 @@ public class Vendedor {
     
     public List<Bebida> getItemBebidas(){
         List<Bebida> ret = new ArrayList<>();
+        List<ItemMenu> items = this.getItems();
         for(ItemMenu i: this.listaItems){
             if(i.esBebida()){
                 ret.add((Bebida)i);

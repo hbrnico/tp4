@@ -4,6 +4,7 @@
  */
 package isi.deso.tp.persistencia;
 
+import isi.deso.tp.logicaNegocios.Cliente;
 import isi.deso.tp.logicaNegocios.Vendedor;
 
 import java.util.List;
@@ -30,4 +31,12 @@ public class VendedorMemory implements VendedorDao {
                 .findFirst();
         return vendedorEncontrado.orElse(null);
     }
+
+    public void crearVendedor(Vendedor vendedor){
+        int id = BaseDeDatos.getIDCliente();
+        vendedor.setID(id);
+        BaseDeDatos.aumentarIDCliente();
+        BaseDeDatos.addVendedor(vendedor);
+    }
+
 }

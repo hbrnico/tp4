@@ -50,7 +50,7 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
             this.itemsPedidos.remove(itemPedido); 
         }
     };
-    public void disminuirItemPedido(int idPedido, int idItemMenu){ 
+    public void disminuirItemPedido(int idPedido, int idItemMenu) {
         List<ItemPedido> itemsPedido = this.itemsPedidos.stream()
                 .filter(itPe -> (itPe.getPedido().getID() == idPedido && itPe.getItemMenu().getId() == idItemMenu) )
                 .collect(Collectors.toList());
@@ -62,7 +62,7 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
         }
     }; 
     
-    public void agregarItemPedido(int idPedido, int idItemMenu) {
+    public void agregarItemPedido(int idPedido, int idItemMenu) throws ItemNoEncontradoException{
     // Buscar el ItemPedido existente
     List<ItemPedido> itemsPedido = this.itemsPedidos.stream()
             .filter(itPe -> itPe.getPedido().getID() == idPedido && itPe.getItemMenu().getId() == idItemMenu)

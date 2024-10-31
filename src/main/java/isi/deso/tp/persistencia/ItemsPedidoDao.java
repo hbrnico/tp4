@@ -20,5 +20,5 @@ public interface ItemsPedidoDao {
     public List<ItemPedido> filtrado(Function<ItemPedido, Boolean> funcion) throws ItemNoEncontradoException;
     public void eliminarItemPedido(int idPedido, int idItemMenu);
     public void disminuirItemPedido(int idPedido, int idItemMenu);
-    public void agregarItemPedido(int idPedido, int idItemMenu);
+    public void agregarItemPedido(int idPedido, int idItemMenu) throws ItemNoEncontradoException;
 }
