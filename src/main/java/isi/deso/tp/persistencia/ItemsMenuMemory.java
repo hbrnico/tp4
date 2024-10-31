@@ -15,6 +15,16 @@ public class ItemsMenuMemory implements ItemsMenuDao {
         List<ItemMenu> itemsMenu = BaseDeDatos.getItemMenuList();
     }
 
+    public ItemMenu getItemMenu(int id) {
+        List<ItemMenu> items = this.itemsMenu.stream()
+                .filter(itemMenu -> itemMenu.getId() == id)
+                .collect(Collectors.toList());
+        
+        if(items.isEmpty()) return null;
+        ItemMenu item = items.get(0);
+        return item;
+    }
+    
     @Override
     public List<ItemMenu> itemsPorVendedor(int id) throws ItemNoEncontradoException {
         List<ItemMenu> itemsDeVendedor = this.itemsMenu.stream()

@@ -5,7 +5,9 @@
 package isi.deso.tp.persistencia;
 
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.logicaNegocios.ItemMenu;
 import isi.deso.tp.logicaNegocios.ItemPedido;
+import isi.deso.tp.logicaNegocios.Pedido;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,6 +25,62 @@ public class ItemsPedidoMemory implements ItemsPedidoDao {
     public List<ItemPedido> getItemsPedidos() {
         return itemsPedidos;
     }
+    
+    public void setItemsPedidos(List<ItemPedido> itemsPedidosNuevo){
+        this.itemsPedidos = itemsPedidosNuevo;
+    }
+    
+    @Override
+    public List<ItemPedido> buscarPorPedido(int id) throws ItemNoEncontradoException{
+        List<ItemPedido> itemsDelPedido = this.itemsPedidos.stream()
+                .filter(itemPedido -> itemPedido.getPedido().getID() == id)
+                .collect(Collectors.toList()); 
+        if(itemsDelPedido.isEmpty()) throw new ItemNoEncontradoException("No se encontraron items pedidos");
+        
+        return itemsDelPedido;
+    }
+    
+    public void eliminarItemPedido(int idPedido, int idItemMenu){ //eliminar el itemPedido del pedido, aunque cantidad sea mayor a 1
+        List<ItemPedido> itemsPedido = this.itemsPedidos.stream()
+            .filter(itPe -> itPe.getPedido().getID() == idPedido && itPe.getItemMenu().getId() == idItemMenu)
+            .collect(Collectors.toList());
+
+        if (!itemsPedido.isEmpty()) {
+            ItemPedido itemPedido = itemsPedido.get(0);
+            this.itemsPedidos.remove(itemPedido); 
+        }
+    };
+    public void disminuirItemPedido(int idPedido, int idItemMenu){ 
+        List<ItemPedido> itemsPedido = this.itemsPedidos.stream()
+                .filter(itPe -> (itPe.getPedido().getID() == idPedido && itPe.getItemMenu().getId() == idItemMenu) )
+                .collect(Collectors.toList());
+        
+        if (!itemsPedido.isEmpty()) {
+            ItemPedido itemPedido = itemsPedido.get(0);
+            int cantidad = itemPedido.disminuirCantidad();
+            if(cantidad == 0) this.itemsPedidos.remove(itemPedido); 
+        }
+    }; 
+    
+    public void agregarItemPedido(int idPedido, int idItemMenu) {
+    // Buscar el ItemPedido existente
+    List<ItemPedido> itemsPedido = this.itemsPedidos.stream()
+            .filter(itPe -> itPe.getPedido().getID() == idPedido && itPe.getItemMenu().getId() == idItemMenu)
+            .collect(Collectors.toList());
+
+    if (!itemsPedido.isEmpty()) { //si existe hace cantidad++, sino lo crea
+        ItemPedido itemPedido = itemsPedido.get(0);
+        itemPedido.incrementarCantidad(); 
+    } else {
+        PedidoMemory pedidoDao = new PedidoMemory();
+        Pedido pedido = pedidoDao.getPedido(idPedido);
+        ItemsMenuMemory itemMenuDao = new ItemsMenuMemory();
+        ItemMenu itemMenu = itemMenuDao.getItemMenu(idItemMenu);
+        ItemPedido nuevoItemPedido = new ItemPedido(itemMenu, pedido);
+        this.itemsPedidos.add(nuevoItemPedido); 
+    }
+} 
+     
 
     public List<ItemPedido> buscarPorRestaurante(int idRest) throws ItemNoEncontradoException {
         

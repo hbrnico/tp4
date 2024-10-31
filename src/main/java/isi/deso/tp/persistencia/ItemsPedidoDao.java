@@ -6,14 +6,19 @@ package isi.deso.tp.persistencia;
 
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.ItemPedido;
+import isi.deso.tp.logicaNegocios.Pedido;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
 public interface ItemsPedidoDao {
+    public List<ItemPedido> buscarPorPedido(int id) throws ItemNoEncontradoException;
     public List<ItemPedido> buscarPorRestaurante(int idRest) throws ItemNoEncontradoException;
     public List<ItemPedido> buscarPorRangoPrecio(double min, double max) throws ItemNoEncontradoException;
     public List<ItemPedido> ordenarPor(Comparator<ItemPedido> comp) throws ItemNoEncontradoException;
     public List<ItemPedido> filtrado(Function<ItemPedido, Boolean> funcion) throws ItemNoEncontradoException;
+    public void eliminarItemPedido(int idPedido, int idItemMenu);
+    public void disminuirItemPedido(int idPedido, int idItemMenu);
+    public void agregarItemPedido(int idPedido, int idItemMenu);
 }

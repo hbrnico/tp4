@@ -23,6 +23,7 @@ public class Cliente implements Observer {
     private String direccion;
     private Coordenada coordenadas;
     private EstrategiaPago estrategiaDePago;
+    private Boolean activo;
 
     public Cliente(int id, String cuit, String email, String direccion, Coordenada coordenadas) {
         this.id = id;
@@ -31,6 +32,7 @@ public class Cliente implements Observer {
         this.direccion = direccion;
         this.coordenadas = coordenadas;
         this.estrategiaDePago = null;
+        this.activo = true;
     }
 
     public Cliente(String cuit, String nombre, String email, String direccion, Coordenada coordenadas) {
@@ -40,6 +42,7 @@ public class Cliente implements Observer {
         this.direccion = direccion;
         this.coordenadas = coordenadas;
         this.estrategiaDePago = null;
+        this.activo = true;
     }
 
     public String getNombre() { return this.nombre; }
@@ -65,10 +68,17 @@ public class Cliente implements Observer {
     public Coordenada getCoordenadas() {
         return this.coordenadas;
     }
+    
+    public Boolean getActivo(){
+        return this.activo;
+    }
+    
+    public void setActivo(Boolean estado){
+        this.activo = estado;
+    }
+    
     //pasar a controlador, con el front implementado
     public void comprar(List<Vendedor> vendedores) throws IOException {
-        Pedido p = new Pedido(this);
-        p.addObserver(this);
         System.out.println("Elija el restaurante en el que desea ordenar");
         vendedores.forEach(n -> System.out.println(n.getNombre()));
 
@@ -95,7 +105,7 @@ public class Cliente implements Observer {
                 System.out.println("El vendedor ingresado no existe. Ingrese los datos nuevamente.");
             }
         }
-        p.setVendedor(vendInstance);
+        Pedido p = new Pedido(this, vendInstance);
 
         System.out.println("Productos del restaurante "+vendInstance.getNombre());
         List<ItemMenu> aux = vendInstance.getItems();

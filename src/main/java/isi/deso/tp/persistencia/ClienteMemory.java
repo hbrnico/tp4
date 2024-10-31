@@ -8,13 +8,14 @@ public class ClienteMemory implements ClienteDao{
 
     public ClienteMemory(){ this.clientes = BaseDeDatos.getClienteList();}
 
-    public Cliente buscarClientePorEmail(String email){
+    public Cliente buscarClienteByEmail(String email){
         return clientes.stream()
                 .filter(cliente -> cliente.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
     }
 
+    @Override
     public void crearCliente(Cliente cliente){
         int id = BaseDeDatos.getIDCliente();
         cliente.setId(id);

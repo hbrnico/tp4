@@ -30,6 +30,7 @@ public class Pedido implements Observable {
         this.precio = 0;
         this.estado = ESTADO.EN_ESPERA;
         this.suscriptores = new ArrayList<>();
+        this.addObserver(miCliente);
         this.ID=contador++;
     }
 
@@ -40,6 +41,7 @@ public class Pedido implements Observable {
         this.precio = 0;
         this.estado = ESTADO.EN_ESPERA;
         this.suscriptores = new ArrayList<>();
+        this.addObserver(miCliente);
         this.ID=contador++;
     }
 
@@ -50,6 +52,7 @@ public class Pedido implements Observable {
         this.precio = 0;
         this.estado = ESTADO.EN_ESPERA;
         this.suscriptores = new ArrayList<>();
+        this.addObserver(miCliente);
         this.ID=id;
     }
 
@@ -84,6 +87,8 @@ public class Pedido implements Observable {
             System.out.println(x1);
         }
     }
+    
+    public void eliminarProducto(){}
 
     public void setEstado(ESTADO estadoCambio){
         this.estado=estadoCambio;

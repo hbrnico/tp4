@@ -15,6 +15,15 @@ public class ItemPedido {
         this.cantidad=0;
     }
     
+    public int disminuirCantidad(){
+        if(cantidad> 0) cantidad--;
+        return this.cantidad;
+    }
+    
+    public void incrementarCantidad(){
+        cantidad++;
+    }
+    
     public ItemMenu getItemMenu() {
         return itemMenu;
     }
@@ -22,5 +31,21 @@ public class ItemPedido {
     public Pedido getPedido() {
         return pedido;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public class getItemMenu {
+
+        public getItemMenu() {
+        }
+    }
+    
+   
    
 }

@@ -16,6 +16,8 @@ public class ClienteController {
 
     public void eliminarCliente(String nombre){
         //eliminamos el cliente de la bdd o solo no lo mostramos por pantalla???
+        
+        //eliminacion logica? cliente.setActivo(false);
     }
 
     public List<Cliente> listarClientes(){
