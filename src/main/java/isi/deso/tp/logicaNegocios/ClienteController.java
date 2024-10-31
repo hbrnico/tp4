@@ -18,5 +18,7 @@ public class ClienteController {
         //eliminamos el cliente de la bdd o solo no lo mostramos por pantalla???
     }
 
-    public List<Cliente> listarClientes()
+    public List<Cliente> listarClientes(){
+        return new ArrayList<>();
+    }
 }
