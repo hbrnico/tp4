@@ -14,4 +14,11 @@ public class ClienteMemory implements ClienteDao{
                 .findFirst()
                 .orElse(null);
     }
+
+    public void crearCliente(Cliente cliente){
+        int id = BaseDeDatos.getIDCliente();
+        cliente.setId(id);
+        BaseDeDatos.aumentarIDCliente();
+        BaseDeDatos.addCliente(cliente);
+    }
 }

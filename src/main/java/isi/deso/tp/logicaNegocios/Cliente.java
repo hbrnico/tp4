@@ -33,8 +33,7 @@ public class Cliente implements Observer {
         this.estrategiaDePago = null;
     }
 
-    public Cliente(int id, String cuit, String nombre, String email, String direccion, Coordenada coordenadas) {
-        this.id = id;
+    public Cliente(String cuit, String nombre, String email, String direccion, Coordenada coordenadas) {
         this.cuit = cuit;
         this.nombre = nombre;
         this.email = email;
@@ -44,6 +43,8 @@ public class Cliente implements Observer {
     }
 
     public String getNombre() { return this.nombre; }
+    //posteriormente esto se eliminara
+    public void setId(int id) { this.id = id; }
 
     public int getID() {
         return this.id;
@@ -64,7 +65,7 @@ public class Cliente implements Observer {
     public Coordenada getCoordenadas() {
         return this.coordenadas;
     }
-
+    //pasar a controlador, con el front implementado
     public void comprar(List<Vendedor> vendedores) throws IOException {
         Pedido p = new Pedido(this);
         p.addObserver(this);

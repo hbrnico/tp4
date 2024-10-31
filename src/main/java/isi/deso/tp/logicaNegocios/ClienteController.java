@@ -1,14 +1,22 @@
 package isi.deso.tp.logicaNegocios;
 
 import isi.deso.tp.persistencia.BaseDeDatos;
+import isi.deso.tp.persistencia.ClienteMemory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteController {
 
     public void crearCliente(String nombre, String cuit, String email,  String direccion, double latidud, double longitud){
-        int id= BaseDeDatos.getIDCliente();
-        BaseDeDatos.aumentarIDVendedor();
         Coordenada c = new Coordenada(latidud, longitud);
-        Cliente client = new Cliente(id,cuit, nombre, email,direccion, c);
-        BaseDeDatos.addCliente(client);
+        Cliente client = new Cliente(cuit, nombre, email,direccion, c);
+        ClienteMemory bdd = new ClienteMemory();
+        bdd.crearCliente(client);
     }
+
+    public void eliminarCliente(String nombre){
+        //eliminamos el cliente de la bdd o solo no lo mostramos por pantalla???
+    }
+
+    public List<Cliente> listarClientes()
 }

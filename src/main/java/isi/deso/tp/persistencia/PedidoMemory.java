@@ -1,6 +1,7 @@
 package isi.deso.tp.persistencia;
 
 import isi.deso.tp.excepciones.PedidoNoEncontradoException;
+import isi.deso.tp.logicaNegocios.ESTADO;
 import isi.deso.tp.logicaNegocios.Pedido;
 
 import java.util.List;
@@ -27,4 +28,18 @@ public class PedidoMemory implements PedidoDao{
         return pedidosPorRestaurante;
     }
 
+    public List<Pedido> buscarPorCliente(int idCliente) throws PedidoNoEncontradoException {
+        List<Pedido> pedidosPorCliente = this.pedidos.stream()
+                .filter(pedido -> pedido.getMiCliente().getID()==idCliente)
+                .collect(Collectors.toList());
+        return pedidosPorCliente;
+    }
+
+    public List<Pedido> buscarPorRestauranteYEstado(int idRest, ESTADO estado) throws PedidoNoEncontradoException {
+        List<Pedido> pedidos=this.pedidos.stream()
+                .filter(pedido -> pedido.getMiVendedor().getID()==idRest)
+                .filter(pedido -> pedido.getEstado().equals(estado))
+                .collect(Collectors.toList());
+        return pedidos;
+    }
 }

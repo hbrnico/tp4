@@ -19,7 +19,7 @@ public class VendedorMemory implements VendedorDao {
 
     public Vendedor getVendedorByID (int id) {
         Optional<Vendedor> vendedorEncontrado = this.vendedores.stream()
-            .filter(v -> v.getID() == id)  
+            .filter(v -> v.getID() == id)
             .findFirst();
         return vendedorEncontrado.orElse(null);
     }

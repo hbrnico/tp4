@@ -133,6 +133,7 @@ public class Vendedor {
         return item; 
     };
 
+    //reemplazar este metodo por una consulta a la bdd donde el where cubra buscar por estado y por id
     public List<Pedido> obtenerPedidosPorEstado(ESTADO estado){
         PedidoMemory misPedidosMemory = new PedidoMemory();
         //System.out.println("Cantidad de pedidos en bdd: " + misPedidosMemory.getPedidos().size());
