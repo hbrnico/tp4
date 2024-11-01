@@ -105,7 +105,7 @@ public class VendedorPanel extends javax.swing.JPanel {
                     .addComponent(buscarButton)
                     .addComponent(buscarVendedorLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listadoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+                .addComponent(listadoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nuevoVendedorButton)
                 .addContainerGap())

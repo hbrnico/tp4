@@ -56,7 +56,7 @@
                   <Component id="buscarVendedorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="listadoScrollPane" pref="226" max="32767" attributes="0"/>
+              <Component id="listadoScrollPane" pref="224" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="nuevoVendedorButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>

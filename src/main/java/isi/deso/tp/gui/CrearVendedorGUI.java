@@ -1,7 +1,14 @@
-package isi.deso.tp.interfaces;
+package isi.deso.tp.gui;
 
 import java.awt.Color;
 import isi.deso.tp.logicaNegocios.Coordenada;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class CrearVendedorGUI extends javax.swing.JFrame {
 
@@ -80,7 +87,7 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
 
         guardar.setBackground(new java.awt.Color(96, 86, 120));
         guardar.setText("Guardar");
-        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 guardarMousePressed(evt);
@@ -94,7 +101,7 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
 
         cancelar.setBackground(new java.awt.Color(96, 86, 120));
         cancelar.setText("Cancelar");
-        cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cancelarMousePressed(evt);
@@ -208,12 +215,12 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
             direccionIngresada.setForeground(Color.LIGHT_GRAY);
         }
         if(latitudIngresada.getText().equals("")){
-            latitudIngresada.setText("Coordenadas en X");
-            latitudIngresada.setForeground(Color.LIGHT_GRAY);           
+            latitudIngresada.setText("Latitud");
+            latitudIngresada.setForeground(Color.LIGHT_GRAY);
         }
         if(longitudIngresada.getText().equals("")){
-            longitudIngresada.setText("Coordenadas en Y");
-            longitudIngresada.setForeground(Color.LIGHT_GRAY);           
+            longitudIngresada.setText("Longitud");
+            longitudIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_nombreIngresadoMousePressed
 
@@ -222,7 +229,10 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreIngresadoActionPerformed
 
     private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
-        dispose();
+       int resp = JOptionPane.showConfirmDialog(null, "Si cancela el registro se perderan los datos no guardados.\n"+"¿Esta seguro?",
+            "Cancelar registro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+        if(resp == JOptionPane.YES_OPTION) dispose();
     }//GEN-LAST:event_cancelarMousePressed
 
     private void direccionIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_direccionIngresadaMousePressed
@@ -235,17 +245,17 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
             nombreIngresado.setForeground(Color.LIGHT_GRAY);
         }
         if(latitudIngresada.getText().equals("")){
-            latitudIngresada.setText("Coordenadas en X");
+            latitudIngresada.setText("Latitud");
             latitudIngresada.setForeground(Color.LIGHT_GRAY);
         }
         if(longitudIngresada.getText().equals("")){
-            longitudIngresada.setText("Coordenadas en Y");
-            longitudIngresada.setForeground(Color.LIGHT_GRAY);           
+            longitudIngresada.setText("Longitud");
+            longitudIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_direccionIngresadaMousePressed
 
     private void latitudIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_latitudIngresadaMousePressed
-        if(latitudIngresada.getText().equals("Coordenadas en X")){
+        if(latitudIngresada.getText().equals("Latitud")){
             latitudIngresada.setText("");
             latitudIngresada.setForeground(Color.black);
         }
@@ -258,20 +268,28 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
             nombreIngresado.setForeground(Color.LIGHT_GRAY);
         }
         if(longitudIngresada.getText().equals("")){
-            longitudIngresada.setText("Coordenadas en Y");
-            longitudIngresada.setForeground(Color.LIGHT_GRAY);           
+            longitudIngresada.setText("Longitud");
+            longitudIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_latitudIngresadaMousePressed
 
     private void guardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMousePressed
-        this.nombre = nombreIngresado.getText();
+  this.nombre = nombreIngresado.getText();
         this.direccion = direccionIngresada.getText();
-    
+        try {
+            this.coordenadas = new Coordenada(Double.parseDouble(latitudIngresada.getText()), Double.parseDouble(longitudIngresada.getText()));
+        } catch (NumberFormatException e) {
+             System.out.println("Los datos ingresados para las coordenadas no son de tipo double.");
+        }
+
+        JOptionPane.showMessageDialog(null, "Cliente registrado con éxito.",
+                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+
         dispose();
     }//GEN-LAST:event_guardarMousePressed
 
     private void longitudIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_longitudIngresadaMousePressed
-        if(longitudIngresada.getText().equals("Coordenadas en Y")){
+       if(longitudIngresada.getText().equals("Longitud")){
             longitudIngresada.setText("");
             longitudIngresada.setForeground(Color.black);
         }
@@ -284,8 +302,8 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
             nombreIngresado.setForeground(Color.LIGHT_GRAY);
         }
         if(latitudIngresada.getText().equals("")){
-            latitudIngresada.setText("Coordenadas en X");
-            latitudIngresada.setForeground(Color.LIGHT_GRAY);           
+            latitudIngresada.setText("Latitud");
+            latitudIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_longitudIngresadaMousePressed
 
