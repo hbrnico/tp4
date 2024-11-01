@@ -45,6 +45,12 @@ public class VendedorPanel extends javax.swing.JPanel {
         nuevoVendedorButton.setBackground(new java.awt.Color(96, 86, 120));
         nuevoVendedorButton.setForeground(new java.awt.Color(255, 255, 255));
         nuevoVendedorButton.setText("Crear nuevo vendedor");
+        nuevoVendedorButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        nuevoVendedorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoVendedorButtonActionPerformed(evt);
+            }
+        });
 
         busquedaField.setBackground(new java.awt.Color(204, 204, 204));
         busquedaField.setToolTipText("");
@@ -54,6 +60,7 @@ public class VendedorPanel extends javax.swing.JPanel {
         buscarButton.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
+        buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         buscarVendedorLabel.setText("Buscar vendedor");
 
@@ -111,6 +118,11 @@ public class VendedorPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nuevoVendedorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoVendedorButtonActionPerformed
+        CrearVendedorGUI cv = new CrearVendedorGUI();
+        cv.setVisible(true);
+    }//GEN-LAST:event_nuevoVendedorButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

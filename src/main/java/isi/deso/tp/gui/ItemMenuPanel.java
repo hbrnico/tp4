@@ -43,6 +43,7 @@ public class ItemMenuPanel extends javax.swing.JPanel {
         nuevoItemMenuButton.setBackground(new java.awt.Color(96, 86, 120));
         nuevoItemMenuButton.setForeground(new java.awt.Color(255, 255, 255));
         nuevoItemMenuButton.setText("Crear nuevo itemMenú");
+        nuevoItemMenuButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         nuevoItemMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoItemMenuButtonActionPerformed(evt);
@@ -57,6 +58,7 @@ public class ItemMenuPanel extends javax.swing.JPanel {
         buscarButton.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
         buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
+        buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         buscarItemMenuLabel.setText("Buscar ItemMenú");
 
@@ -120,7 +122,8 @@ public class ItemMenuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nuevoItemMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoItemMenuButtonActionPerformed
-        // TODO add your handling code here:
+        CrearItemMenuGUI cim = new CrearItemMenuGUI();
+        cim.setVisible(true);
     }//GEN-LAST:event_nuevoItemMenuButtonActionPerformed
 
 

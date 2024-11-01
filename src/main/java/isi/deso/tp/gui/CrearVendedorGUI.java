@@ -11,10 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class CrearVendedorGUI extends javax.swing.JFrame {
-
-    String nombre;
-    String direccion;
-    Coordenada coordenadas;
     
     public CrearVendedorGUI() {
         initComponents();
@@ -87,7 +83,7 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
 
         guardar.setBackground(new java.awt.Color(96, 86, 120));
         guardar.setText("Guardar");
-        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 guardarMousePressed(evt);
@@ -101,7 +97,7 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
 
         cancelar.setBackground(new java.awt.Color(96, 86, 120));
         cancelar.setText("Cancelar");
-        cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cancelarMousePressed(evt);
@@ -225,13 +221,33 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreIngresadoMousePressed
 
     private void nombreIngresadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreIngresadoActionPerformed
-        // TODO add your handling code here:
+        if(nombreIngresado.getText().equals("Nombre")){
+            nombreIngresado.setText("");
+        }
+        if(direccionIngresada.getText().equals("")){
+            direccionIngresada.setText("Dirección");
+        }
+        if(latitudIngresada.getText().equals("")){
+            latitudIngresada.setText("");
+        }
+        if(longitudIngresada.getText().equals("")){
+            longitudIngresada.setText("Longitud");
+        }
     }//GEN-LAST:event_nombreIngresadoActionPerformed
 
     private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
-       int resp = JOptionPane.showConfirmDialog(null, "Si cancela el registro se perderan los datos no guardados.\n"+"¿Esta seguro?",
-            "Cancelar registro", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        String[] options = {"Sí", "No"};
 
+        int resp = JOptionPane.showOptionDialog(null,
+            "Si cancela el registro se perderán los datos no guardados.\n¿Está seguro?",
+            "Cancelar registro",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.WARNING_MESSAGE,
+            null,
+            options, 
+            options[1] 
+        );
+        
         if(resp == JOptionPane.YES_OPTION) dispose();
     }//GEN-LAST:event_cancelarMousePressed
 
@@ -274,16 +290,10 @@ public class CrearVendedorGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_latitudIngresadaMousePressed
 
     private void guardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMousePressed
-  this.nombre = nombreIngresado.getText();
-        this.direccion = direccionIngresada.getText();
-        try {
-            this.coordenadas = new Coordenada(Double.parseDouble(latitudIngresada.getText()), Double.parseDouble(longitudIngresada.getText()));
-        } catch (NumberFormatException e) {
-             System.out.println("Los datos ingresados para las coordenadas no son de tipo double.");
-        }
+       // CODIGO BACKEND
 
-        JOptionPane.showMessageDialog(null, "Cliente registrado con éxito.",
-                "INFORMATION_MESSAGE", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Vendedor registrado con éxito.",
+                "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 
         dispose();
     }//GEN-LAST:event_guardarMousePressed
