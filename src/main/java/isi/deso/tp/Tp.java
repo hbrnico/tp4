@@ -7,6 +7,7 @@ import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.*;
 import isi.deso.tp.persistencia.BaseDeDatos;
 import isi.deso.tp.persistencia.ItemsPedidoMemory;
+import isi.deso.tp.persistencia.VendedorMemory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,16 @@ public class Tp {
 
     public static void main(String[] args) {
 
+        Vendedor v1 = new Vendedor("Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
+        Vendedor v2 = new Vendedor("Lucas", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
+        Vendedor v3 = new Vendedor("Mariano", "Cordoba 700", new Coordenada(-31.720648806383995, -60.52989301773252));
+        VendedorMemory bdd = new VendedorMemory();
+        bdd.crearVendedor(v1);
+        bdd.crearVendedor(v2);
+        bdd.crearVendedor(v3);
+
+        Vendedor v5 = bdd.getVendedorByNombre("Pedro");
+        System.out.println(v5.getNombre());
         //test1();
         
         //test2();
@@ -29,7 +40,7 @@ public class Tp {
         
         //test4();
 
-        test5();
+        //test5();
 
     }
     
@@ -299,7 +310,7 @@ public class Tp {
 
     }
     
-    public static void test5(){
+    /*public static void test5(){
         Cliente C = new Cliente(1, "20-34567892-4", "pedrosanches@gmail.com", "Las Heras 6664", new Coordenada(-31.607585631151917, -60.688909841851526));
         Vendedor v1 = new Vendedor(1, "Pedro's", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
         Vendedor v2 = new Vendedor(2, "Lucas'", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
@@ -378,7 +389,7 @@ public class Tp {
 
         v1.cambiarEstadoPedido(pedidos);
     }
-
+*/
 
     public static void buscarVendedoresPorId(ArrayList<Vendedor> vendedores, int ID){
         boolean encontrado = false;

@@ -1,6 +1,7 @@
 package isi.deso.tp.gui;
 
 import isi.deso.tp.logicaNegocios.Coordenada;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 public class CrearItemMenuGUI extends javax.swing.JFrame {
@@ -11,76 +12,52 @@ public class CrearItemMenuGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        categoriaIngresada = new javax.swing.JTextField();
-        nombreIngresado = new javax.swing.JTextField();
-        descripcionIngresada = new javax.swing.JTextField();
-        precioIngresado = new javax.swing.JTextField();
-        cancelar = new javax.swing.JButton();
-        guardar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        bebidaBtn = new javax.swing.JButton();
+        platoBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        categoriaIngresada.setForeground(new java.awt.Color(204, 204, 204));
-        categoriaIngresada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        categoriaIngresada.setText("Categoría");
-        categoriaIngresada.setToolTipText("");
-        categoriaIngresada.addMouseListener(new java.awt.event.MouseAdapter() {
+        bebidaBtn.setBackground(new java.awt.Color(96, 86, 120));
+        bebidaBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        bebidaBtn.setText("Bebida");
+        bebidaBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        bebidaBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                categoriaIngresadaMousePressed(evt);
+                bebidaBtnMousePressed(evt);
             }
         });
-        categoriaIngresada.addActionListener(new java.awt.event.ActionListener() {
+        bebidaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoriaIngresadaActionPerformed(evt);
+                bebidaBtnActionPerformed(evt);
             }
         });
 
-        nombreIngresado.setForeground(new java.awt.Color(204, 204, 204));
-        nombreIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        nombreIngresado.setText("Nombre");
-        nombreIngresado.setToolTipText("");
-        nombreIngresado.addMouseListener(new java.awt.event.MouseAdapter() {
+        platoBtn.setBackground(new java.awt.Color(96, 86, 120));
+        platoBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        platoBtn.setText("Plato");
+        platoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        platoBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                nombreIngresadoMousePressed(evt);
+                platoBtnMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                platoBtnMouseReleased(evt);
             }
         });
-        nombreIngresado.addActionListener(new java.awt.event.ActionListener() {
+        platoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreIngresadoActionPerformed(evt);
+                platoBtnActionPerformed(evt);
             }
         });
 
-        descripcionIngresada.setForeground(new java.awt.Color(204, 204, 204));
-        descripcionIngresada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        descripcionIngresada.setText("Descripción");
-        descripcionIngresada.setToolTipText("");
-        descripcionIngresada.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                descripcionIngresadaMousePressed(evt);
-            }
-        });
-        descripcionIngresada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descripcionIngresadaActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Crear un nuevo ItemMenu");
 
-        precioIngresado.setForeground(new java.awt.Color(204, 204, 204));
-        precioIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        precioIngresado.setText("Precio");
-        precioIngresado.setToolTipText("");
-        precioIngresado.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                precioIngresadoMousePressed(evt);
-            }
-        });
-        precioIngresado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precioIngresadoActionPerformed(evt);
-            }
-        });
+        jLabel2.setText("¿Qué tipo de ItemMenu desea?");
 
         cancelar.setBackground(new java.awt.Color(96, 86, 120));
         cancelar.setText("Cancelar");
@@ -96,147 +73,58 @@ public class CrearItemMenuGUI extends javax.swing.JFrame {
             }
         });
 
-        guardar.setBackground(new java.awt.Color(96, 86, 120));
-        guardar.setText("Guardar");
-        guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                guardarMousePressed(evt);
-            }
-        });
-        guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Ingrese los siguientes datos:");
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Crear un nuevo ItemMenu");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(65, 65, 65))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cancelar)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(bebidaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(platoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(41, 41, 41))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(platoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bebidaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(cancelar)
+                .addGap(33, 33, 33))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(descripcionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(categoriaIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(guardar)
-                        .addGap(56, 56, 56))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(descripcionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(categoriaIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelar)
-                    .addComponent(guardar))
-                .addGap(44, 44, 44))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void categoriaIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriaIngresadaMousePressed
-        if(nombreIngresado.getText().equals("")){
-            nombreIngresado.setText("Nombre");
-        }
-        if(descripcionIngresada.getText().equals("")){
-            descripcionIngresada.setText("Descripción");
-        }
-        if(precioIngresado.getText().equals("")){
-            precioIngresado.setText("Precio");
-        }
-        if(categoriaIngresada.getText().equals("Categoría")){
-            categoriaIngresada.setText("");
-        }
-    }//GEN-LAST:event_categoriaIngresadaMousePressed
-
-    private void categoriaIngresadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaIngresadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_categoriaIngresadaActionPerformed
-
-    private void nombreIngresadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nombreIngresadoMousePressed
-        if(nombreIngresado.getText().equals("Nombre")){
-            nombreIngresado.setText("");
-        }
-        if(descripcionIngresada.getText().equals("")){
-            descripcionIngresada.setText("Descripción");
-        }
-        if(precioIngresado.getText().equals("")){
-            precioIngresado.setText("Precio");
-        }
-        if(categoriaIngresada.getText().equals("")){
-            categoriaIngresada.setText("Categoría");
-        }
-    }//GEN-LAST:event_nombreIngresadoMousePressed
-
-    private void nombreIngresadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreIngresadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreIngresadoActionPerformed
-
-    private void descripcionIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_descripcionIngresadaMousePressed
-        if(nombreIngresado.getText().equals("")){
-            nombreIngresado.setText("Nombre");
-        }
-        if(descripcionIngresada.getText().equals("Descripción")){
-            descripcionIngresada.setText("");
-        }
-        if(precioIngresado.getText().equals("")){
-            precioIngresado.setText("Precio");
-        }
-        if(categoriaIngresada.getText().equals("")){
-            categoriaIngresada.setText("Categoría");
-        }
-    }//GEN-LAST:event_descripcionIngresadaMousePressed
-
-    private void descripcionIngresadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionIngresadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descripcionIngresadaActionPerformed
-
-    private void precioIngresadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_precioIngresadoMousePressed
-        if(nombreIngresado.getText().equals("")){
-            nombreIngresado.setText("Nombre");
-        }
-        if(descripcionIngresada.getText().equals("")){
-            descripcionIngresada.setText("Descripción");
-        }
-        if(precioIngresado.getText().equals("Precio")){
-            precioIngresado.setText("");
-        }
-        if(categoriaIngresada.getText().equals("")){
-            categoriaIngresada.setText("Categoría");
-        }
-    }//GEN-LAST:event_precioIngresadoMousePressed
-
-    private void precioIngresadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioIngresadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_precioIngresadoActionPerformed
 
     private void cancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarMousePressed
         String[] options = {"Sí", "No"};
@@ -258,18 +146,27 @@ public class CrearItemMenuGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarActionPerformed
 
-    private void guardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMousePressed
-       // CODIGO BACKEND
+    private void platoBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_platoBtnMousePressed
+        CrearPlatoGUI cp = new CrearPlatoGUI();
+        cp.setVisible(true);
+    }//GEN-LAST:event_platoBtnMousePressed
 
-        JOptionPane.showMessageDialog(null, "ItemMenú registrado con éxito.",
-                "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
-
-        dispose();
-    }//GEN-LAST:event_guardarMousePressed
-
-    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+    private void platoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_platoBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_guardarActionPerformed
+    }//GEN-LAST:event_platoBtnActionPerformed
+
+    private void bebidaBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bebidaBtnMousePressed
+        CrearBebidaGUI cb = new CrearBebidaGUI();
+        cb.setVisible(true);
+    }//GEN-LAST:event_bebidaBtnMousePressed
+
+    private void bebidaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bebidaBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bebidaBtnActionPerformed
+
+    private void platoBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_platoBtnMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_platoBtnMouseReleased
 
     /**
      * @param args the command line arguments
@@ -307,13 +204,11 @@ public class CrearItemMenuGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bebidaBtn;
     private javax.swing.JButton cancelar;
-    private javax.swing.JTextField categoriaIngresada;
-    private javax.swing.JTextField descripcionIngresada;
-    private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField nombreIngresado;
-    private javax.swing.JTextField precioIngresado;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton platoBtn;
     // End of variables declaration//GEN-END:variables
 }

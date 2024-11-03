@@ -18,6 +18,8 @@ public class Plato extends ItemMenu {
         this.peso = peso;
     }
 
+    //public void setDescription(String descripcion) {this.description = descripcion}
+
     public int getCalorias() {
         return calorias;
     }

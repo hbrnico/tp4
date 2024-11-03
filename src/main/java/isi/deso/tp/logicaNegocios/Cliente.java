@@ -45,9 +45,22 @@ public class Cliente implements Observer {
         this.activo = true;
     }
 
+    public void setId(int id) { this.id = id; }
+
+    public void setNombre(String nombre){this.nombre = nombre; }
+
+    public void setCuit(String cuit){ this.cuit = cuit; }
+
+    public void setEmail(String email){ this.email = email; }
+
+    public void setDireccion(String direccion){ this.direccion = direccion; }
+
+    public void setCoordenadas(Coordenada c){this.coordenadas= c;}
+
+
     public String getNombre() { return this.nombre; }
     //posteriormente esto se eliminara
-    public void setId(int id) { this.id = id; }
+
 
     public int getID() {
         return this.id;
@@ -72,7 +85,7 @@ public class Cliente implements Observer {
     public Boolean getActivo(){
         return this.activo;
     }
-    
+
     public void setActivo(Boolean estado){
         this.activo = estado;
     }

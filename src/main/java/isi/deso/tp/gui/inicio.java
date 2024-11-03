@@ -1,6 +1,12 @@
 package isi.deso.tp.gui;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.logicaNegocios.*;
+import isi.deso.tp.persistencia.ClienteMemory;
+import isi.deso.tp.persistencia.ItemsMenuMemory;
+import isi.deso.tp.persistencia.VendedorMemory;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -216,14 +222,30 @@ public class inicio extends javax.swing.JFrame {
         panelMenu.repaint();
     }//GEN-LAST:event_pedidosButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
+                Vendedor v1 = new Vendedor("Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
+                Vendedor v2 = new Vendedor("Lucas", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
+                Vendedor v3 = new Vendedor("Mariano", "Cordoba 700", new Coordenada(-31.720648806383995, -60.52989301773252));
+                VendedorMemory bdd = new VendedorMemory();
+                bdd.crearVendedor(v1);
+                bdd.crearVendedor(v2);
+                bdd.crearVendedor(v3);
+                Cliente c1 = new Cliente("20-34567892-4","Pedro Sanchez", "pedrosanches@gmail.com", "Las Heras 6664", new Coordenada(-31.607585631151917, -60.688909841851526));
+                Cliente c2 = new Cliente( "27-45678901-6", "Nayib Bukele","maria123@gmail.com", "Castelli 1399", new Coordenada(-31.65805720316965, -60.76379753347072));
+                Cliente c3 = new Cliente ("30-78901234-5","El Javo", "corralonpepe@gmail.com", "Saavedra 4599", (new Coordenada(-31.690958263178747, -60.77288831761002)));
+                ClienteMemory bdd2 = new ClienteMemory();
+                bdd2.crearCliente(c1);
+                bdd2.crearCliente(c2);
+                bdd2.crearCliente(c3);
+
+                ItemMenuController.crearBebida( "Coca-Cola", "Gaseosa de cola", 1000.0, "cat1", 0.0f, 500, v1.getNombre());
+                ItemMenuController.crearBebida( "Fanta", "Gaseosa de Naranja", 2000.0, "cat1", 0.0f, 600, v1.getNombre());
+                ItemMenuController.crearPlato( "Suprema", "Pechuga de pollo rebosada", 5000.00, "cat1", 600, false, false, 300.00f, v1.getNombre());
+                ItemMenuController.crearPlato("Empanadas de carne", "Media docena de empanadas de carne", 4500.00, "cat1", 1020, false, false, 700.00f,v3.getNombre());
+
                 try {
                     UIManager.setLookAndFeel(new FlatMacLightLaf());
                 } catch (UnsupportedLookAndFeelException ex) {

@@ -36,7 +36,13 @@ public class Vendedor {
         this.coordenadas = coordenadas;
         this.listaItems = listaItems;
     }
-    
+
+    public Vendedor(String nombre, String direccion, Coordenada c) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.coordenadas = c;
+    }
+
     public int getID(){
         return this.id;
     }
@@ -138,7 +144,7 @@ public class Vendedor {
     };
 
     //reemplazar este metodo por una consulta a la bdd donde el where cubra buscar por estado y por id
-    public List<Pedido> obtenerPedidosPorEstado(ESTADO estado){
+    public List<Pedido> obtenerPedidosPorEstado(ESTADO estado) throws PedidoNoEncontradoException {
         PedidoMemory misPedidosMemory = new PedidoMemory();
         //System.out.println("Cantidad de pedidos en bdd: " + misPedidosMemory.getPedidos().size());
         List<Pedido> misPedidos = misPedidosMemory.buscarPorRestaurante(this.getID());
@@ -157,12 +163,13 @@ public class Vendedor {
         ESTADO estadoNuevo = null;
 
         System.out.println("Ingrese el nuevo estado: EN_ESPERA/RECIBIDO/EN_ENVIO/ENTREGADO/RECHAZADO");
-        while(!valorValido)
-        try {
-            estadoNuevo = ESTADO.valueOf(ingresoTeclado.next());
-            valorValido = true;
-        } catch (IllegalArgumentException e) {
-            System.out.println("El valor ingresado no es un estado válido. Reingrese los datos.");
+        while(!valorValido){
+            try {
+                estadoNuevo = ESTADO.valueOf(ingresoTeclado.next());
+                valorValido = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println("El valor ingresado no es un estado válido. Reingrese los datos.");
+            }
         }
         pedido.setEstado(estadoNuevo);
     }
@@ -210,5 +217,15 @@ public class Vendedor {
         }
 
         return pedido;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+    public void setNombre(String nombre){
+        this.nombre=nombre;
+    }
+    public void setCoordenadas(Coordenada coordenadas){
+        this.coordenadas=coordenadas;
     }
 }

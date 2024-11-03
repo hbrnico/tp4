@@ -1,8 +1,79 @@
 package isi.deso.tp.gui;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.border.Border;
+
 public class PedidosPanel extends javax.swing.JPanel {
     public PedidosPanel() {
         initComponents();
+        initialize();
     }
+    
+    private void initialize(){
+        
+        JPanel panelMenu2 = (JPanel) scrollPane.getViewport().getView();
+        panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT)); 
+        panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
+
+        JLabel jLabel1 = new JLabel("Numero de Pedido");        
+        jLabel1.setMaximumSize(new Dimension(438, 23));
+        jLabel1.setMinimumSize(new Dimension(438, 23));
+        jLabel1.setPreferredSize(new Dimension(438, 23));
+        
+        JButton eliminarBtn = new JButton("Eliminar");
+        eliminarBtn.setPreferredSize(new Dimension(80,23));
+        eliminarBtn.setMaximumSize(new Dimension(80,23));
+        eliminarBtn.setMinimumSize(new Dimension(80,23));
+        
+        eliminarBtn.addMouseListener(
+            new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                        String[] options = {"Sí", "No"};
+
+                int resp = JOptionPane.showOptionDialog(null,
+                    "¿Está seguro que quiere eliminar el pedido?",
+                    "Cancelar registro",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE,
+                    null,
+                    options, 
+                    options[1] 
+                );
+
+                if(resp == JOptionPane.YES_OPTION); // METODO ELIMINAR BACKEND
+            }
+        });
+                
+        JPanel paux = new JPanel();
+        paux.setMaximumSize(new Dimension(520, 24));
+        paux.setMinimumSize(new Dimension(520, 24));
+        paux.setPreferredSize(new Dimension(520, 24));
+
+        paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
+        paux.add(jLabel1);
+        paux.add(eliminarBtn);
+        
+        
+        // Añadir el JSpinner y el JLabel al panel
+        panelMenu2.add(paux);
+
+        scrollPane.setViewportView(panelMenu2);
+
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -12,8 +83,8 @@ public class PedidosPanel extends javax.swing.JPanel {
         busquedaField = new javax.swing.JTextField();
         buscarButton = new javax.swing.JButton();
         buscarPedidoLabel = new javax.swing.JLabel();
-        listadoScrollPane = new javax.swing.JScrollPane();
-        listadoPedidosTable = new javax.swing.JTable();
+        scrollPane = new javax.swing.JScrollPane();
+        panelContenedor = new javax.swing.JPanel();
 
         tituloPedidos.setBackground(new java.awt.Color(153, 153, 153));
         tituloPedidos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -45,29 +116,38 @@ public class PedidosPanel extends javax.swing.JPanel {
         buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
         buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                buscarButtonMousePressed(evt);
+            }
+        });
 
         buscarPedidoLabel.setText("Buscar pedido");
 
-        listadoPedidosTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        listadoPedidosTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        listadoPedidosTable.setGridColor(new java.awt.Color(255, 255, 255));
-        listadoScrollPane.setViewportView(listadoPedidosTable);
+        scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        javax.swing.GroupLayout panelContenedorLayout = new javax.swing.GroupLayout(panelContenedor);
+        panelContenedor.setLayout(panelContenedorLayout);
+        panelContenedorLayout.setHorizontalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 564, Short.MAX_VALUE)
+        );
+        panelContenedorLayout.setVerticalGroup(
+            panelContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 261, Short.MAX_VALUE)
+        );
+
+        scrollPane.setViewportView(panelContenedor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 579, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -80,7 +160,6 @@ public class PedidosPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(1, 1, 1))
-                        .addComponent(listadoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
                         .addComponent(tituloPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(nuevoPedidoButton)
@@ -89,7 +168,10 @@ public class PedidosPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -99,9 +181,7 @@ public class PedidosPanel extends javax.swing.JPanel {
                         .addComponent(busquedaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(buscarButton)
                         .addComponent(buscarPedidoLabel))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(listadoScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
                     .addComponent(nuevoPedidoButton)
                     .addContainerGap()))
         );
@@ -116,14 +196,22 @@ public class PedidosPanel extends javax.swing.JPanel {
         cpg.setVisible(true);
     }//GEN-LAST:event_nuevoPedidoButtonMousePressed
 
+    private void buscarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMousePressed
+        String busqueda = buscarPedidoLabel.getText();
+        
+        
+        
+        initialize(); // BORRAR
+    }//GEN-LAST:event_buscarButtonMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscarButton;
     private javax.swing.JLabel buscarPedidoLabel;
     private javax.swing.JTextField busquedaField;
-    private javax.swing.JTable listadoPedidosTable;
-    private javax.swing.JScrollPane listadoScrollPane;
     private javax.swing.JButton nuevoPedidoButton;
+    private javax.swing.JPanel panelContenedor;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JLabel tituloPedidos;
     // End of variables declaration//GEN-END:variables
 }

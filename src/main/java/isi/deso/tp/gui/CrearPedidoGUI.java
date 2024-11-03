@@ -1,5 +1,7 @@
 package isi.deso.tp.gui;
 
+import isi.deso.tp.logicaNegocios.Pedido;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -49,6 +51,11 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
         jLabel2.setText("Seleccione un vendedor:");
 
         listaVendedores.setToolTipText("");
+        listaVendedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                listaVendedoresMousePressed(evt);
+            }
+        });
         listaVendedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaVendedoresActionPerformed(evt);
@@ -163,6 +170,7 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaVendedoresActionPerformed
+
         
         // Selecciona vendedor
         System.out.println(listaVendedores.getSelectedItem());
@@ -189,15 +197,14 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
         paux.setMinimumSize(new Dimension(400, 50));
         paux.setPreferredSize(new Dimension(400, 50));
         
-        Border borde = BorderFactory.createLineBorder(Color.BLACK, 1); // Borde de 2 px de grosor, color negro
+        Border borde = BorderFactory.createLineBorder(Color.BLACK, 1);
         paux.setBorder(borde);
         
         paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
         paux.add(jLabel1);
         paux.add(jSpinner2);
+
         
-        
-        // Añadir el JSpinner y el JLabel al panel
         panelMenu2.add(paux);
 
         scrollPane.setViewportView(panelMenu2);
@@ -208,6 +215,7 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
     private void idClienteIngresadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_idClienteIngresadoMousePressed
         if(idClienteIngresado.getText().equals("IDCliente")){
             idClienteIngresado.setText("");
+            idClienteIngresado.setForeground(Color.black);
         }
     }//GEN-LAST:event_idClienteIngresadoMousePressed
 
@@ -216,7 +224,10 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_idClienteIngresadoActionPerformed
 
     private void guardarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarBtnMousePressed
-       // CODIGO BACKEND
+
+        List<Pedido> listaPedidosVended
+
+
 
         JOptionPane.showMessageDialog(null, "Pedido registrado con éxito.",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
@@ -247,6 +258,13 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarBtnActionPerformed
+
+    private void listaVendedoresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaVendedoresMousePressed
+        if(idClienteIngresado.getText().equals("")){
+            idClienteIngresado.setText("IDCliente");
+            idClienteIngresado.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_listaVendedoresMousePressed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
