@@ -1,11 +1,16 @@
 package isi.deso.tp.gui;
 
 import java.awt.Color;
+
+import isi.deso.tp.controllers.ItemMenuController;
 import isi.deso.tp.logicaNegocios.Coordenada;
+import isi.deso.tp.logicaNegocios.Vendedor;
+
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,7 +18,10 @@ import javax.swing.JPanel;
 public class CrearPlatoGUI extends javax.swing.JFrame {
     
     public CrearPlatoGUI() {
+
         initComponents();
+        cargarVendedores();
+
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,6 +41,13 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
         caloriasLabel = new javax.swing.JLabel();
         nombreIngresado = new javax.swing.JTextField();
         caloriasIngresadas = new javax.swing.JTextField();
+        pesoLabel1 = new javax.swing.JLabel();
+        precioIngresado = new javax.swing.JTextField();
+        pesoLabel2 = new javax.swing.JLabel();
+        categoriaIngresada = new javax.swing.JTextField();
+        vendedorComboBox = new javax.swing.JComboBox<>();
+        seleccionVendedorLabel = new javax.swing.JLabel();
+        descripcionIngresada = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,37 +175,88 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
             }
         });
 
+        pesoLabel1.setText("Precio");
+
+        precioIngresado.setForeground(new java.awt.Color(204, 204, 204));
+        precioIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        precioIngresado.setText("Precio");
+        precioIngresado.setToolTipText("");
+        precioIngresado.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                precioIngresadoFocusLost(evt);
+            }
+        });
+        precioIngresado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                precioIngresadoMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                precioIngresadoMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                precioIngresadoMouseReleased(evt);
+            }
+        });
+        precioIngresado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioIngresadoActionPerformed(evt);
+            }
+        });
+
+        pesoLabel2.setText("Categoría");
+
+        categoriaIngresada.setForeground(new java.awt.Color(204, 204, 204));
+        categoriaIngresada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        categoriaIngresada.setText("Categoría");
+        categoriaIngresada.setToolTipText("");
+        categoriaIngresada.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                categoriaIngresadaFocusLost(evt);
+            }
+        });
+        categoriaIngresada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                categoriaIngresadaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                categoriaIngresadaMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                categoriaIngresadaMouseReleased(evt);
+            }
+        });
+        categoriaIngresada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaIngresadaActionPerformed(evt);
+            }
+        });
+
+        seleccionVendedorLabel.setText("Seleccione un vendedor");
+
+        descripcionIngresada.setForeground(new java.awt.Color(204, 204, 204));
+        descripcionIngresada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        descripcionIngresada.setText("Descripción");
+        descripcionIngresada.setToolTipText("");
+        descripcionIngresada.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                descripcionIngresadaFocusLost(evt);
+            }
+        });
+        descripcionIngresada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                descripcionIngresadaMousePressed(evt);
+            }
+        });
+        descripcionIngresada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcionIngresadaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(fondoLayout.createSequentialGroup()
-                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(87, 87, 87)
-                        .addComponent(vegetarianosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pesoLabel)
-                            .addComponent(ingresarDatosLabel1))
-                        .addGap(54, 54, 54)))
-                .addComponent(ingresarDatosLabel2)
-                .addGap(64, 64, 64))
-            .addGroup(fondoLayout.createSequentialGroup()
-                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(cancelar)
-                        .addGap(26, 26, 26)
-                        .addComponent(guardar))
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(caloriasLabel)
-                            .addComponent(celiacosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(fondoLayout.createSequentialGroup()
                 .addGap(162, 162, 162)
                 .addComponent(ingresarDatosLabel)
@@ -199,16 +265,64 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(crearPlatoLabel)
                 .addGap(156, 156, 156))
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGap(237, 237, 237)
+                .addComponent(cancelar)
+                .addGap(26, 26, 26)
+                .addComponent(guardar)
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(pesoIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(ingresarDatosLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(caloriasIngresadas, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                .addComponent(ingresarDatosLabel2)
+                .addGap(43, 43, 43))
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pesoLabel)
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pesoIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(132, 132, 132)
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(caloriasLabel)
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(categoriaIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(caloriasIngresadas, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addComponent(vegetarianosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(celiacosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(pesoLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pesoLabel2)
+                .addGap(84, 84, 84))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(vendedorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addComponent(seleccionVendedorLabel)
+                                .addGap(11, 11, 11)))
+                        .addGap(148, 148, 148))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(descripcionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(89, 89, 89))))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,11 +333,17 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
                 .addComponent(ingresarDatosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addComponent(descripcionIngresada, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(seleccionVendedorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vendedorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ingresarDatosLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ingresarDatosLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vegetarianosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(celiacosComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -235,7 +355,15 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(caloriasIngresadas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pesoIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pesoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pesoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(categoriaIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelar)
                     .addComponent(guardar))
@@ -250,11 +378,21 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargarVendedores(){
+
+        List<Vendedor> lv = isi.deso.tp.controllers.VendedorController.buscarListaVendedores();
+        for (Vendedor v:lv){
+            vendedorComboBox.addItem(v.getNombre());
+        }
+
+
+    }
 
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
@@ -293,7 +431,11 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
     private void guardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMousePressed
         if(nombreIngresado.getText().equals("Nombre")
                 || pesoIngresado.getText().equals("Peso")
-                || caloriasIngresadas.getText().equals("Calorías"))
+                || caloriasIngresadas.getText().equals("Calorías")
+                || categoriaIngresada.getText().equals("Categoría")
+                || vendedorComboBox.getSelectedItem().equals("")
+                || precioIngresado.getText().equals("Precio"))
+                   
         {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos.",
                 "Registro incompleto", JOptionPane.INFORMATION_MESSAGE);
@@ -302,15 +444,15 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
 
         String nombre = nombreIngresado.getText();
         float peso = Float.parseFloat(pesoIngresado.getText());
-        float calorias = Float.parseFloat(caloriasIngresadas.getText());
+        int calorias = Integer.parseInt(caloriasIngresadas.getText());
         boolean aptoVegetariano = vegetarianosComboBox.getSelectedItem() == "Si" ? true : false;
         boolean aptoCeliaco = celiacosComboBox.getSelectedItem() == "Si" ? true : false;
+        float precio = Float.parseFloat(precioIngresado.getText());
+        String vendedor = vendedorComboBox.getSelectedItem().toString();
+        String categoria = categoriaIngresada.getText();
+        String descripcion = descripcionIngresada.getText();
 
-
-
-
-        //CODIGO BACKEND
-
+        ItemMenuController.crearPlato(nombre, descripcion, (double) precio, categoria, calorias, aptoCeliaco, aptoVegetariano, peso, vendedor);
 
 
         JOptionPane.showMessageDialog(null, "Plato registrado con éxito.",
@@ -382,6 +524,76 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nombreIngresadoFocusLost
 
+    private void precioIngresadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_precioIngresadoFocusLost
+        if(precioIngresado.getText().equals("")){
+            precioIngresado.setText("Precio");
+            precioIngresado.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_precioIngresadoFocusLost
+
+    private void precioIngresadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_precioIngresadoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioIngresadoMouseExited
+
+    private void precioIngresadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_precioIngresadoMousePressed
+        if(precioIngresado.getText().equals("Precio")){
+            precioIngresado.setText("");
+            precioIngresado.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_precioIngresadoMousePressed
+
+    private void precioIngresadoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_precioIngresadoMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioIngresadoMouseReleased
+
+    private void precioIngresadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioIngresadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_precioIngresadoActionPerformed
+
+    private void categoriaIngresadaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_categoriaIngresadaFocusLost
+        if(categoriaIngresada.getText().equals("")){
+            categoriaIngresada.setText("Categoría");
+            categoriaIngresada.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_categoriaIngresadaFocusLost
+
+    private void categoriaIngresadaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriaIngresadaMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaIngresadaMouseExited
+
+    private void categoriaIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriaIngresadaMousePressed
+        if(categoriaIngresada.getText().equals("Categoría")){
+            categoriaIngresada.setText("");
+            categoriaIngresada.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_categoriaIngresadaMousePressed
+
+    private void categoriaIngresadaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoriaIngresadaMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaIngresadaMouseReleased
+
+    private void categoriaIngresadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaIngresadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaIngresadaActionPerformed
+
+    private void descripcionIngresadaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descripcionIngresadaFocusLost
+          if(categoriaIngresada.getText().equals("Descripción")){
+            categoriaIngresada.setText("");
+            categoriaIngresada.setForeground(Color.LIGHT_GRAY);
+        }
+    }//GEN-LAST:event_descripcionIngresadaFocusLost
+
+    private void descripcionIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_descripcionIngresadaMousePressed
+          if(categoriaIngresada.getText().equals("Descripción")){
+            categoriaIngresada.setText("");
+            categoriaIngresada.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_descripcionIngresadaMousePressed
+
+    private void descripcionIngresadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionIngresadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcionIngresadaActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -394,8 +606,10 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
     private javax.swing.JTextField caloriasIngresadas;
     private javax.swing.JLabel caloriasLabel;
     private javax.swing.JButton cancelar;
+    private javax.swing.JTextField categoriaIngresada;
     private javax.swing.JComboBox<String> celiacosComboBox;
     private javax.swing.JLabel crearPlatoLabel;
+    private javax.swing.JTextField descripcionIngresada;
     private javax.swing.JPanel fondo;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel ingresarDatosLabel;
@@ -404,6 +618,11 @@ public class CrearPlatoGUI extends javax.swing.JFrame {
     private javax.swing.JTextField nombreIngresado;
     private javax.swing.JTextField pesoIngresado;
     private javax.swing.JLabel pesoLabel;
+    private javax.swing.JLabel pesoLabel1;
+    private javax.swing.JLabel pesoLabel2;
+    private javax.swing.JTextField precioIngresado;
+    private javax.swing.JLabel seleccionVendedorLabel;
     private javax.swing.JComboBox<String> vegetarianosComboBox;
+    private javax.swing.JComboBox<String> vendedorComboBox;
     // End of variables declaration//GEN-END:variables
 }

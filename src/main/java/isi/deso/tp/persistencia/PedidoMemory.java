@@ -27,9 +27,7 @@ public class PedidoMemory implements PedidoDao{
     }
     
     @Override
-    public void eliminarPedido(int posicion) {
-
-        int id = this.pedidos.get(posicion).getID();
+    public void eliminarPedido(int id) {
 
         BaseDeDatos.eliminarPedido(id);
     }

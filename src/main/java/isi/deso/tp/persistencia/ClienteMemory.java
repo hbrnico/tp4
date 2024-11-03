@@ -31,6 +31,15 @@ public class ClienteMemory implements ClienteDao{
         return c.get(0);
     }
 
+    public Cliente buscarClientePorID(int id) throws ClienteNoEncontradoExeption {
+        List<Cliente> c = this.clientes.stream()
+                .filter(cliente -> cliente.getID()==id)
+                .collect(Collectors.toList());
+
+        if(c.isEmpty()) throw new ClienteNoEncontradoExeption("No existe el cliente con id: " + id);
+        return c.get(0);
+    }
+
     @Override
     public void crearCliente(Cliente cliente){
         int id = BaseDeDatos.getIDCliente();

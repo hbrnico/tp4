@@ -35,14 +35,20 @@ public class ItemMenuController {
         itemsMenuDao.eliminarItemMenu(nombreVendedor, nombre);
     }
 
-    public static void modificarPlato(String nombre, String descripcion, double precio, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) throws ItemNoEncontradoException{
+    public static void modificarPlato(String nombreViejo,String nombre, String descripcion, double precio, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) throws ItemNoEncontradoException{
         ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
-        itemsMenuDao.modificarPlato(nombre, descripcion, precio,calorias, aptoCeliaco, aptoVegano, peso, nombreVendedor);
+        itemsMenuDao.modificarPlato(nombreViejo, nombre, descripcion, precio,calorias, aptoCeliaco, aptoVegano, peso, nombreVendedor);
     }
 
-    public static void modificarBebida(String nombre, String descripcion, double precio, float graduacionAlcoholica, int tamanio, String nombreVendedor) throws ItemNoEncontradoException {
+    public static void modificarBebida(String nombreViejo,String nombre, String descripcion, double precio, float graduacionAlcoholica, int tamanio, String nombreVendedor) throws ItemNoEncontradoException {
         ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
-        itemsMenuDao.modificarBebida(nombre, descripcion, precio, graduacionAlcoholica, tamanio, nombreVendedor);
+        itemsMenuDao.modificarBebida(nombreViejo, nombre, descripcion, precio, graduacionAlcoholica, tamanio, nombreVendedor);
+    }
+
+    public static List<ItemMenu> buscarItemMenuPorNombre(String nombreMenu){
+        ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
+        List<ItemMenu> lim = itemsMenuDao.buscarItemMenuPorNombre(nombreMenu);
+        return lim;
     }
 
     public static List<ItemMenu> buscarItemMenuPorVendedor(String nombre) {

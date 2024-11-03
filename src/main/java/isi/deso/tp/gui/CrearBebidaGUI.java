@@ -1,11 +1,17 @@
 package isi.deso.tp.gui;
 
 import java.awt.Color;
+
+import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.controllers.VendedorController;
 import isi.deso.tp.logicaNegocios.Coordenada;
+import isi.deso.tp.logicaNegocios.Vendedor;
+
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,7 +19,9 @@ import javax.swing.JPanel;
 public class CrearBebidaGUI extends javax.swing.JFrame {
     
     public CrearBebidaGUI() {
+
         initComponents();
+        cargarVendedores();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -344,6 +352,16 @@ public class CrearBebidaGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarVendedores(){
+
+        List<Vendedor> lv = VendedorController.buscarListaVendedores();
+        for (Vendedor v:lv){
+            vendedorComboBox.addItem(v.getNombre());
+        }
+
+
+    }
+
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarActionPerformed
@@ -381,12 +399,13 @@ public class CrearBebidaGUI extends javax.swing.JFrame {
         float peso = Float.parseFloat(graduacionIngresada.getText());
         float precio = Float.parseFloat(precioIngresado.getText());
         String vendedor = vendedorComboBox.getSelectedItem().toString();
-        String categoria = tamañoIngresado.getText();
+        String categoria = categoriaIngresada.getText();
+        int tamanio = Integer.parseInt(tamañoIngresado.getText());
+        String descripcion = descripcionIngresada.getText();
+
+        ItemMenuController.crearBebida(nombre,descripcion,precio,categoria,peso,tamanio,vendedor);
         
-        
-        //CODIGO BACKEND
-        
-        JOptionPane.showMessageDialog(null, "Plato registrado con éxito.",
+        JOptionPane.showMessageDialog(null, "Bebida registrada con éxito.",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 
         dispose();
@@ -413,6 +432,7 @@ public class CrearBebidaGUI extends javax.swing.JFrame {
             nombreIngresado.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_nombreIngresadoFocusLost
+
 
     private void precioIngresadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_precioIngresadoFocusLost
         if(precioIngresado.getText().equals("")){
@@ -469,7 +489,7 @@ public class CrearBebidaGUI extends javax.swing.JFrame {
     private void descripcionIngresadaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descripcionIngresadaFocusLost
           if(tamañoIngresado.getText().equals("Descripción")){
             tamañoIngresado.setText("");
-            tamañoIngresado.setForeground(Color.LIGHT_GRAY);
+            tamañoIngresado.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_descripcionIngresadaFocusLost
 

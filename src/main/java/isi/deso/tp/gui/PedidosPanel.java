@@ -1,10 +1,17 @@
 package isi.deso.tp.gui;
 
+import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.controllers.PedidoController;
+import isi.deso.tp.excepciones.PedidoNoEncontradoException;
+import isi.deso.tp.logicaNegocios.ItemMenu;
+import isi.deso.tp.logicaNegocios.Pedido;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -22,54 +29,61 @@ public class PedidosPanel extends javax.swing.JPanel {
     }
     
     private void initialize(){
-        
+
+        List<Pedido> pedidos = PedidoController.listarPedidos();
+
         JPanel panelMenu2 = (JPanel) scrollPane.getViewport().getView();
-        panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT)); 
-        panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
 
-        JLabel jLabel1 = new JLabel("Numero de Pedido");        
-        jLabel1.setMaximumSize(new Dimension(438, 23));
-        jLabel1.setMinimumSize(new Dimension(438, 23));
-        jLabel1.setPreferredSize(new Dimension(438, 23));
-        
-        JButton eliminarBtn = new JButton("Eliminar");
-        eliminarBtn.setPreferredSize(new Dimension(80,23));
-        eliminarBtn.setMaximumSize(new Dimension(80,23));
-        eliminarBtn.setMinimumSize(new Dimension(80,23));
-        
-        eliminarBtn.addMouseListener(
-            new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                        String[] options = {"Sí", "No"};
+        for(Pedido p:pedidos) {
+            panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT));
+            panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
 
-                int resp = JOptionPane.showOptionDialog(null,
-                    "¿Está seguro que quiere eliminar el pedido?",
-                    "Cancelar registro",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    options, 
-                    options[1] 
-                );
+            JLabel jLabel1 = new JLabel("Vendedor: " + p.getMiVendedor().getNombre() +" Cliente: "+ p.getMiCliente().getNombre());
+            jLabel1.setMaximumSize(new Dimension(438, 23));
+            jLabel1.setMinimumSize(new Dimension(438, 23));
+            jLabel1.setPreferredSize(new Dimension(438, 23));
 
-                if(resp == JOptionPane.YES_OPTION); // METODO ELIMINAR BACKEND
-            }
-        });
-                
-        JPanel paux = new JPanel();
-        paux.setMaximumSize(new Dimension(520, 24));
-        paux.setMinimumSize(new Dimension(520, 24));
-        paux.setPreferredSize(new Dimension(520, 24));
+            JButton eliminarBtn = new JButton("Eliminar");
+            eliminarBtn.setPreferredSize(new Dimension(80, 23));
+            eliminarBtn.setMaximumSize(new Dimension(80, 23));
+            eliminarBtn.setMinimumSize(new Dimension(80, 23));
 
-        paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
-        paux.add(jLabel1);
-        paux.add(eliminarBtn);
-        
-        
-        // Añadir el JSpinner y el JLabel al panel
-        panelMenu2.add(paux);
+            eliminarBtn.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
 
+                            String[] options = {"Sí", "No"};
+
+                            int resp = JOptionPane.showOptionDialog(null,
+                                    "¿Está seguro que quiere eliminar el pedido?",
+                                    "Cancelar registro",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.WARNING_MESSAGE,
+                                    null,
+                                    options,
+                                    options[1]
+                            );
+
+                            if (resp == JOptionPane.YES_OPTION) {
+
+                                PedidoController.eliminarPedido(p.getID()); // METODO ELIMINAR BACKEND
+                            }
+                        }
+                    });
+
+            JPanel paux = new JPanel();
+            paux.setMaximumSize(new Dimension(520, 24));
+            paux.setMinimumSize(new Dimension(520, 24));
+            paux.setPreferredSize(new Dimension(520, 24));
+
+            paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
+            paux.add(jLabel1);
+            paux.add(eliminarBtn);
+
+            // Añadir el JSpinner y el JLabel al panel
+            panelMenu2.add(paux);
+        }
         scrollPane.setViewportView(panelMenu2);
 
     }
@@ -118,7 +132,11 @@ public class PedidosPanel extends javax.swing.JPanel {
         buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                buscarButtonMousePressed(evt);
+                try {
+                    buscarButtonMousePressed(evt);
+                } catch (PedidoNoEncontradoException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -196,13 +214,74 @@ public class PedidosPanel extends javax.swing.JPanel {
         cpg.setVisible(true);
     }//GEN-LAST:event_nuevoPedidoButtonMousePressed
 
-    private void buscarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMousePressed
-        String busqueda = buscarPedidoLabel.getText();
-        
-        
-        
-        initialize(); // BORRAR
-    }//GEN-LAST:event_buscarButtonMousePressed
+    private void buscarButtonMousePressed(java.awt.event.MouseEvent evt) throws PedidoNoEncontradoException {//GEN-FIRST:event_buscarButtonMousePressed
+        String busqueda = busquedaField.getText();
+
+        List<Pedido> pedidos = PedidoController.buscarPedido(busqueda);
+
+
+        JPanel panelMenu2 = (JPanel) scrollPane.getViewport().getView();
+
+        panelMenu2.removeAll();
+        for(Pedido p:pedidos) {
+            panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT));
+            panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
+
+            JLabel jLabel1 = new JLabel("Vendedor: " + p.getMiVendedor().getNombre() +" Cliente: "+ p.getMiCliente().getNombre());
+            jLabel1.setMaximumSize(new Dimension(438, 23));
+            jLabel1.setMinimumSize(new Dimension(438, 23));
+            jLabel1.setPreferredSize(new Dimension(438, 23));
+
+            JButton eliminarBtn = new JButton("Eliminar");
+            eliminarBtn.setPreferredSize(new Dimension(80, 23));
+            eliminarBtn.setMaximumSize(new Dimension(80, 23));
+            eliminarBtn.setMinimumSize(new Dimension(80, 23));
+
+            eliminarBtn.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                            String[] options = {"Sí", "No"};
+
+                            int resp = JOptionPane.showOptionDialog(null,
+                                    "¿Está seguro que quiere eliminar el pedido?",
+                                    "Cancelar registro",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.WARNING_MESSAGE,
+                                    null,
+                                    options,
+                                    options[1]
+                            );
+
+                            if (resp == JOptionPane.YES_OPTION) {
+
+                                PedidoController.eliminarPedido(p.getID()); // METODO ELIMINAR BACKEND
+                            }
+                        }
+                    });
+
+            JPanel paux = new JPanel();
+            paux.setMaximumSize(new Dimension(520, 24));
+            paux.setMinimumSize(new Dimension(520, 24));
+            paux.setPreferredSize(new Dimension(520, 24));
+
+            paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
+            paux.add(jLabel1);
+            paux.add(eliminarBtn);
+
+            // Añadir el JSpinner y el JLabel al panel
+            panelMenu2.add(paux);
+        }
+        scrollPane.setViewportView(panelMenu2);
+
+    }
+
+
+
+
+
+//GEN-LAST:event_buscarButtonMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

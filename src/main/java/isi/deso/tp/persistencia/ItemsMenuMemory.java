@@ -1,5 +1,6 @@
 package isi.deso.tp.persistencia;
 
+import isi.deso.tp.controllers.ItemMenuController;
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.*;
 
@@ -12,7 +13,7 @@ public class ItemsMenuMemory implements ItemsMenuDao {
     List<ItemMenu> itemsMenu;
 
     public ItemsMenuMemory(){
-        List<ItemMenu> itemsMenu = BaseDeDatos.getItemMenuList();
+        this.itemsMenu = BaseDeDatos.getItemMenuList();
     }
 
     public void addPlato(String nombre, String descripcion, double precio,  String tipoCategoria, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor){
@@ -52,7 +53,10 @@ public class ItemsMenuMemory implements ItemsMenuDao {
     }
 
     public ItemMenu buscarPorVendedorYNombre(String vendedor, String nombre ) throws ItemNoEncontradoException {
-        List<ItemMenu> item=this.itemsMenu.stream()
+
+        List<ItemMenu> items= this.itemsMenu;
+
+        List<ItemMenu> item=items.stream()
                 .filter(it -> it.getVendedor().getNombre().equals(vendedor))
                 .filter(it -> it.getNombre().equals(nombre))
                 .collect(Collectors.toList());
@@ -86,6 +90,15 @@ public class ItemsMenuMemory implements ItemsMenuDao {
         return itemsDeVendedor;
     }
 
+    public List<ItemMenu> buscarItemMenuPorNombre(String nombreMenu){
+        List<ItemMenu> listaIM = BaseDeDatos.getItemMenuList();
+
+        List<ItemMenu> itemsNombre = listaIM.stream()
+                .filter(itemMenu -> itemMenu.getNombre().equals(nombreMenu))
+                .collect(Collectors.toList());
+
+        return itemsNombre;
+    }
 
     public List<ItemMenu> buscarItemMenuPorVendedor(String nombre) {
 
@@ -98,33 +111,22 @@ public class ItemsMenuMemory implements ItemsMenuDao {
         return itemsDeVendedor;
     }
 
-    public void modificarPlato(String nombre, String descripcion, double precio, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) throws ItemNoEncontradoException{
+    public void modificarPlato(String nombreViejo, String nombre, String descripcion, double precio, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) throws ItemNoEncontradoException{
 
-        ItemMenu item = buscarPorVendedorYNombre(nombreVendedor, nombre);
-
-        if (item instanceof Plato) {
-            Plato plato = (Plato) item;
-            plato.setDescripcion(descripcion);
-            plato.setPrecio(precio);
-            plato.setCalorias(calorias);
-            plato.setAptoCeliaco(aptoCeliaco);
-            plato.setAptoVegano(aptoVegano);
-            plato.setPeso(peso);
-        }
+        ItemMenu m = buscarPorVendedorYNombre(nombreVendedor,nombreViejo);
+        VendedorMemory bdd = new VendedorMemory();
+        Vendedor v = bdd.getVendedorByNombre(nombreVendedor);
+        BaseDeDatos.modificarPlato(m.getId(),nombre,descripcion,precio,calorias,aptoCeliaco,aptoVegano,peso,v);
 
 
     }
 
-    public void modificarBebida( String nombre, String descripcion, double precio, float graduacionAlcoholica, int tamanio, String nombreVendedor) throws ItemNoEncontradoException{
-        ItemMenu item = buscarPorVendedorYNombre(nombreVendedor, nombre);
+    public void modificarBebida( String nombreViejo, String nombre, String descripcion, double precio, float graduacionAlcoholica, int tamanio, String nombreVendedor) throws ItemNoEncontradoException{
+        ItemMenu m = buscarPorVendedorYNombre(nombreVendedor,nombreViejo);
+        VendedorMemory bdd = new VendedorMemory();
+        Vendedor v = bdd.getVendedorByNombre(nombreVendedor);
+        BaseDeDatos.modificarBebida(m.getId(),nombre,descripcion,precio,graduacionAlcoholica,tamanio,v);
 
-        if (item instanceof Bebida) {
-            Bebida bebida = (Bebida) item;
-            bebida.setDescripcion(descripcion);
-            bebida.setPrecio(precio);
-            bebida.setGraduacionAlcoholica(graduacionAlcoholica);
-            bebida.setTamanio(tamanio);
-        }
     }
 
 }

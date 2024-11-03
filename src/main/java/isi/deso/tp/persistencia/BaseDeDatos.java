@@ -76,6 +76,33 @@ public class BaseDeDatos {
     public static int getIDItemMenu() {return IDItemMenu;}
     public static void aumentarIDItemMenu() {IDItemMenu++;}
     public static void eliminarItemMenu(int id){itemMenuList.removeIf(p -> p.getId() == id);}
+    public static void modificarBebida(int id, String nombre, String descripcion, double precio, float graduacionAlcoholica, int tamanio, Vendedor v){
+        for(ItemMenu item : itemMenuList){
+            if((item instanceof Bebida) && (item.getId()==id)){
+                item.setNombre(nombre);
+                item.setDescripcion(descripcion);
+                item.setPrecio(precio);
+                ((Bebida) item).setGraduacionAlcoholica(graduacionAlcoholica);
+                ((Bebida) item).setTamanio(tamanio);
+                item.setVendedor(v);
+            }
+        }
+    }
+    public static void modificarPlato(int id, String nombre, String descripcion, double precio, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, Vendedor v){
+        for(ItemMenu item : itemMenuList){
+            if((item instanceof Plato) && (item.getId()==id)){
+                item.setNombre(nombre);
+                item.setDescripcion(descripcion);
+                item.setPrecio(precio);
+                ((Plato) item).setCalorias(calorias);
+                ((Plato) item).setAptoCeliaco(aptoCeliaco);
+                ((Plato) item).setAptoVegano(aptoVegano);
+                ((Plato) item).setPeso(peso);
+                item.setVendedor(v);
+            }
+        }
+    }
+
 
     public static List<Cliente> getClienteList() { return clienteList;}
     public static void setClienteList(List<Cliente> clienteList) {BaseDeDatos.clienteList = clienteList;}

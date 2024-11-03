@@ -1,11 +1,18 @@
 package isi.deso.tp.gui;
 
+import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.controllers.PedidoController;
+import isi.deso.tp.controllers.VendedorController;
+import isi.deso.tp.excepciones.ClienteNoEncontradoExeption;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.logicaNegocios.ItemMenu;
+import isi.deso.tp.logicaNegocios.ItemMenuDTO;
 import isi.deso.tp.logicaNegocios.Pedido;
+import isi.deso.tp.logicaNegocios.Vendedor;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Label;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -24,10 +31,13 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
     }
 
     private void cargarVendedores(){
-        listaVendedores.addItem("--------");
-        listaVendedores.addItem("Mariano's");
-        listaVendedores.addItem("Pedro's");
-        listaVendedores.addItem("Lucas'");
+
+        List<Vendedor> lv = VendedorController.buscarListaVendedores();
+        for (Vendedor v:lv){
+            listaVendedores.addItem(v.getNombre());
+        }
+
+
     }
     
     @SuppressWarnings("unchecked")
@@ -82,7 +92,13 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
         guardarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                guardarBtnMousePressed(evt);
+                try {
+                    guardarBtnMousePressed(evt);
+                } catch (ClienteNoEncontradoExeption e) {
+                    throw new RuntimeException(e);
+                } catch (ItemNoEncontradoException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         guardarBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -173,39 +189,50 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
 
         
         // Selecciona vendedor
-        System.out.println(listaVendedores.getSelectedItem());
+        List<Vendedor> vl= VendedorController.buscarListaVendedores();
+        String nombreVendedor = listaVendedores.getSelectedItem().toString();
+
         
         // Acá iría el backend -> devolver los itemsMenu del vendedor seleccionado
         // De momento solo pongo un par de items para probar la GUI.
-        
+
+        List<ItemMenu> listaItemsVendedor = ItemMenuController.buscarItemMenuPorVendedor(nombreVendedor);
+
+
         JPanel panelMenu2 = (JPanel) scrollPane.getViewport().getView();
-        panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT)); 
-        panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS)); 
+        panelMenu2.removeAll();
+        for(ItemMenu item : listaItemsVendedor) {
 
-        JSpinner jSpinner2 = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
-        jSpinner2.setMaximumSize(new Dimension(45,25));
-        jSpinner2.setMinimumSize(new Dimension(45,25));
-        jSpinner2.setPreferredSize(new Dimension(45,25));
-        JLabel jLabel1 = new JLabel("NombreItemMenu");
-        
-        jLabel1.setMaximumSize(new Dimension(390-45, 25));
-        jLabel1.setMinimumSize(new Dimension(390-45, 25));
-        jLabel1.setPreferredSize(new Dimension(390-45, 25));
-        
-        JPanel paux = new JPanel();
-        paux.setMaximumSize(new Dimension(400, 50));
-        paux.setMinimumSize(new Dimension(400, 50));
-        paux.setPreferredSize(new Dimension(400, 50));
-        
-        Border borde = BorderFactory.createLineBorder(Color.BLACK, 1);
-        paux.setBorder(borde);
-        
-        paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
-        paux.add(jLabel1);
-        paux.add(jSpinner2);
 
-        
-        panelMenu2.add(paux);
+            panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT));
+            panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
+
+            JSpinner jSpinner2 = new JSpinner(new SpinnerNumberModel(0, 0, 100, 1));
+            jSpinner2.setMaximumSize(new Dimension(45, 25));
+            jSpinner2.setMinimumSize(new Dimension(45, 25));
+            jSpinner2.setPreferredSize(new Dimension(45, 25));
+            JLabel jLabel1 = new JLabel(item.getNombre());
+
+            jLabel1.setMaximumSize(new Dimension(390 - 45, 25));
+            jLabel1.setMinimumSize(new Dimension(390 - 45, 25));
+            jLabel1.setPreferredSize(new Dimension(390 - 45, 25));
+
+            JPanel paux = new JPanel();
+            paux.setMaximumSize(new Dimension(400, 50));
+            paux.setMinimumSize(new Dimension(400, 50));
+            paux.setPreferredSize(new Dimension(400, 50));
+
+            Border borde = BorderFactory.createLineBorder(Color.BLACK, 1);
+            paux.setBorder(borde);
+
+            paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
+            paux.add(jLabel1);
+            paux.add(jSpinner2);
+
+
+            panelMenu2.add(paux);
+
+        }
 
         scrollPane.setViewportView(panelMenu2);
 
@@ -223,10 +250,38 @@ public class CrearPedidoGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idClienteIngresadoActionPerformed
 
-    private void guardarBtnMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarBtnMousePressed
+    private void guardarBtnMousePressed(java.awt.event.MouseEvent evt) throws ClienteNoEncontradoExeption, ItemNoEncontradoException {//GEN-FIRST:event_guardarBtnMousePressed
 
-        List<Pedido> listaPedidosVended
+        Integer idCliente= Integer.valueOf(idClienteIngresado.getText());
+        String nombreVendedor = listaVendedores.getSelectedItem().toString();
+        List<Integer>valores = new ArrayList<>();
+        List<ItemMenu> listaItemsVendedor = ItemMenuController.buscarItemMenuPorVendedor(nombreVendedor);
 
+        for(Component componente1 : panelContenedorItems.getComponents()) {
+            if(componente1 instanceof JPanel){
+                for(Component componente2 : ((JPanel) componente1).getComponents()){
+                    if(componente2 instanceof JSpinner){
+                        JSpinner aux = (JSpinner) componente2;
+                        valores.add((Integer) aux.getValue());
+                    }
+                }
+            }
+        }
+
+        //for(Integer i:valores)System.out.println(i);
+        //formar lista de itemmenu del pedido
+
+        List<ItemMenuDTO> itemsPedido=new ArrayList<>();
+
+        for (int i = 0; i < listaItemsVendedor.size(); i++) {
+                    itemsPedido.add(new ItemMenuDTO(listaItemsVendedor.get(i).getNombre(),valores.get(i),nombreVendedor));
+        }
+
+        /*for(ItemMenuDTO item : itemsPedido){
+            System.out.println(item.getNombre());
+        }*/
+
+        PedidoController.crearPedido(idCliente,nombreVendedor,itemsPedido);
 
 
         JOptionPane.showMessageDialog(null, "Pedido registrado con éxito.",

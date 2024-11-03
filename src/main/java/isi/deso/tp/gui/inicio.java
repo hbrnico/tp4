@@ -2,11 +2,16 @@ package isi.deso.tp.gui;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.controllers.PedidoController;
+import isi.deso.tp.excepciones.ClienteNoEncontradoExeption;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.*;
 import isi.deso.tp.persistencia.ClienteMemory;
 import isi.deso.tp.persistencia.ItemsMenuMemory;
 import isi.deso.tp.persistencia.VendedorMemory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -246,12 +251,27 @@ public class inicio extends javax.swing.JFrame {
                 ItemMenuController.crearPlato( "Suprema", "Pechuga de pollo rebosada", 5000.00, "cat1", 600, false, false, 300.00f, v1.getNombre());
                 ItemMenuController.crearPlato("Empanadas de carne", "Media docena de empanadas de carne", 4500.00, "cat1", 1020, false, false, 700.00f,v3.getNombre());
 
+                ItemMenuDTO aux1 = new ItemMenuDTO("Fanta",4,"Pedro");
+                ItemMenuDTO aux2 = new ItemMenuDTO("Suprema",3,"Pedro");
+
+                List<ItemMenuDTO> auxiliar=new ArrayList<>();
+                auxiliar.add(aux1);
+                auxiliar.add(aux2);
+
+                try {
+                    PedidoController.crearPedido(4,"Pedro",auxiliar);
+                } catch (ItemNoEncontradoException e) {
+                    throw new RuntimeException(e);
+                } catch (ClienteNoEncontradoExeption e) {
+                    throw new RuntimeException(e);
+                }
+
                 try {
                     UIManager.setLookAndFeel(new FlatMacLightLaf());
                 } catch (UnsupportedLookAndFeelException ex) {
                     Logger.getLogger(inicio.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+
                 new inicio().setVisible(true);
             }
         });

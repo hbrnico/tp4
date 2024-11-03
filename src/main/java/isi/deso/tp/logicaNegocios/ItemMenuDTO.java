@@ -5,7 +5,7 @@ public class ItemMenuDTO {
     int cantidad;
     String vendedor;
 
-    ItemMenuDTO(String nombre, int cantidad, String vendedor) {
+    public ItemMenuDTO(String nombre, int cantidad, String vendedor) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.vendedor = vendedor;

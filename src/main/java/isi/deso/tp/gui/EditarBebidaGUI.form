@@ -46,6 +46,52 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
+                          <Component id="cancelar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="guardar" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="graduacionLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="precioLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="precioIngresado" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="categoriaIngresada" min="-2" pref="72" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
+                                  <Component id="categoriaLabel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="graduacionIngresada" min="-2" pref="72" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="tamañoIngresado" min="-2" pref="72" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -63,75 +109,24 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="descripcionIngresada" min="-2" pref="244" max="-2" attributes="0"/>
                               <Component id="nombreIngresado" min="-2" pref="244" max="-2" attributes="0"/>
-                              <Component id="pesoLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="tamañoLabel" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-              </Group>
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="crearBebidaLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="ingresarDatosLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="237" max="-2" attributes="0"/>
-                          <Component id="cancelar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                          <Component id="guardar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Component id="pesoLabel" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="editarBebidaLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="pesoLabel1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="precioIngresado" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="categoriaIngresada" min="-2" pref="72" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
-                                  <Component id="pesoLabel3" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="graduacionIngresada" min="-2" pref="72" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="tamañoIngresado" min="-2" pref="72" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="crearBebidaLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ingresarDatosLabel" min="-2" pref="16" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="editarBebidaLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Component id="nombreIngresado" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="descripcionIngresada" pref="83" max="32767" attributes="0"/>
@@ -141,8 +136,8 @@
                   <Component id="vendedorComboBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="pesoLabel" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
-                      <Component id="pesoLabel2" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="graduacionLabel" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                      <Component id="tamañoLabel" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -153,8 +148,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="pesoLabel3" alignment="1" min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="pesoLabel1" min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="categoriaLabel" alignment="1" min="-2" pref="16" max="-2" attributes="0"/>
+                              <Component id="precioLabel" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="precioIngresado" min="-2" pref="35" max="-2" attributes="0"/>
@@ -222,20 +217,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="crearBebidaLabel">
+        <Component class="javax.swing.JLabel" name="editarBebidaLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Crear una bebida"/>
+            <Property name="text" type="java.lang.String" value="Editar bebida"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="ingresarDatosLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ingrese los siguientes datos:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="pesoLabel">
+        <Component class="javax.swing.JLabel" name="graduacionLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Graduaci&#xf3;n alcoh&#xf3;lica"/>
           </Properties>
@@ -255,7 +245,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreIngresadoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="pesoLabel1">
+        <Component class="javax.swing.JLabel" name="precioLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Precio"/>
           </Properties>
@@ -277,7 +267,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="precioIngresadoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="pesoLabel2">
+        <Component class="javax.swing.JLabel" name="tama&#xf1;oLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tama&#xf1;o"/>
           </Properties>
@@ -329,7 +319,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descripcionIngresadaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="pesoLabel3">
+        <Component class="javax.swing.JLabel" name="categoriaLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Categor&#xed;a"/>
           </Properties>

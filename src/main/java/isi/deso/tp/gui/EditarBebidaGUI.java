@@ -1,20 +1,47 @@
 package isi.deso.tp.gui;
 
+import isi.deso.tp.controllers.ItemMenuController;
 import java.awt.Color;
+
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.Coordenada;
+import isi.deso.tp.logicaNegocios.Vendedor;
+
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class EditarBebidaGUI extends javax.swing.JFrame {
-    
+    String nombreViejo;
+    String nombreVendedor;
     public EditarBebidaGUI() {
         initComponents();
+        cargarVendedores();
     }
+    public EditarBebidaGUI( String nombreVendedor) {
+        initComponents();
+        this.nombreVendedor = nombreVendedor;
+        cargarVendedores();
+    }
+
+    public void setNombreViejo(String nombre){this.nombreViejo=nombre;}
+    public void setVendedor(String nombre){this.nombreVendedor=nombre;}
+    public String getNombreViejo(){return this.nombreViejo;}
+    public String getNombreVendedor(){return this.nombreVendedor;}
+    private void cargarVendedores(){
+
+
+            vendedorComboBox.addItem(getNombreVendedor());
+
+
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -23,18 +50,17 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
         graduacionIngresada = new javax.swing.JTextField();
         guardar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        crearBebidaLabel = new javax.swing.JLabel();
-        ingresarDatosLabel = new javax.swing.JLabel();
-        pesoLabel = new javax.swing.JLabel();
+        editarBebidaLabel = new javax.swing.JLabel();
+        graduacionLabel = new javax.swing.JLabel();
         nombreIngresado = new javax.swing.JTextField();
-        pesoLabel1 = new javax.swing.JLabel();
+        precioLabel = new javax.swing.JLabel();
         precioIngresado = new javax.swing.JTextField();
-        pesoLabel2 = new javax.swing.JLabel();
+        tamañoLabel = new javax.swing.JLabel();
         tamañoIngresado = new javax.swing.JTextField();
         vendedorComboBox = new javax.swing.JComboBox<>();
         seleccionVendedorLabel = new javax.swing.JLabel();
         descripcionIngresada = new javax.swing.JTextField();
-        pesoLabel3 = new javax.swing.JLabel();
+        categoriaLabel = new javax.swing.JLabel();
         categoriaIngresada = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,7 +99,11 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
         guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                guardarMousePressed(evt);
+                try {
+                    guardarMousePressed(evt);
+                } catch (ItemNoEncontradoException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,12 +126,10 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
             }
         });
 
-        crearBebidaLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        crearBebidaLabel.setText("Crear una bebida");
+        editarBebidaLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        editarBebidaLabel.setText("Editar bebida");
 
-        ingresarDatosLabel.setText("Ingrese los siguientes datos:");
-
-        pesoLabel.setText("Graduación alcohólica");
+        graduacionLabel.setText("Graduación alcohólica");
 
         nombreIngresado.setForeground(new java.awt.Color(204, 204, 204));
         nombreIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -123,7 +151,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
             }
         });
 
-        pesoLabel1.setText("Precio");
+        precioLabel.setText("Precio");
 
         precioIngresado.setForeground(new java.awt.Color(204, 204, 204));
         precioIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -151,7 +179,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
             }
         });
 
-        pesoLabel2.setText("Tamaño");
+        tamañoLabel.setText("Tamaño");
 
         tamañoIngresado.setForeground(new java.awt.Color(204, 204, 204));
         tamañoIngresado.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -201,7 +229,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
             }
         });
 
-        pesoLabel3.setText("Categoría");
+        categoriaLabel.setText("Categoría");
 
         categoriaIngresada.setForeground(new java.awt.Color(204, 204, 204));
         categoriaIngresada.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -233,6 +261,39 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
         fondo.setLayout(fondoLayout);
         fondoLayout.setHorizontalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(237, 237, 237)
+                        .addComponent(cancelar)
+                        .addGap(26, 26, 26)
+                        .addComponent(guardar))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(graduacionLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(precioLabel))
+                            .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(categoriaIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(fondoLayout.createSequentialGroup()
+                                .addGap(185, 185, 185)
+                                .addComponent(categoriaLabel)
+                                .addGap(0, 20, Short.MAX_VALUE))))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addComponent(graduacionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tamañoIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,56 +308,18 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
                         .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(descripcionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pesoLabel2))
-                        .addGap(89, 89, 89))))
-            .addGroup(fondoLayout.createSequentialGroup()
-                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(crearBebidaLabel)
-                            .addComponent(ingresarDatosLabel)))
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(cancelar)
-                        .addGap(26, 26, 26)
-                        .addComponent(guardar))
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(pesoLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(fondoLayout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(pesoLabel1)
-                                .addGap(21, 21, 21))
-                            .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(categoriaIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(fondoLayout.createSequentialGroup()
-                                .addGap(185, 185, 185)
-                                .addComponent(pesoLabel3)
-                                .addGap(0, 20, Short.MAX_VALUE))))
-                    .addGroup(fondoLayout.createSequentialGroup()
-                        .addComponent(graduacionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tamañoIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(68, 68, 68))
+                            .addComponent(tamañoLabel))
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                        .addComponent(editarBebidaLabel)
+                        .addGap(153, 153, 153))))
         );
         fondoLayout.setVerticalGroup(
             fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(crearBebidaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ingresarDatosLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
+                .addComponent(editarBebidaLabel)
+                .addGap(26, 26, 26)
                 .addComponent(nombreIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(descripcionIngresada, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
@@ -306,8 +329,8 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
                 .addComponent(vendedorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pesoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pesoLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(graduacionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tamañoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(graduacionIngresada, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,9 +339,8 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
                 .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pesoLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(pesoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(categoriaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(precioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(precioIngresado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(94, 94, 94)
@@ -365,18 +387,20 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
         if(resp == JOptionPane.YES_OPTION) dispose();
     }//GEN-LAST:event_cancelarMousePressed
 
-    private void guardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMousePressed
+    private void guardarMousePressed(java.awt.event.MouseEvent evt) throws ItemNoEncontradoException {//GEN-FIRST:event_guardarMousePressed
 
         String nombre = nombreIngresado.getText();
-        float peso = Float.parseFloat(graduacionIngresada.getText());
+        float graduacionAlcoholica = Float.parseFloat(graduacionIngresada.getText());
         float precio = Float.parseFloat(precioIngresado.getText());
         String vendedor = vendedorComboBox.getSelectedItem().toString();
-        String categoria = tamañoIngresado.getText();
-        
+        String categoria = categoriaIngresada.getText();
+        int tamanio = Integer.parseInt(tamañoIngresado.getText());
+        String descripcion = descripcionIngresada.getText();
         
         //CODIGO BACKEND
-        
-        JOptionPane.showMessageDialog(null, "Plato registrado con éxito.",
+
+        ItemMenuController.modificarBebida(getNombreViejo(),nombre, descripcion, precio, graduacionAlcoholica, tamanio, vendedor);
+        JOptionPane.showMessageDialog(null, "Bebida registrada con éxito.",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 
         dispose();
@@ -432,7 +456,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
 
     private void tamañoIngresadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tamañoIngresadoFocusLost
         if(tamañoIngresado.getText().equals("")){
-            tamañoIngresado.setText("Categoría");
+            tamañoIngresado.setText("Tamaño");
             tamañoIngresado.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_tamañoIngresadoFocusLost
@@ -442,7 +466,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tamañoIngresadoMouseExited
 
     private void tamañoIngresadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tamañoIngresadoMousePressed
-        if(tamañoIngresado.getText().equals("Categoría")){
+        if(tamañoIngresado.getText().equals("Tamaño")){
             tamañoIngresado.setText("");
             tamañoIngresado.setForeground(Color.BLACK);
         }
@@ -457,16 +481,16 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_tamañoIngresadoActionPerformed
 
     private void descripcionIngresadaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descripcionIngresadaFocusLost
-          if(tamañoIngresado.getText().equals("Descripción")){
-            tamañoIngresado.setText("");
-            tamañoIngresado.setForeground(Color.LIGHT_GRAY);
+          if(descripcionIngresada.getText().equals("")){
+            descripcionIngresada.setText("Descripción");
+            descripcionIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_descripcionIngresadaFocusLost
 
     private void descripcionIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_descripcionIngresadaMousePressed
-          if(tamañoIngresado.getText().equals("Descripción")){
-            tamañoIngresado.setText("");
-            tamañoIngresado.setForeground(Color.BLACK);
+          if(descripcionIngresada.getText().equals("Descripción")){
+            descripcionIngresada.setText("");
+            descripcionIngresada.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_descripcionIngresadaMousePressed
 
@@ -475,10 +499,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_descripcionIngresadaActionPerformed
 
     private void graduacionIngresadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graduacionIngresadaActionPerformed
-        if(graduacionIngresada.getText().equals("Peso")){
-            graduacionIngresada.setText("");
-            graduacionIngresada.setForeground(Color.black);
-        }
+
     }//GEN-LAST:event_graduacionIngresadaActionPerformed
 
     private void graduacionIngresadaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_graduacionIngresadaMouseReleased
@@ -486,7 +507,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_graduacionIngresadaMouseReleased
 
     private void graduacionIngresadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_graduacionIngresadaMousePressed
-        if(graduacionIngresada.getText().equals("Peso")){
+        if(graduacionIngresada.getText().equals("%")){
             graduacionIngresada.setText("");
             graduacionIngresada.setForeground(Color.black);
         }
@@ -498,14 +519,14 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
 
     private void graduacionIngresadaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_graduacionIngresadaFocusLost
         if(graduacionIngresada.getText().equals("")){
-            graduacionIngresada.setText("Peso");
+            graduacionIngresada.setText("%");
             graduacionIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_graduacionIngresadaFocusLost
 
     private void categoriaIngresadaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_categoriaIngresadaFocusLost
-        if(categoriaIngresada.getText().equals("Categoría")){
-            categoriaIngresada.setText("");
+        if(categoriaIngresada.getText().equals("")){
+            categoriaIngresada.setText("Categoría");
             categoriaIngresada.setForeground(Color.LIGHT_GRAY);
         }
     }//GEN-LAST:event_categoriaIngresadaFocusLost
@@ -540,20 +561,19 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
     private javax.swing.JTextField categoriaIngresada;
-    private javax.swing.JLabel crearBebidaLabel;
+    private javax.swing.JLabel categoriaLabel;
     private javax.swing.JTextField descripcionIngresada;
+    private javax.swing.JLabel editarBebidaLabel;
     private javax.swing.JPanel fondo;
     private javax.swing.JTextField graduacionIngresada;
+    private javax.swing.JLabel graduacionLabel;
     private javax.swing.JButton guardar;
-    private javax.swing.JLabel ingresarDatosLabel;
     private javax.swing.JTextField nombreIngresado;
-    private javax.swing.JLabel pesoLabel;
-    private javax.swing.JLabel pesoLabel1;
-    private javax.swing.JLabel pesoLabel2;
-    private javax.swing.JLabel pesoLabel3;
     private javax.swing.JTextField precioIngresado;
+    private javax.swing.JLabel precioLabel;
     private javax.swing.JLabel seleccionVendedorLabel;
     private javax.swing.JTextField tamañoIngresado;
+    private javax.swing.JLabel tamañoLabel;
     private javax.swing.JComboBox<String> vendedorComboBox;
     // End of variables declaration//GEN-END:variables
 }

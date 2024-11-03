@@ -1,20 +1,50 @@
 package isi.deso.tp.gui;
 
 import java.awt.Color;
+
+import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.Coordenada;
+import isi.deso.tp.logicaNegocios.Vendedor;
+
 import java.awt.FlowLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class EditarPlatoGUI extends javax.swing.JFrame {
-    
+    String nombreViejo;
+    String nombreVendedor;
+
     public EditarPlatoGUI() {
+
         initComponents();
+        cargarVendedores();
     }
+
+    public EditarPlatoGUI(String nombreVendedor) {
+
+        initComponents();
+        this.nombreVendedor = nombreVendedor;
+        cargarVendedores();
+    }
+
+    public void setVendedor(String nombre){this.nombreVendedor=nombre;}
+    public String getNombreVendedor(){return this.nombreVendedor;}
+    private void cargarVendedores(){
+
+            vendedorComboBox.addItem(getNombreVendedor());
+
+
+    }
+
+    public void setNombre(String nombre){this.nombreViejo=nombre;}
+    public String getNombreViejo(){return this.nombreViejo;}
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -76,7 +106,11 @@ public class EditarPlatoGUI extends javax.swing.JFrame {
         guardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                guardarMousePressed(evt);
+                try {
+                    guardarMousePressed(evt);
+                } catch (ItemNoEncontradoException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         guardar.addActionListener(new java.awt.event.ActionListener() {
@@ -351,6 +385,8 @@ public class EditarPlatoGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
+
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cancelarActionPerformed
@@ -385,13 +421,13 @@ public class EditarPlatoGUI extends javax.swing.JFrame {
         if(resp == JOptionPane.YES_OPTION) dispose();
     }//GEN-LAST:event_cancelarMousePressed
 
-    private void guardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarMousePressed
+    private void guardarMousePressed(java.awt.event.MouseEvent evt) throws ItemNoEncontradoException {//GEN-FIRST:event_guardarMousePressed
 
 
         String nombre = nombreIngresado.getText();
         float peso = Float.parseFloat(pesoIngresado.getText());
-        float calorias = Float.parseFloat(caloriasIngresadas.getText());
-        boolean aptoVegetariano = vegetarianosComboBox.getSelectedItem() == "Si" ? true : false;
+        int calorias = Integer.parseInt(caloriasIngresadas.getText());
+        boolean aptoVegano = vegetarianosComboBox.getSelectedItem() == "Si" ? true : false;
         boolean aptoCeliaco = celiacosComboBox.getSelectedItem() == "Si" ? true : false;
         float precio = Float.parseFloat(precioIngresado.getText());
         String vendedor = vendedorComboBox.getSelectedItem().toString();
@@ -399,7 +435,9 @@ public class EditarPlatoGUI extends javax.swing.JFrame {
         
         
         //CODIGO BACKEND
-        
+
+        ItemMenuController.modificarPlato(getNombreViejo(),nombre,"",precio,calorias,aptoCeliaco,aptoVegano,peso,vendedor);
+
         JOptionPane.showMessageDialog(null, "Cambio registrado con éxito.",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 

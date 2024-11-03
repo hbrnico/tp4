@@ -1,9 +1,15 @@
 package isi.deso.tp.gui;
 
+import isi.deso.tp.controllers.ItemMenuController;
+import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.logicaNegocios.Bebida;
+import isi.deso.tp.logicaNegocios.ItemMenu;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,70 +24,87 @@ public class ItemMenuPanel extends javax.swing.JPanel {
     }
 
     private void initialize(){
-        
+
+        List<ItemMenu> itemsMenu = ItemMenuController.buscarListaItemsMenu();
         JPanel panelMenu2 = (JPanel) scrollPane.getViewport().getView();
-        panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT)); 
+        panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT));
         panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
+        for(ItemMenu item : itemsMenu){
+            JLabel jLabel1 = new JLabel(item.getNombre());
+            jLabel1.setMaximumSize(new Dimension(363, 23));
+            jLabel1.setMinimumSize(new Dimension(363, 23));
+            jLabel1.setPreferredSize(new Dimension(363, 23));
 
-        JLabel jLabel1 = new JLabel("Nombre del itemMenu");        
-        jLabel1.setMaximumSize(new Dimension(363, 23));
-        jLabel1.setMinimumSize(new Dimension(363, 23));
-        jLabel1.setPreferredSize(new Dimension(363, 23));
-        
-        JButton editarBtn = new JButton("Editar");
-        editarBtn.setPreferredSize(new Dimension(73,23));
-        editarBtn.setMaximumSize(new Dimension(73,23));
-        editarBtn.setMinimumSize(new Dimension(73,23));
-        
-        editarBtn.addMouseListener(
-            new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
+            JButton editarBtn = new JButton("Editar");
+            editarBtn.setPreferredSize(new Dimension(73,23));
+            editarBtn.setMaximumSize(new Dimension(73,23));
+            editarBtn.setMinimumSize(new Dimension(73,23));
+
+            editarBtn.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                            if(item instanceof Bebida){
+                                EditarBebidaGUI eb = new EditarBebidaGUI(item.getVendedor().getNombre());
+                                eb.setNombreViejo(item.getNombre());
+                                eb.setVisible(true);
+                            }
+                            else{
+                                EditarPlatoGUI ep = new EditarPlatoGUI(item.getVendedor().getNombre());
+                                ep.setNombre(item.getNombre());
+                                ep.setVisible(true);
+                            }
+
+                        }
+                    });
+
+            JButton eliminarBtn = new JButton("Eliminar");
+            eliminarBtn.setPreferredSize(new Dimension(80,23));
+            eliminarBtn.setMaximumSize(new Dimension(80,23));
+            eliminarBtn.setMinimumSize(new Dimension(80,23));
+
+            eliminarBtn.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            String[] options = {"Sí", "No"};
+
+                            int resp = JOptionPane.showOptionDialog(null,
+                                    "¿Está seguro que quiere eliminar el itemMenu?",
+                                    "Eliminar ItemMenu",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.WARNING_MESSAGE,
+                                    null,
+                                    options,
+                                    options[1]
+                            );
+
+                            if(resp == JOptionPane.YES_OPTION){
+                                try{
+                                    ItemMenuController.eliminarItemMenu(item.getVendedor().getNombre(), item.getNombre());
+                                } catch (ItemNoEncontradoException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        }
+                    });
+
+            JPanel paux = new JPanel();
+            paux.setMaximumSize(new Dimension(520, 24));
+            paux.setMinimumSize(new Dimension(520, 24));
+            paux.setPreferredSize(new Dimension(520, 24));
+
+            paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
+            paux.add(jLabel1);
+            paux.add(editarBtn);
+            paux.add(eliminarBtn);
 
 
-                
-            }
-        });
-        
-        JButton eliminarBtn = new JButton("Eliminar");
-        eliminarBtn.setPreferredSize(new Dimension(80,23));
-        eliminarBtn.setMaximumSize(new Dimension(80,23));
-        eliminarBtn.setMinimumSize(new Dimension(80,23));
-        
-        eliminarBtn.addMouseListener(
-            new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                        String[] options = {"Sí", "No"};
 
-                int resp = JOptionPane.showOptionDialog(null,
-                    "¿Está seguro que quiere eliminar el itemMenu?",
-                    "Eliminar ItemMenu",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.WARNING_MESSAGE,
-                    null,
-                    options, 
-                    options[1] 
-                );
-
-                if(resp == JOptionPane.YES_OPTION); // METODO ELIMINAR BACKEND
-            }
-        });
-                
-        JPanel paux = new JPanel();
-        paux.setMaximumSize(new Dimension(520, 24));
-        paux.setMinimumSize(new Dimension(520, 24));
-        paux.setPreferredSize(new Dimension(520, 24));
-
-        paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
-        paux.add(jLabel1);
-        paux.add(editarBtn);
-        paux.add(eliminarBtn);
-        
-        
-        // Añadir el JSpinner y el JLabel al panel
-        panelMenu2.add(paux);
-
+            // Añadir el JSpinner y el JLabel al panel
+            panelMenu2.add(paux);
+        }
         scrollPane.setViewportView(panelMenu2);
 
     }
@@ -192,11 +215,92 @@ public class ItemMenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_nuevoItemMenuButtonActionPerformed
 
     private void buscarButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMousePressed
-        String busqueda = buscarItemMenuLabel.getText();
+        String busqueda = busquedaField.getText();
         
-        
-        
-        initialize(); // BORRAR 
+        List<ItemMenu> itemsMenu = ItemMenuController.buscarItemMenuPorNombre(busqueda);
+
+        JPanel panelMenu2 = (JPanel) scrollPane.getViewport().getView();
+        panelMenu2.removeAll();
+        panelMenu2.setLayout(new FlowLayout(FlowLayout.LEFT));
+        panelMenu2.setLayout(new BoxLayout(panelMenu2, BoxLayout.Y_AXIS));
+
+        for(ItemMenu item : itemsMenu){
+            JLabel jLabel1 = new JLabel(item.getNombre());
+            jLabel1.setMaximumSize(new Dimension(363, 23));
+            jLabel1.setMinimumSize(new Dimension(363, 23));
+            jLabel1.setPreferredSize(new Dimension(363, 23));
+
+            JButton editarBtn = new JButton("Editar");
+            editarBtn.setPreferredSize(new Dimension(73,23));
+            editarBtn.setMaximumSize(new Dimension(73,23));
+            editarBtn.setMinimumSize(new Dimension(73,23));
+
+            editarBtn.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+
+                            if(item instanceof Bebida){
+                                EditarBebidaGUI eb = new EditarBebidaGUI(item.getVendedor().getNombre());
+                                eb.setNombreViejo(item.getNombre());
+                                eb.setVisible(true);
+                            }
+                            else{
+                                EditarPlatoGUI ep = new EditarPlatoGUI(item.getVendedor().getNombre());
+                                ep.setNombre(item.getNombre());
+                                ep.setVisible(true);
+                            }
+
+                        }
+                    });
+
+            JButton eliminarBtn = new JButton("Eliminar");
+            eliminarBtn.setPreferredSize(new Dimension(80,23));
+            eliminarBtn.setMaximumSize(new Dimension(80,23));
+            eliminarBtn.setMinimumSize(new Dimension(80,23));
+
+            eliminarBtn.addMouseListener(
+                    new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            String[] options = {"Sí", "No"};
+
+                            int resp = JOptionPane.showOptionDialog(null,
+                                    "¿Está seguro que quiere eliminar el itemMenu?",
+                                    "Eliminar ItemMenu",
+                                    JOptionPane.YES_NO_OPTION,
+                                    JOptionPane.WARNING_MESSAGE,
+                                    null,
+                                    options,
+                                    options[1]
+                            );
+
+                            if(resp == JOptionPane.YES_OPTION){
+                                try{
+                                    ItemMenuController.eliminarItemMenu(item.getVendedor().getNombre(), item.getNombre());
+                                } catch (ItemNoEncontradoException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
+                        }
+                    });
+
+            JPanel paux = new JPanel();
+            paux.setMaximumSize(new Dimension(520, 24));
+            paux.setMinimumSize(new Dimension(520, 24));
+            paux.setPreferredSize(new Dimension(520, 24));
+
+            paux.setLayout(new BoxLayout(paux, BoxLayout.X_AXIS));
+            paux.add(jLabel1);
+            paux.add(editarBtn);
+            paux.add(eliminarBtn);
+
+
+
+            // Añadir el JSpinner y el JLabel al panel
+            panelMenu2.add(paux);
+        }
+        scrollPane.setViewportView(panelMenu2);
     }//GEN-LAST:event_buscarButtonMousePressed
 
 

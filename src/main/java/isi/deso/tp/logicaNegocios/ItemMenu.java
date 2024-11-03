@@ -65,6 +65,8 @@ public abstract class ItemMenu {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public void setVendedor(Vendedor v) {this.vendedor=v;}
     
   
     public abstract float peso();

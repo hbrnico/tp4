@@ -20,11 +20,11 @@ public class PedidoController {
 
     }
     
-     public static void crearPedido(String emailCliente, String nombreVendedor, List<ItemMenuDTO> items) throws ItemNoEncontradoException, ClienteNoEncontradoExeption {
+     public static void crearPedido(int idCliente, String nombreVendedor, List<ItemMenuDTO> items) throws ItemNoEncontradoException, ClienteNoEncontradoExeption {
         VendedorMemory vendedorMemory = new VendedorMemory();
         Vendedor vendedor = vendedorMemory.getVendedorByNombre(nombreVendedor);
         ClienteMemory clienteMemory = new ClienteMemory();
-        Cliente cliente = clienteMemory.buscarClientePorEmail(emailCliente);
+        Cliente cliente = clienteMemory.buscarClientePorID(idCliente);
 
         PedidoDao pedidoDao = new PedidoMemory(); //despues va a ser PedidoBDD
         pedidoDao.addPedido(cliente, vendedor, items);
@@ -42,11 +42,9 @@ public class PedidoController {
         return pedido;
     }
     
-    public static void eliminarPedido(int posicion){
+    public static void eliminarPedido(int id){
         PedidoDao pedidoDao = new PedidoMemory(); //despues va a ser PedidoBDD
-        //recupero la posicion relativa en la lista de este pedido,
-        //luego recupero el id del pedido en dicha posicion y elimino a ese
-        pedidoDao.eliminarPedido(posicion);
+        pedidoDao.eliminarPedido(id);
     }
 
 
