@@ -145,7 +145,6 @@ public class ItemMenuPanel extends javax.swing.JPanel {
         busquedaField.setOpaque(true);
 
         buscarButton.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
         buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {

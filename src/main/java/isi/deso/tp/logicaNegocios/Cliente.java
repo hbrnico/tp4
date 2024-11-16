@@ -25,12 +25,13 @@ public class Cliente implements Observer {
     private EstrategiaPago estrategiaDePago;
     private Boolean activo;
 
-    public Cliente(int id, String cuit, String email, String direccion, Coordenada coordenadas) {
+    public Cliente(int id, String cuit, String email, String direccion, Coordenada coordenadas,String nombre) {
         this.id = id;
         this.cuit = cuit;
         this.email = email;
         this.direccion = direccion;
         this.coordenadas = coordenadas;
+        this.nombre = nombre;
         this.estrategiaDePago = null;
         this.activo = true;
     }
@@ -163,7 +164,7 @@ public class Cliente implements Observer {
         }
 
         PedidoMemory ped = new PedidoMemory();
-        ped.addPedido(p);
+        ped.crearPedido(p);
     }
 
     public void pagarPorMercadoPago(Pedido carrito) {

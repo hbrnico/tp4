@@ -135,7 +135,6 @@ public class VendedorPanel extends javax.swing.JPanel {
         busquedaField.setOpaque(true);
 
         buscarButton.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
         buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -171,7 +170,7 @@ public class VendedorPanel extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(buscarVendedorLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(busquedaField, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                        .addComponent(busquedaField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1))

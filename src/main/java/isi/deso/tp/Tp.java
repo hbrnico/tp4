@@ -3,35 +3,17 @@
  */
 
 package isi.deso.tp;
-import isi.deso.tp.excepciones.ItemNoEncontradoException;
+import isi.deso.tp.gui.inicio;
 import isi.deso.tp.logicaNegocios.*;
-import isi.deso.tp.persistencia.BaseDeDatos;
-import isi.deso.tp.persistencia.ItemsPedidoMemory;
-import isi.deso.tp.persistencia.VendedorMemory;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Comparator;
-import java.util.Scanner;
 
 
 public class Tp {
 
     public static void main(String[] args) {
 
-        Vendedor v1 = new Vendedor("Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
-        Vendedor v2 = new Vendedor("Lucas", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
-        Vendedor v3 = new Vendedor("Mariano", "Cordoba 700", new Coordenada(-31.720648806383995, -60.52989301773252));
-        VendedorMemory bdd = new VendedorMemory();
-        bdd.crearVendedor(v1);
-        bdd.crearVendedor(v2);
-        bdd.crearVendedor(v3);
-
-        Vendedor v5 = bdd.getVendedorByNombre("Pedro");
-        System.out.println(v5.getNombre());
         //test1();
         
         //test2();
@@ -42,8 +24,9 @@ public class Tp {
 
         //test5();
 
+        test6();
     }
-    
+    /*
     public static void test1(){
         Vendedor v1 = new Vendedor(1, "Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
         Vendedor v2 = new Vendedor(2, "Lucas", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
@@ -95,7 +78,7 @@ public class Tp {
         //Puede cambiarse para probar diferentes distancias
         System.out.println("La distancia entre el vendedor 3 y el cliente 3 es: " + v3.distancia(c3) + " kilometros");
     }
-    
+    */
     private static void test2(){
         
         Vendedor v1 = new Vendedor(1, "Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
@@ -145,7 +128,7 @@ public class Tp {
         System.out.println("lista bebidas sin alc:" + v3.getItemBebidasSinAlcohol());
         
     }
-    
+    /*
     public static void test3(){
         Vendedor v1 = new Vendedor(1, "Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
         Vendedor v2 = new Vendedor(2, "Lucas", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
@@ -247,7 +230,8 @@ public class Tp {
             System.out.println(x1);
         }
     }
-    
+    */
+    /*
     public static void test4(){
         Cliente C = new Cliente(1, "20-34567892-4", "pedrosanches@gmail.com", "Las Heras 6664", new Coordenada(-31.607585631151917, -60.688909841851526));
         Vendedor v1 = new Vendedor(1, "Pedro's", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
@@ -309,7 +293,7 @@ public class Tp {
         }
 
     }
-    
+    */
     /*public static void test5(){
         Cliente C = new Cliente(1, "20-34567892-4", "pedrosanches@gmail.com", "Las Heras 6664", new Coordenada(-31.607585631151917, -60.688909841851526));
         Vendedor v1 = new Vendedor(1, "Pedro's", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
@@ -391,6 +375,46 @@ public class Tp {
     }
 */
 
+    public static void test6(){
+            /*            Vendedor v1 = new Vendedor("Pedro", "Av. de las Americas 1000", new Coordenada(-31.746894632549242, -60.52480784560017));
+                Vendedor v2 = new Vendedor("Lucas", "Bv. Galvez 1200", new Coordenada(-31.638385317681948, -60.68820680511817));
+                Vendedor v3 = new Vendedor("Mariano", "Cordoba 700", new Coordenada(-31.720648806383995, -60.52989301773252));
+                VendedorMemory bdd = new VendedorMemory();
+                bdd.crearVendedor(v1);
+                bdd.crearVendedor(v2);
+                bdd.crearVendedor(v3);
+                Cliente c1 = new Cliente("20-34567892-4","Pedro Sanchez", "pedrosanches@gmail.com", "Las Heras 6664", new Coordenada(-31.607585631151917, -60.688909841851526));
+                Cliente c2 = new Cliente( "27-45678901-6", "Nayib Bukele","maria123@gmail.com", "Castelli 1399", new Coordenada(-31.65805720316965, -60.76379753347072));
+                Cliente c3 = new Cliente ("30-78901234-5","El Javo", "corralonpepe@gmail.com", "Saavedra 4599", (new Coordenada(-31.690958263178747, -60.77288831761002)));
+                ClienteMemory bdd2 = new ClienteMemory();
+                bdd2.crearCliente(c1);
+                bdd2.crearCliente(c2);
+                bdd2.crearCliente(c3);
+
+                ItemMenuController.crearBebida( "Coca-Cola", "Gaseosa de cola", 1000.0, "cat1", 0.0f, 500, v1.getNombre());
+                ItemMenuController.crearBebida( "Fanta", "Gaseosa de Naranja", 2000.0, "cat1", 0.0f, 600, v1.getNombre());
+                ItemMenuController.crearPlato( "Suprema", "Pechuga de pollo rebosada", 5000.00, "cat1", 600, false, false, 300.00f, v1.getNombre());
+                ItemMenuController.crearPlato("Empanadas de carne", "Media docena de empanadas de carne", 4500.00, "cat1", 1020, false, false, 700.00f,v3.getNombre());
+
+                ItemMenuDTO aux1 = new ItemMenuDTO("Fanta",4,"Pedro");
+                ItemMenuDTO aux2 = new ItemMenuDTO("Suprema",3,"Pedro");
+
+                List<ItemMenuDTO> auxiliar=new ArrayList<>();
+                auxiliar.add(aux1);
+                auxiliar.add(aux2);
+
+                try {
+                    PedidoController.crearPedido(4,"Pedro",auxiliar);
+                } catch (ItemNoEncontradoException e) {
+                    throw new RuntimeException(e);
+                } catch (ClienteNoEncontradoExeption e) {
+                    throw new RuntimeException(e);
+                }
+        */
+        inicio i = new inicio();
+        i.setVisible(true);
+    }
+    
     public static void buscarVendedoresPorId(ArrayList<Vendedor> vendedores, int ID){
         boolean encontrado = false;
         Iterator iterador = vendedores.iterator();

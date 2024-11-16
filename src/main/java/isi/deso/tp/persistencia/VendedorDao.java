@@ -6,6 +6,13 @@ package isi.deso.tp.persistencia;
 
 import isi.deso.tp.logicaNegocios.Vendedor;
 
+import java.util.List;
+
 public interface VendedorDao {
     public Vendedor getVendedorByID(int id);
+    public Vendedor getVendedorByNombre(String nombre);
+    public void crearVendedor(Vendedor vendedor);
+    public List<Vendedor> getVendedores();
+    public void eliminarVendedor(int id);
+    public void modificarVendedorPorID(int id, Vendedor v);
 }

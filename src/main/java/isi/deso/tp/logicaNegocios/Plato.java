@@ -18,11 +18,15 @@ public class Plato extends ItemMenu {
         this.peso = peso;
     }
 
-    //public void setDescription(String descripcion) {this.description = descripcion}
-
-    public int getCalorias() {
-        return calorias;
+    public Plato(String nombre, String descripcion, double precio, Categoria categoria, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, Vendedor vendedor) {
+        super(nombre, descripcion, precio, categoria, vendedor);
+        this.calorias = calorias;
+        this.aptoCeliaco = aptoCeliaco;
+        this.aptoVegano = aptoVegano;
+        this.peso = peso;
     }
+
+    //public void setDescription(String descripcion) {this.description = descripcion}
 
     public void setCalorias(int calorias) {
         this.calorias = calorias;
@@ -47,6 +51,10 @@ public class Plato extends ItemMenu {
     @Override
     public String toString() {
         return "{ COMIDA: " + super.getNombre() + ", precio: " + super.getPrecio() + ", peso: " + this.peso() + "}" ;
+    }
+
+    public int getCalorias() {
+        return calorias;
     }
 
     @Override

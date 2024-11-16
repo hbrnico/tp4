@@ -19,6 +19,7 @@ public class Pedido implements Observable {
     private Vendedor miVendedor;
     private LocalDateTime fechaHoraPedido;
     private double precio;
+    private Pago pago;
     private ESTADO estado;
     private List<Observer> suscriptores;
     private int ID;
@@ -56,6 +57,15 @@ public class Pedido implements Observable {
         this.ID=id;
     }
 
+    public Pedido(Cliente cliente, Vendedor vendedor, int id, LocalDateTime fechaHoraPedido, double precio, ESTADO estado){
+        this.miCliente = cliente;
+        this.miVendedor = vendedor;
+        this.fechaHoraPedido = fechaHoraPedido;
+        this.precio = precio;
+        this.estado = estado;
+        this.ID = id;
+    }
+
     public void setVendedor(Vendedor v){ this.miVendedor = v; }
 
     public Vendedor getMiVendedor() {
@@ -81,18 +91,20 @@ public class Pedido implements Observable {
             ItemMenu p = this.miVendedor.buscarProducto(plato);
             ItemPedido recup = new ItemPedido(p, this);
             ItemsPedidoMemory miItemsPedidoMemory = new ItemsPedidoMemory();
-            miItemsPedidoMemory.agrearAItemsPedidos(recup);
+            miItemsPedidoMemory.crearItemPedido(recup);
             this.precio = this.precio + p.getPrecio();
         } catch (ItemNoEncontradoException x1) {
             System.out.println(x1);
         }
     }
-    
-    public void eliminarProducto(){}
 
     public void setEstado(ESTADO estadoCambio){
         this.estado=estadoCambio;
-        notifyObservers();
+        //notifyObservers();
+    }
+
+    public void setPago(Pago pago){
+        this.pago = pago;
     }
 
     public List<ItemMenu> getItemsDelPedido(){

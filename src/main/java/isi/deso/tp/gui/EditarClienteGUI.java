@@ -1,7 +1,7 @@
 package isi.deso.tp.gui;
 
 import isi.deso.tp.controllers.ClienteController;
-import isi.deso.tp.excepciones.ClienteNoEncontradoExeption;
+import isi.deso.tp.excepciones.ClienteNoEncontradoException;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -60,7 +60,7 @@ public class EditarClienteGUI extends javax.swing.JFrame {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 try {
                     guardarBtnMousePressed(evt);
-                } catch (ClienteNoEncontradoExeption e) {
+                } catch (ClienteNoEncontradoException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -244,7 +244,7 @@ public class EditarClienteGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_guardarActionPerformed
 
-    private void guardarBtnMousePressed(java.awt.event.MouseEvent evt)  throws ClienteNoEncontradoExeption {//GEN-FIRST:event_guardarBtnMousePressed
+    private void guardarBtnMousePressed(java.awt.event.MouseEvent evt)  throws ClienteNoEncontradoException {//GEN-FIRST:event_guardarBtnMousePressed
 
         String nombre= nombreIngresado.getText();
         String direccion= direccionIngresada.getText();

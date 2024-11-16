@@ -1,10 +1,5 @@
 package isi.deso.tp.logicaNegocios;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 public abstract class ItemMenu {
     private int id;
     private String nombre;
@@ -15,6 +10,14 @@ public abstract class ItemMenu {
 
     public ItemMenu(int id, String nombre, String descripcion, double precio, Categoria categoria, Vendedor vendedor) {
         this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.vendedor = vendedor;
+    }
+
+    public ItemMenu(String nombre, String descripcion, double precio, Categoria categoria, Vendedor vendedor) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;

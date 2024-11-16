@@ -24,7 +24,11 @@ public class VendedorController {
         return vendedorList;
     }
 
-
+    public static Vendedor getVendedorByID(int ID) throws VendedorNoEncontradoExeption {
+        VendedorMemory m = new VendedorMemory();
+        Vendedor v=m.getVendedorByID(ID);
+        return v;
+    }
 
     public static Vendedor buscarVendedor(String nombre) throws VendedorNoEncontradoExeption {
         VendedorMemory m = new VendedorMemory();

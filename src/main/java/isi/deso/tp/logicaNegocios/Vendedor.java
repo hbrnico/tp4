@@ -228,4 +228,8 @@ public class Vendedor {
     public void setCoordenadas(Coordenada coordenadas){
         this.coordenadas=coordenadas;
     }
+    @Override
+    public String toString(){
+        return nombre;
+    }
 }

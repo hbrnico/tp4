@@ -1,13 +1,11 @@
 package isi.deso.tp.gui;
 
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import isi.deso.tp.controllers.ItemMenuController;
 import isi.deso.tp.controllers.PedidoController;
-import isi.deso.tp.excepciones.ClienteNoEncontradoExeption;
+import isi.deso.tp.excepciones.ClienteNoEncontradoException;
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.*;
 import isi.deso.tp.persistencia.ClienteMemory;
-import isi.deso.tp.persistencia.ItemsMenuMemory;
 import isi.deso.tp.persistencia.VendedorMemory;
 
 import java.util.ArrayList;
@@ -246,10 +244,10 @@ public class inicio extends javax.swing.JFrame {
                 bdd2.crearCliente(c2);
                 bdd2.crearCliente(c3);
 
-                ItemMenuController.crearBebida( "Coca-Cola", "Gaseosa de cola", 1000.0, "cat1", 0.0f, 500, v1.getNombre());
-                ItemMenuController.crearBebida( "Fanta", "Gaseosa de Naranja", 2000.0, "cat1", 0.0f, 600, v1.getNombre());
-                ItemMenuController.crearPlato( "Suprema", "Pechuga de pollo rebosada", 5000.00, "cat1", 600, false, false, 300.00f, v1.getNombre());
-                ItemMenuController.crearPlato("Empanadas de carne", "Media docena de empanadas de carne", 4500.00, "cat1", 1020, false, false, 700.00f,v3.getNombre());
+                //ItemMenuController.crearBebida( "Coca-Cola", "Gaseosa de cola", 1000.0, "cat1", 0.0f, 500, v1.getNombre());
+                //ItemMenuController.crearBebida( "Fanta", "Gaseosa de Naranja", 2000.0, "cat1", 0.0f, 600, v1.getNombre());
+                //ItemMenuController.crearPlato( "Suprema", "Pechuga de pollo rebosada", 5000.00, "cat1", 600, false, false, 300.00f, v1.getNombre());
+                //ItemMenuController.crearPlato("Empanadas de carne", "Media docena de empanadas de carne", 4500.00, "cat1", 1020, false, false, 700.00f,v3.getNombre());
 
                 ItemMenuDTO aux1 = new ItemMenuDTO("Fanta",4,"Pedro");
                 ItemMenuDTO aux2 = new ItemMenuDTO("Suprema",3,"Pedro");
@@ -262,7 +260,7 @@ public class inicio extends javax.swing.JFrame {
                     PedidoController.crearPedido(4,"Pedro",auxiliar);
                 } catch (ItemNoEncontradoException e) {
                     throw new RuntimeException(e);
-                } catch (ClienteNoEncontradoExeption e) {
+                } catch (ClienteNoEncontradoException e) {
                     throw new RuntimeException(e);
                 }
 

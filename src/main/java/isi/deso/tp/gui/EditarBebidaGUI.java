@@ -4,17 +4,8 @@ import isi.deso.tp.controllers.ItemMenuController;
 import java.awt.Color;
 
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
-import isi.deso.tp.logicaNegocios.Coordenada;
-import isi.deso.tp.logicaNegocios.Vendedor;
 
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class EditarBebidaGUI extends javax.swing.JFrame {
     String nombreViejo;
@@ -399,7 +390,7 @@ public class EditarBebidaGUI extends javax.swing.JFrame {
         
         //CODIGO BACKEND
 
-        ItemMenuController.modificarBebida(getNombreViejo(),nombre, descripcion, precio, graduacionAlcoholica, tamanio, vendedor);
+        ItemMenuController.modificarBebida(getNombreViejo(),nombre, descripcion, precio, categoria, graduacionAlcoholica, tamanio, vendedor);
         JOptionPane.showMessageDialog(null, "Bebida registrada con éxito.",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);
 

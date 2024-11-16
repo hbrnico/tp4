@@ -1,6 +1,5 @@
 package isi.deso.tp.gui;
 
-import isi.deso.tp.logicaNegocios.Coordenada;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 

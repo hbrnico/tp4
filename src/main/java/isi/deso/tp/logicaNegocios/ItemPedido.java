@@ -14,6 +14,11 @@ public class ItemPedido {
         this.pedido = pedido;
         this.cantidad=0;
     }
+    public ItemPedido(ItemMenu itemMenu, Pedido pedido,int cantidad){
+        this.itemMenu = itemMenu;
+        this.pedido = pedido;
+        this.cantidad=cantidad;
+    }
     
     public int disminuirCantidad(){
         if(cantidad> 0) cantidad--;

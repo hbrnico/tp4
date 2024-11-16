@@ -3,17 +3,10 @@ package isi.deso.tp.gui;
 import java.awt.Color;
 
 import isi.deso.tp.controllers.ItemMenuController;
-import isi.deso.tp.logicaNegocios.Coordenada;
 import isi.deso.tp.logicaNegocios.Vendedor;
 
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class CrearPlatoGUI extends javax.swing.JFrame {
     

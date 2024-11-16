@@ -1,10 +1,8 @@
 package isi.deso.tp.gui;
 
 import isi.deso.tp.controllers.ClienteController;
-import isi.deso.tp.controllers.VendedorController;
-import isi.deso.tp.excepciones.ClienteNoEncontradoExeption;
+import isi.deso.tp.excepciones.ClienteNoEncontradoException;
 import isi.deso.tp.logicaNegocios.Cliente;
-import isi.deso.tp.logicaNegocios.Vendedor;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -77,7 +75,7 @@ public class ClientePanel extends javax.swing.JPanel {
                             if (resp == JOptionPane.YES_OPTION) {
                                 try{
                                     ClienteController.eliminarCliente(c.getEmail());
-                                } catch (ClienteNoEncontradoExeption ex) {
+                                } catch (ClienteNoEncontradoException ex) {
                                     System.out.println(ex);
                                 }
                             }
@@ -138,7 +136,6 @@ public class ClientePanel extends javax.swing.JPanel {
         busquedaField.setOpaque(true);
 
         buscarButton.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Blue"));
-        buscarButton.setForeground(new java.awt.Color(255, 255, 255));
         buscarButton.setText("Buscar");
         buscarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,7 +259,7 @@ public class ClientePanel extends javax.swing.JPanel {
                                 if (resp == JOptionPane.YES_OPTION) {
                                     try{
                                         ClienteController.eliminarCliente(c.getEmail());
-                                    } catch (ClienteNoEncontradoExeption ex) {
+                                    } catch (ClienteNoEncontradoException ex) {
                                         System.out.println(ex);
                                     }
                                 }
@@ -284,7 +281,7 @@ public class ClientePanel extends javax.swing.JPanel {
                 panelMenu2.add(paux);
             }
             scrollPane.setViewportView(panelMenu2);
-        }catch (ClienteNoEncontradoExeption ex){
+        }catch (ClienteNoEncontradoException ex){
             System.out.println(ex);
         }
 

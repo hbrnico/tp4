@@ -2,6 +2,10 @@ package isi.deso.tp.controllers;
 
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
 import isi.deso.tp.logicaNegocios.ItemMenu;
+import isi.deso.tp.logicaNegocios.Plato;
+import isi.deso.tp.logicaNegocios.Bebida;
+import isi.deso.tp.logicaNegocios.Vendedor;
+import isi.deso.tp.logicaNegocios.Categoria;
 import isi.deso.tp.persistencia.ItemsMenuDao;
 import isi.deso.tp.persistencia.ItemsMenuMemory;
 
@@ -11,12 +15,19 @@ public class ItemMenuController {
 
     public static void crearPlato(String nombre, String descripcion, double precio,  String tipoCategoria, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) {
         ItemsMenuDao itemMenuDao = new ItemsMenuMemory();
-        itemMenuDao.addPlato(nombre, descripcion, precio, tipoCategoria, calorias, aptoCeliaco, aptoVegano, peso, nombreVendedor);
+        Vendedor vendedor = VendedorController.buscarVendedor(nombreVendedor);
+        Categoria categoria = CategoriaController.getCategoriaByTipo(tipoCategoria);
+        Plato plato = new Plato(nombre, descripcion, precio, categoria, calorias, aptoCeliaco, aptoVegano, peso, vendedor);
+        itemMenuDao.crearPlato(plato);
     }
 
-    public static void crearBebida( String nombre, String descripcion, double precio, String tipoCategoria, float graduacionAlcoholica, int tamanio, String nombreVendedor) {
+    public static void crearBebida(String nombre, String descripcion, double precio, String tipoCategoria, float graduacionAlcoholica, int tamanio, String nombreVendedor) {
         ItemsMenuDao itemMenuDao = new ItemsMenuMemory();
-        itemMenuDao.addBebida(nombre, descripcion, precio, tipoCategoria, graduacionAlcoholica, tamanio, nombreVendedor);
+        Categoria categoria = CategoriaController.getCategoriaByTipo(tipoCategoria);
+        Vendedor vendedor = VendedorController.buscarVendedor(nombreVendedor);
+
+        Bebida bebida = new Bebida(nombre, descripcion, precio, categoria, graduacionAlcoholica, tamanio, vendedor);
+        itemMenuDao.crearBebida(bebida);
     }
 
     public static List<ItemMenu> buscarListaItemsMenu(){
@@ -30,19 +41,37 @@ public class ItemMenuController {
         return itemMenu;
     }
 
+    public static List<ItemMenu> itemsPorVendedor(int idVendedor) throws ItemNoEncontradoException{
+        ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
+        return itemsMenuDao.itemsPorVendedor(idVendedor);
+    }
+
     public static void eliminarItemMenu(String nombreVendedor, String nombre) throws ItemNoEncontradoException {
         ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
         itemsMenuDao.eliminarItemMenu(nombreVendedor, nombre);
     }
 
-    public static void modificarPlato(String nombreViejo,String nombre, String descripcion, double precio, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) throws ItemNoEncontradoException{
+    public static void modificarPlato(String nombreViejo,String nombre, String descripcion, double precio, String tipoCategoria, int calorias, boolean aptoCeliaco, boolean aptoVegano, float peso, String nombreVendedor) throws ItemNoEncontradoException{
         ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
-        itemsMenuDao.modificarPlato(nombreViejo, nombre, descripcion, precio,calorias, aptoCeliaco, aptoVegano, peso, nombreVendedor);
+
+        Categoria categoria = CategoriaController.getCategoriaByTipo(tipoCategoria);
+        Vendedor vendedor = VendedorController.buscarVendedor(nombreVendedor);
+
+        Plato plato = new Plato(nombre, descripcion, precio, categoria, calorias, aptoCeliaco, aptoVegano, peso, vendedor);
+
+        itemsMenuDao.modificarPlato(nombreViejo, plato);
+
     }
 
-    public static void modificarBebida(String nombreViejo,String nombre, String descripcion, double precio, float graduacionAlcoholica, int tamanio, String nombreVendedor) throws ItemNoEncontradoException {
+    public static void modificarBebida(String nombreViejo, String nombre, String descripcion, double precio, String tipoCategoria, float graduacionAlcoholica, int tamanio, String nombreVendedor) throws ItemNoEncontradoException {
         ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
-        itemsMenuDao.modificarBebida(nombreViejo, nombre, descripcion, precio, graduacionAlcoholica, tamanio, nombreVendedor);
+
+        Categoria categoria = CategoriaController.getCategoriaByTipo(tipoCategoria);
+        Vendedor vendedor = VendedorController.buscarVendedor(nombreVendedor);
+
+        Bebida bebida = new Bebida(nombre, descripcion, precio, categoria, graduacionAlcoholica, tamanio, vendedor);
+
+        itemsMenuDao.modificarBebida(nombreViejo, bebida);
     }
 
     public static List<ItemMenu> buscarItemMenuPorNombre(String nombreMenu){
@@ -51,9 +80,8 @@ public class ItemMenuController {
         return lim;
     }
 
-    public static List<ItemMenu> buscarItemMenuPorVendedor(String nombre) {
+    public static ItemMenu buscarPorVendedorYNombre(String nombreVendedor, String nombre ) throws ItemNoEncontradoException{
         ItemsMenuDao itemsMenuDao = new ItemsMenuMemory();
-        List<ItemMenu> lim = itemsMenuDao.buscarItemMenuPorVendedor(nombre);
-        return lim;
+        return itemsMenuDao.buscarPorVendedorYNombre(nombreVendedor, nombre);
     }
 }

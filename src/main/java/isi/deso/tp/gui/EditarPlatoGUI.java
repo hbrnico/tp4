@@ -4,17 +4,8 @@ import java.awt.Color;
 
 import isi.deso.tp.controllers.ItemMenuController;
 import isi.deso.tp.excepciones.ItemNoEncontradoException;
-import isi.deso.tp.logicaNegocios.Coordenada;
-import isi.deso.tp.logicaNegocios.Vendedor;
 
-import java.awt.FlowLayout;
-import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class EditarPlatoGUI extends javax.swing.JFrame {
     String nombreViejo;
@@ -436,7 +427,7 @@ public class EditarPlatoGUI extends javax.swing.JFrame {
         
         //CODIGO BACKEND
 
-        ItemMenuController.modificarPlato(getNombreViejo(),nombre,"",precio,calorias,aptoCeliaco,aptoVegano,peso,vendedor);
+        ItemMenuController.modificarPlato(getNombreViejo(),nombre,"",precio, categoria, calorias, aptoCeliaco,aptoVegano,peso,vendedor);
 
         JOptionPane.showMessageDialog(null, "Cambio registrado con éxito.",
                 "Registro exitoso", JOptionPane.INFORMATION_MESSAGE);

@@ -15,6 +15,12 @@ public class Bebida extends ItemMenu {
         this.tamanio = tamanio;
     }
 
+    public Bebida(String nombre, String descripcion, double precio, Categoria categoria, float graduacionAlcoholica, int tamanio, Vendedor vendedor) {
+        super(nombre, descripcion, precio, categoria, vendedor);
+        this.graduacionAlcoholica = graduacionAlcoholica;
+        this.tamanio = tamanio;
+    }
+
     public float getGraduacionAlcoholica() {
         return graduacionAlcoholica;
     }
